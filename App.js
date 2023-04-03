@@ -1,20 +1,18 @@
-import { StatusBar } from "expo-status-bar";
-import React, { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import * as Linking from "expo-linking";
+import { StatusBar } from "react-native";
+import AppNavigator from "./src/navigation/AppNavigator";
 
 export default function App() {
+	const prefix = Linking.createURL("/");
+	const linking = {
+		prefixes: [prefix],
+	};
+
 	return (
-		<View style={styles.container}>
-			<Text>Open up App.js to start working on your app!</Text>
-			<StatusBar style="auto" />
-		</View>
+		<>
+			<StatusBar barStyle="dark-content" />
+			<AppNavigator linking={linking} />
+		</>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#fff",
-		alignItems: "center",
-		justifyContent: "center",
-	},
-});
