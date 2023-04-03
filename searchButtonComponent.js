@@ -83,6 +83,14 @@ const styles = StyleSheet.create({
 		paddingBottom: 10,
 		paddingLeft: 30,
 		paddingRight: 30,
+		shadowColor: "black",
+		shadowOpacity: 0.5,
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowRadius: 2,
+		elevation: 5,
 	},
 
 	button: {
@@ -94,6 +102,14 @@ const styles = StyleSheet.create({
 		paddingRight: 30,
 		flexDirection: "row",
 		alignItems: "center",
+		shadowColor: "black",
+		shadowOpacity: 0.5,
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowRadius: 2,
+		elevation: 5,
 	},
 
 	buttonText: {
