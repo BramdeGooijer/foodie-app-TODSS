@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useRef } from "react";
 import {
 	View,
@@ -19,7 +20,7 @@ const searchbar = () => {
 		Animated.timing(animatedValue, {
 			toValue: 1,
 			duration: 500,
-			useNativeDriver: false,
+			useNativeDriver: true,
 		}).start(() => inputRef.current.focus());
 	};
 
@@ -28,7 +29,7 @@ const searchbar = () => {
 		Animated.timing(animatedValue, {
 			toValue: 0,
 			duration: 500,
-			useNativeDriver: false,
+			useNativeDriver: true,
 		}).start();
 	};
 
@@ -37,7 +38,13 @@ const searchbar = () => {
 			{
 				translateX: animatedValue.interpolate({
 					inputRange: [0, 1],
-					outputRange: [0, -180],
+					outputRange: [0, 0],
+				}),
+			},
+			{
+				scaleX: animatedValue.interpolate({
+					inputRange: [0, 0.5, 1],
+					outputRange: [1, 0.5, 0],
 				}),
 			},
 		],
@@ -48,7 +55,13 @@ const searchbar = () => {
 			{
 				translateX: animatedValue.interpolate({
 					inputRange: [0, 1],
-					outputRange: [180, 0],
+					outputRange: [0, 0],
+				}),
+			},
+			{
+				scaleX: animatedValue.interpolate({
+					inputRange: [0, 0.5, 1],
+					outputRange: [0, 0.5, 1],
 				}),
 			},
 		],
@@ -57,18 +70,23 @@ const searchbar = () => {
 	return (
 		<View>
 			{!showSearchBar && (
-				<TouchableOpacity style={styles.button} onPress={handleButtonClick}>
+				<TouchableOpacity
+					style={[styles.button, buttonStyle]}
+					onPress={handleButtonClick}>
 					<Icon name="search" size={24} color="black" style={styles.icon} />
 					<Text style={styles.buttonText}>zoeken</Text>
 				</TouchableOpacity>
 			)}
 			{showSearchBar && (
-				<TextInput
-					ref={inputRef}
-					style={styles.input}
-					placeholder="zoeken..."
-					onBlur={handleInputBlur}
-					autoFocus={true}></TextInput>
+				<Animated.View style={[styles.inputContainer, inputStyle]}>
+					<TextInput
+						ref={inputRef}
+						style={styles.input}
+						placeholder="zoeken..."
+						onBlur={handleInputBlur}
+						autoFocus={true}
+					/>
+				</Animated.View>
 			)}
 		</View>
 	);
