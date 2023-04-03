@@ -34,19 +34,19 @@ const FilterButton = ({ options }) => {
 		}
 	};
 
-	const handleOptionSelect = option => {
-		// Check if the option is already selected
-		if (selectedOptions.includes(option)) {
-			// If it is, remove it from the selectedOptions array
-			const newSelectedOptions = selectedOptions.filter(
-				item => item !== option
-			);
-			setSelectedOptions(newSelectedOptions);
-		} else {
-			// If it isn't, add it to the selectedOptions array
-			setSelectedOptions([...selectedOptions, option]);
-		}
-	};
+	// const handleOptionSelect = option => {
+	// 	// Check if the option is already selected
+	// 	if (selectedOptions.includes(option)) {
+	// 		// If it is, remove it from the selectedOptions array
+	// 		const newSelectedOptions = selectedOptions.filter(
+	// 			item => item !== option
+	// 		);
+	// 		setSelectedOptions(newSelectedOptions);
+	// 	} else {
+	// 		// If it isn't, add it to the selectedOptions array
+	// 		setSelectedOptions([...selectedOptions, option]);
+	// 	}
+	// };
 
 	return (
 		<View style={styles.container}>
@@ -62,22 +62,7 @@ const FilterButton = ({ options }) => {
 					<Text style={styles.filterButtonItem}>Filter</Text>
 				</View>
 			</TouchableOpacity>
-			{isFilterOpen && (
-				<View style={styles.dropdown}>
-					<FlatList
-						data={options}
-						renderItem={({ item }) => (
-							<TouchableOpacity
-								style={styles.option}
-								onPress={() => handleOptionSelect(item)}>
-								<Text>{item}</Text>
-								{selectedOptions.includes(item) && <Text>✔️</Text>}
-							</TouchableOpacity>
-						)}
-						keyExtractor={item => item}
-					/>
-				</View>
-			)}
+			{isFilterOpen && <View style={styles.dropdown}>{}</View>}
 		</View>
 	);
 };
