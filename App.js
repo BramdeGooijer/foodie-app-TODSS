@@ -4,7 +4,7 @@ import Searchbar from "./searchButtonComponent";
 export default function App() {
 	return (
 		<View style={styles.container}>
-			<Searchbar></Searchbar>
+			<Searchbar />
 		</View>
 	);
 }
