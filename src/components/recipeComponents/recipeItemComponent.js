@@ -1,16 +1,41 @@
-import React, { View, Text, StyleSheet, Image } from "react-native";
+import { useState } from "react";
+import React, { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+// import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function RecipeItemComponent() {
+export default function RecipeItemComponent(props) {
+const [liked, setLiked] = useState(props.liked);
+
+const handleLikeRecipe = () => {
+    setLiked(!liked);
+}
+
     return (
         <View style={styles.itemContainer}>
             <Image 
                 style={styles.recipeImage}
                 source={require('../../../assets/recipeImages/recipeTestImage.png')}
             />
+            
+            <Image
+                id="lennaPlusIcon"
+                style={[styles.lennaPlusIcon, {display: props.lennaplus ? 'flex' : 'none'}]}
+                source={require('../../../assets/lennaPlusTestIcon.png')}
+            />
+
+            <TouchableOpacity 
+                onPress={handleLikeRecipe}
+                style={styles.likedIconTouchable}
+            >
+                <Image 
+                    style={styles.likedIcon}
+                    source={ liked ? require('../../../assets/likedTestIcon.png') : require('../../../assets/unlikedTestIcon.png')}
+                />
+            </TouchableOpacity>
+
             <View style={styles.recipeInfoWrapper}>
                 <View style={styles.recipeInfo}>
-                    <Text style={styles.recipeCategoryText}>Diner</Text>
-                    <Text style={styles.recipeSubText}>Romige en eiwitrijke pasta met geroosterde groenten</Text>
+                    <Text style={styles.recipeCategoryText}>{props.category}</Text>
+                    <Text style={styles.recipeSubText}>{props.subtext}</Text>
                     <View style={styles.allergyIconWrapper}>
                         <Image 
                             style={styles.allergyIcon}
@@ -39,6 +64,8 @@ const styles = StyleSheet.create({
 
         marginBottom: 20,
 
+        borderTopRightRadius: 5,
+        borderBottomRightRadius: 5,
         backgroundColor: "#F3F4F1",
     },
 
@@ -49,8 +76,31 @@ const styles = StyleSheet.create({
     },
 
     recipeInfoWrapper: {
+        zIndex: 100,
     },
     
+    lennaPlusIcon: {
+        position: "absolute",
+        top: 15,
+        left: 15,
+        // bottom: 20,
+        // right: 20,
+        height: 20,
+        width: 60
+    },
+
+    likedIconTouchable: {
+        position: "absolute",
+        top: 15,
+        right: 15,
+        zIndex: 101,
+    },
+    
+    likedIcon: {
+        width: 23,
+        height: 20,
+    },
+
     recipeInfo: {
         padding: 20,
         justifyContent: "space-between",
@@ -60,12 +110,12 @@ const styles = StyleSheet.create({
 
     recipeCategoryText: {
         fontFamily: "Plus-Jakarta-Sans-Bold",
-        fontSize: "12px",
+        fontSize: 12,
     },
 
     recipeSubText: {
         fontFamily: "Plus-Jakarta-Sans-Bold",
-        fontSize: "16px",
+        fontSize: 16,
         width: "45%",
         // backgroundColor: "yellow"
     },

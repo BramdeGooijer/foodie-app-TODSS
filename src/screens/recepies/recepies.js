@@ -15,7 +15,12 @@ export default function RecepiesScreen() {
 	const renderItem = ({item}) => {
 		return (
 			// <View style={styles.recipeItem}><Text>{item.text}</Text></View>
-			<RecipeItemComponent></RecipeItemComponent>
+			<RecipeItemComponent 
+				category="Diner" 
+				subtext="Romige en eiwitrijke pasta met geroosterde groenten" 
+				liked={true}
+				lennaplus={true}
+			/>
 		)
 	}
 
@@ -66,7 +71,7 @@ const styles = StyleSheet.create({
 	pageTitle: {
 		flex: 1,
 		
-		fontSize: "18px",
+		fontSize: 18,
 		fontWeight: 700,
 		fontFamily: 'Plus-Jakarta-Sans-Bold',
 
@@ -84,7 +89,7 @@ const styles = StyleSheet.create({
 
 	// Styling for main area items
 	amountOfRecipesText: {
-		fontSize: "16px",
+		fontSize: 16,
 		fontFamily: "Plus-Jakarta-Sans-Semi-Bold",
 		
 		marginBottom: 15,
