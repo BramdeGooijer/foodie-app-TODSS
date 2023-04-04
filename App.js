@@ -1,5 +1,4 @@
-import { StatusBar } from "expo-status-bar";
-import React, { StyleSheet, Text, View } from "react-native";
+import React, { StyleSheet, View } from "react-native";
 import Searchbar from "./searchButtonComponent";
 
 export default function App() {

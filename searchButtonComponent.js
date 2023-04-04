@@ -14,6 +14,15 @@ const searchbar = () => {
 	const [showSearchBar, setShowSearchBar] = useState(false);
 	const inputRef = useRef(null);
 	const animatedValue = useRef(new Animated.Value(0)).current;
+	const [inputValue, setInputValue] = useState("");
+
+	const handleInputChange = text => {
+		setInputValue(text);
+	};
+
+	const handleInputSubmit = () => {
+		console.log(inputValue);
+	};
 
 	const handleButtonClick = () => {
 		setShowSearchBar(true);
@@ -85,6 +94,8 @@ const searchbar = () => {
 						placeholder="zoeken..."
 						onBlur={handleInputBlur}
 						autoFocus={true}
+						onChangeText={handleInputChange}
+						onSubmitEditing={handleInputSubmit}
 					/>
 				</Animated.View>
 			)}
@@ -116,8 +127,9 @@ const styles = StyleSheet.create({
 		borderRadius: 35,
 		paddingTop: 10,
 		paddingBottom: 10,
-		paddingLeft: 30,
-		paddingRight: 30,
+		paddingLeft: 20,
+		paddingRight: 20,
+		marginLeft: 40,
 		flexDirection: "row",
 		alignItems: "center",
 		shadowColor: "black",
@@ -131,11 +143,11 @@ const styles = StyleSheet.create({
 	},
 
 	buttonText: {
-		fontSize: 24,
+		fontSize: 18,
 	},
 
 	icon: {
-		marginRight: 15,
+		marginRight: 10,
 	},
 });
 
