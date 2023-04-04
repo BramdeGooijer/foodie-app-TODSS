@@ -29,7 +29,7 @@ export default function RecepiesScreen() {
 				</View>
 			</View>
 			<View style={styles.mainArea}>
-				<Text style={styles.amountOfRecipesText}>0 resultaten</Text>
+				<Text style={styles.amountOfRecipesText}>{data.length} resultaten</Text>
 				<FlatList style={styles.recipeList} data={data} renderItem={renderItem} keyExtractor={item => item.id}/>
 			</View>
 		</SafeAreaView>

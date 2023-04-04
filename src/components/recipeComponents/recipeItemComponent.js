@@ -8,8 +8,24 @@ export default function RecipeItemComponent() {
                 source={require('../../../assets/recipeImages/recipeTestImage.png')}
             />
             <View style={styles.recipeInfoWrapper}>
-                <Text>Romige en eiwitrijke pasta met geroosterde groenten</Text>
-
+                <View style={styles.recipeInfo}>
+                    <Text style={styles.recipeCategoryText}>Diner</Text>
+                    <Text style={styles.recipeSubText}>Romige en eiwitrijke pasta met geroosterde groenten</Text>
+                    <View style={styles.allergyIconWrapper}>
+                        <Image 
+                            style={styles.allergyIcon}
+                            source={require('../../../assets/allergyIcons/allergyTestIcon.png')}
+                        />
+                        <Image 
+                            style={styles.allergyIcon}
+                            source={require('../../../assets/allergyIcons/allergyTestIcon.png')}
+                        />
+                        <Image 
+                            style={styles.allergyIcon}
+                            source={require('../../../assets/allergyIcons/allergyTestIcon.png')}
+                        />
+                    </View>
+                </View>
             </View>
         </View>
     );
@@ -33,6 +49,33 @@ const styles = StyleSheet.create({
     },
 
     recipeInfoWrapper: {
+    },
+    
+    recipeInfo: {
+        padding: 20,
+        justifyContent: "space-between",
+        height: "100%",
+        // backgroundColor: "red"
+    },
 
+    recipeCategoryText: {
+        fontFamily: "Plus-Jakarta-Sans-Bold",
+        fontSize: "12px",
+    },
+
+    recipeSubText: {
+        fontFamily: "Plus-Jakarta-Sans-Bold",
+        fontSize: "16px",
+        width: "45%",
+        // backgroundColor: "yellow"
+    },
+
+    allergyIconWrapper: {
+        flexDirection: "row",
+    },
+
+    allergyIcon: {
+        width: 30,
+        height: 30,
     },
 });
