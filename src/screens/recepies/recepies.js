@@ -3,23 +3,36 @@ import RecipeItemComponent from "../../components/recipeComponents/recipeItemCom
 
 export default function RecepiesScreen() {
 	const data = [
-		{ id: 1, text: 'Worst'},
-		{ id: 2, text: 'kaas'},
-		{ id: 3, text: 'ik'},
-		{ id: 4, text: 'ben'},
-		{ id: 5, text: 'hier'},
-		{ id: 6, text: 'bezig'},
-
+		{ 
+			id: 1, 
+			category: "Ontbijt", 
+			subtext: "Heerlijke ei met bacon",
+			allergies: ["gluten"],
+			recipeImage: "recipeTestImage",
+			liked: true,
+			lennaPlus: false,
+		},
+		{ 
+			id: 2, 
+			category: "Diner", 
+			subtext: "Romige en eiwitrijke paste met geroosterde groenten",
+			allergies: ["gluten", "lactose"],
+			recipeImage: "recipeTestImageMarrokaans",
+			liked: false,
+			lennaPlus: true,
+		},
 	]
 
 	const renderItem = ({item}) => {
 		return (
 			// <View style={styles.recipeItem}><Text>{item.text}</Text></View>
 			<RecipeItemComponent 
-				category="Diner" 
-				subtext="Romige en eiwitrijke pasta met geroosterde groenten" 
-				liked={true}
-				lennaplus={true}
+				category={item.category}
+				subtext={item.subtext}
+				allergies={item.allergies}
+				recipeImage={item.recipeImage} 
+				liked={item.liked}
+				lennaplus={item.lennaplus}
 			/>
 		)
 	}

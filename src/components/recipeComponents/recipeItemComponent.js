@@ -3,22 +3,33 @@ import React, { View, Text, StyleSheet, Image, TouchableOpacity } from "react-na
 // import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function RecipeItemComponent(props) {
-const [liked, setLiked] = useState(props.liked);
+    const [liked, setLiked] = useState(props.liked);
 
-const handleLikeRecipe = () => {
-    setLiked(!liked);
-}
+    const handleLikeRecipe = () => {
+        setLiked(!liked);
+    }
+
+    let recipeImage;
+
+    switch(props.recipeImage) {
+        case "recipeTestImage":
+            recipeImage = require(`../../../assets/recipeImages/recipeTestImage.png`)
+            break;
+        case "recipeTestImageMarrokaans":
+            recipeImage = require(`../../../assets/recipeImages/recipeTestImageMarrokaans.png`)
+            break;
+    }
 
     return (
         <View style={styles.itemContainer}>
             <Image 
                 style={styles.recipeImage}
-                source={require('../../../assets/recipeImages/recipeTestImage.png')}
+                source={recipeImage}
             />
             
             <Image
                 id="lennaPlusIcon"
-                style={[styles.lennaPlusIcon, {display: props.lennaplus ? 'flex' : 'none'}]}
+                style={[styles.lennaPlusIcon, {display: props.lennaPlus ? 'flex' : 'none'}]}
                 source={require('../../../assets/lennaPlusTestIcon.png')}
             />
 
