@@ -96,6 +96,7 @@ const searchbar = () => {
 						autoFocus={true}
 						onChangeText={handleInputChange}
 						onSubmitEditing={handleInputSubmit}
+						value={inputValue}
 					/>
 				</Animated.View>
 			)}
