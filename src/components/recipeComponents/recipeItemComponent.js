@@ -65,18 +65,30 @@ export default function RecipeItemComponent(props) {
 						<Text style={styles.recipeSubText}>{props.subtext}</Text>
 
 						<View style={styles.allergyIconWrapper}>
-							<Image
-								style={styles.allergyIcon}
-								source={require("../../../assets/allergyIcons/allergyIcon.png")}
-							/>
-							<Image
-								style={styles.allergyIcon}
-								source={require("../../../assets/allergyIcons/allergyIcon.png")}
-							/>
-							<Image
-								style={styles.allergyIcon}
-								source={require("../../../assets/allergyIcons/allergyIcon.png")}
-							/>
+							{props.allergies.map(item => {
+								if (item === "gluten") {
+									return (
+										<Image
+											style={styles.allergyIcon}
+											source={require("../../../assets/allergyIcons/allergyIcon.png")}
+										/>
+									);
+								} else if (item === "lactose") {
+									return (
+										<Image
+											style={styles.allergyIcon}
+											source={require("../../../assets/allergyIcons/lactosefreeTestIcon.png")}
+										/>
+									);
+								} else if (item === "sugar") {
+									return (
+										<Image
+											style={styles.allergyIcon}
+											source={require("../../../assets/allergyIcons/sugarfreeTestIcon.png")}
+										/>
+									);
+								}
+							})}
 						</View>
 					</View>
 				</TouchableWithoutFeedback>
@@ -173,5 +185,6 @@ const styles = StyleSheet.create({
 	allergyIcon: {
 		width: 30,
 		height: 30,
+		marginRight: 5,
 	},
 });
