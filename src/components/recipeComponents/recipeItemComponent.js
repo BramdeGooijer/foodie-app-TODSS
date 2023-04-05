@@ -9,6 +9,7 @@ import React, {
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export default function RecipeItemComponent(props) {
 	const [liked, setLiked] = useState(props.liked);
@@ -23,12 +24,16 @@ export default function RecipeItemComponent(props) {
 		}
 	};
 
+	const handleNavToRecipe = () => {
+		console.log("hi");
+	};
+
 	switch (props.recipeImage) {
 		case "recipeTestImage":
-			recipeImage = require(`../../../assets/recipeImages/recipeTestImage.png`);
+			recipeImage = require(`../../../assets/recipeImages/dummyRecipe1.png`);
 			break;
 		case "recipeTestImageMarrokaans":
-			recipeImage = require(`../../../assets/recipeImages/recipeTestImageMarrokaans.png`);
+			recipeImage = require(`../../../assets/recipeImages/dummyRecipe2.png`);
 			break;
 	}
 
@@ -53,24 +58,28 @@ export default function RecipeItemComponent(props) {
 			</TouchableOpacity>
 
 			<View style={styles.recipeInfoWrapper}>
-				<View style={styles.recipeInfo}>
-					<Text style={styles.recipeCategoryText}>{props.category}</Text>
-					<Text style={styles.recipeSubText}>{props.subtext}</Text>
-					<View style={styles.allergyIconWrapper}>
-						<Image
-							style={styles.allergyIcon}
-							source={require("../../../assets/allergyIcons/allergyTestIcon.png")}
-						/>
-						<Image
-							style={styles.allergyIcon}
-							source={require("../../../assets/allergyIcons/allergyTestIcon.png")}
-						/>
-						<Image
-							style={styles.allergyIcon}
-							source={require("../../../assets/allergyIcons/allergyTestIcon.png")}
-						/>
+				<TouchableWithoutFeedback onPress={handleNavToRecipe}>
+					<View style={styles.recipeInfo}>
+						<Text style={styles.recipeCategoryText}>{props.category}</Text>
+
+						<Text style={styles.recipeSubText}>{props.subtext}</Text>
+
+						<View style={styles.allergyIconWrapper}>
+							<Image
+								style={styles.allergyIcon}
+								source={require("../../../assets/allergyIcons/allergyIcon.png")}
+							/>
+							<Image
+								style={styles.allergyIcon}
+								source={require("../../../assets/allergyIcons/allergyIcon.png")}
+							/>
+							<Image
+								style={styles.allergyIcon}
+								source={require("../../../assets/allergyIcons/allergyIcon.png")}
+							/>
+						</View>
 					</View>
-				</View>
+				</TouchableWithoutFeedback>
 			</View>
 		</View>
 	);
@@ -93,10 +102,6 @@ const styles = StyleSheet.create({
 		width: 133,
 		height: 149,
 		backgroundColor: "lightblue",
-	},
-
-	recipeInfoWrapper: {
-		zIndex: 100,
 	},
 
 	lennaPlusIcon: {
@@ -135,26 +140,33 @@ const styles = StyleSheet.create({
 		height: 20,
 	},
 
+	recipeInfoWrapper: {
+		zIndex: 100,
+		width: "64%",
+		padding: 10,
+	},
+
 	recipeInfo: {
-		padding: 20,
+		// padding: 20,
 		justifyContent: "space-between",
 		height: "100%",
-		// backgroundColor: "red"
 	},
 
 	recipeCategoryText: {
+		flex: 1,
 		fontFamily: "Plus-Jakarta-Sans-Bold",
 		fontSize: 12,
 	},
 
 	recipeSubText: {
+		flex: 4,
 		fontFamily: "Plus-Jakarta-Sans-Bold",
 		fontSize: 16,
-		width: "45%",
-		// backgroundColor: "yellow"
+		width: "85%",
 	},
 
 	allergyIconWrapper: {
+		flex: 2,
 		flexDirection: "row",
 	},
 
