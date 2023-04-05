@@ -8,9 +8,11 @@ import React, {
 	TouchableOpacity,
 } from "react-native";
 import * as Haptics from "expo-haptics";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
 export default function RecipeItemComponent(props) {
 	const [liked, setLiked] = useState(props.liked);
+	let recipeImage;
 
 	const handleLikeRecipe = () => {
 		setLiked(!liked);
@@ -20,8 +22,6 @@ export default function RecipeItemComponent(props) {
 			Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 		}
 	};
-
-	let recipeImage;
 
 	switch (props.recipeImage) {
 		case "recipeTestImage":
@@ -36,26 +36,20 @@ export default function RecipeItemComponent(props) {
 		<View style={styles.itemContainer}>
 			<Image style={styles.recipeImage} source={recipeImage} />
 
-			<Image
-				id="lennaPlusIcon"
-				style={[
-					styles.lennaPlusIcon,
-					{ display: props.lennaPlus ? "flex" : "none" },
-				]}
-				source={require("../../../assets/lennaPlusTestIcon.png")}
-			/>
+			{props.lennaplus ? (
+				<View style={styles.lennaPlusIcon}>
+					<Text style={styles.lennaPlusIconText}>Lenna +</Text>
+				</View>
+			) : undefined}
 
 			<TouchableOpacity
 				onPress={handleLikeRecipe}
 				style={styles.likedIconTouchable}>
-				<Image
-					style={styles.likedIcon}
-					source={
-						liked
-							? require("../../../assets/likedTestIcon.png")
-							: require("../../../assets/unlikedTestIcon.png")
-					}
-				/>
+				{liked ? (
+					<MaterialIcon size={25} name="favorite" color={"#FBBA00"} />
+				) : (
+					<MaterialIcon size={25} name="favorite-outline" color={"#FBBA00"} />
+				)}
 			</TouchableOpacity>
 
 			<View style={styles.recipeInfoWrapper}>
@@ -109,10 +103,24 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		top: 15,
 		left: 15,
+		justifyContent: "center",
+		alignItems: "center",
+
+		// For bottom right use the code below
 		// bottom: 20,
 		// right: 20,
+
 		height: 20,
 		width: 60,
+		borderRadius: 4,
+
+		fontFamily: "Plus-Jakarta-Sans-Bold",
+		fontSize: 12,
+		backgroundColor: "#294406",
+	},
+
+	lennaPlusIconText: {
+		color: "#FFFFFF",
 	},
 
 	likedIconTouchable: {

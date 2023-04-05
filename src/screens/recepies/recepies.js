@@ -16,7 +16,7 @@ export default function RecepiesScreen() {
 			allergies: ["gluten"],
 			recipeImage: "recipeTestImage",
 			liked: true,
-			lennaPlus: false,
+			lennaplus: false,
 		},
 		{
 			id: 2,
@@ -25,7 +25,7 @@ export default function RecepiesScreen() {
 			allergies: ["gluten", "lactose"],
 			recipeImage: "recipeTestImageMarrokaans",
 			liked: false,
-			lennaPlus: true,
+			lennaplus: true,
 		},
 	];
 
