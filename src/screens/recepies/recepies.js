@@ -1,41 +1,47 @@
-import React, { View, Text, SafeAreaView, StyleSheet, FlatList  } from "react-native";
+import React, {
+	View,
+	Text,
+	SafeAreaView,
+	StyleSheet,
+	FlatList,
+} from "react-native";
 import RecipeItemComponent from "../../components/recipeComponents/recipeItemComponent";
 
 export default function RecepiesScreen() {
 	const data = [
-		{ 
-			id: 1, 
-			category: "Ontbijt", 
+		{
+			id: 1,
+			category: "Ontbijt",
 			subtext: "Heerlijke ei met bacon",
 			allergies: ["gluten"],
 			recipeImage: "recipeTestImage",
 			liked: true,
 			lennaPlus: false,
 		},
-		{ 
-			id: 2, 
-			category: "Diner", 
+		{
+			id: 2,
+			category: "Diner",
 			subtext: "Romige en eiwitrijke paste met geroosterde groenten",
 			allergies: ["gluten", "lactose"],
 			recipeImage: "recipeTestImageMarrokaans",
 			liked: false,
 			lennaPlus: true,
 		},
-	]
+	];
 
-	const renderItem = ({item}) => {
+	const renderItem = ({ item }) => {
 		return (
 			// <View style={styles.recipeItem}><Text>{item.text}</Text></View>
-			<RecipeItemComponent 
+			<RecipeItemComponent
 				category={item.category}
 				subtext={item.subtext}
 				allergies={item.allergies}
-				recipeImage={item.recipeImage} 
+				recipeImage={item.recipeImage}
 				liked={item.liked}
 				lennaplus={item.lennaplus}
 			/>
-		)
-	}
+		);
+	};
 
 	return (
 		<SafeAreaView style={styles.pageContainer}>
@@ -48,7 +54,12 @@ export default function RecepiesScreen() {
 			</View>
 			<View style={styles.mainArea}>
 				<Text style={styles.amountOfRecipesText}>{data.length} resultaten</Text>
-				<FlatList style={styles.recipeList} data={data} renderItem={renderItem} keyExtractor={item => item.id}/>
+				<FlatList
+					style={styles.recipeList}
+					data={data}
+					renderItem={renderItem}
+					keyExtractor={item => item.id}
+				/>
 			</View>
 		</SafeAreaView>
 	);
@@ -60,13 +71,13 @@ const styles = StyleSheet.create({
 		width: "100%",
 		height: "100%",
 
-		backgroundColor: "#F3F4F1"
+		backgroundColor: "#F3F4F1",
 	},
 
 	// Page areas
 	topArea: {
 		flex: 1,
-		
+
 		alignItems: "center",
 	},
 
@@ -83,11 +94,10 @@ const styles = StyleSheet.create({
 	// Styling for top area items
 	pageTitle: {
 		flex: 1,
-		
+
 		fontSize: 18,
 		fontWeight: 700,
-		fontFamily: 'Plus-Jakarta-Sans-Bold',
-
+		fontFamily: "Plus-Jakarta-Sans-Bold",
 	},
 
 	buttonWrapper: {
@@ -97,16 +107,14 @@ const styles = StyleSheet.create({
 
 		width: "80%",
 		margin: 20,
-		
 	},
 
 	// Styling for main area items
 	amountOfRecipesText: {
 		fontSize: 16,
 		fontFamily: "Plus-Jakarta-Sans-Semi-Bold",
-		
-		marginBottom: 15,
 
+		marginBottom: 15,
 	},
 
 	recipeList: {
