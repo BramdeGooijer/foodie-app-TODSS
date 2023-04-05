@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import {
 	View,
 	StyleSheet,
@@ -9,6 +9,7 @@ import {
 	Animated,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import debounce from "lodash/debounce";
 
 const searchbar = () => {
 	const [showSearchBar, setShowSearchBar] = useState(false);
@@ -16,13 +17,28 @@ const searchbar = () => {
 	const animatedValue = useRef(new Animated.Value(0)).current;
 	const [inputValue, setInputValue] = useState("");
 
-	const handleInputChange = text => {
-		setInputValue(text);
+	const handleInputSubmit = text => {
+		console.log(text);
 	};
 
-	const handleInputSubmit = () => {
-		console.log(inputValue);
-	};
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const debouncedHandleInputSubmit = useCallback(
+		debounce(text => {
+			handleInputSubmit(text);
+		}, 500),
+		[]
+	);
+
+	const handleInputChange = useCallback(
+		text => {
+			setInputValue(text);
+			clearTimeout(debouncedHandleInputSubmit.timerId);
+			debouncedHandleInputSubmit.timerId = setTimeout(() => {
+				debouncedHandleInputSubmit(text);
+			}, 500);
+		},
+		[debouncedHandleInputSubmit]
+	);
 
 	const handleButtonClick = () => {
 		setShowSearchBar(true);
@@ -95,7 +111,6 @@ const searchbar = () => {
 						onBlur={handleInputBlur}
 						autoFocus={true}
 						onChangeText={handleInputChange}
-						onSubmitEditing={handleInputSubmit}
 						value={inputValue}
 					/>
 				</Animated.View>
