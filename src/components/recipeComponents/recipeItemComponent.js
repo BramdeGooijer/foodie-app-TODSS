@@ -7,13 +7,18 @@ import React, {
 	Image,
 	TouchableOpacity,
 } from "react-native";
-// import { TouchableOpacity } from "react-native-gesture-handler";
+import * as Haptics from "expo-haptics";
 
 export default function RecipeItemComponent(props) {
 	const [liked, setLiked] = useState(props.liked);
 
 	const handleLikeRecipe = () => {
 		setLiked(!liked);
+		if (liked) {
+			Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+		} else {
+			Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+		}
 	};
 
 	let recipeImage;
