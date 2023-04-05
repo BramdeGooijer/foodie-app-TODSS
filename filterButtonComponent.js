@@ -41,6 +41,7 @@ const FilterButton = ({ options }) => {
 	};
 
 	const [cuisines, setCuisines] = useState(1);
+	const [allergenen, setAllergenen] = useState(1);
 
 	return (
 		<View style={styles.container}>
@@ -261,6 +262,88 @@ const FilterButton = ({ options }) => {
 							</TouchableOpacity>
 						</View>
 					</View>
+
+					<View style={styles.item}>
+						<Text style={styles.title}>ALLERGENEN</Text>
+						<View style={styles.row}>
+							<TouchableOpacity
+								onPress={() => {
+									setAllergenen(1);
+								}}
+								style={[
+									styles.category,
+									{
+										borderColor:
+											allergenen === 1 ? COLORS.primary : COLORS.grey,
+									},
+								]}>
+								<Text
+									style={[
+										styles.subtitle,
+										{ color: allergenen === 1 ? COLORS.primary : COLORS.grey },
+									]}>
+									All
+								</Text>
+							</TouchableOpacity>
+							<TouchableOpacity
+								onPress={() => {
+									setAllergenen(2);
+								}}
+								style={[
+									styles.category,
+									{
+										borderColor:
+											allergenen === 2 ? COLORS.primary : COLORS.grey,
+									},
+								]}>
+								<Text
+									style={[
+										styles.subtitle,
+										{ color: allergenen === 2 ? COLORS.primary : COLORS.grey },
+									]}>
+									Gluten
+								</Text>
+							</TouchableOpacity>
+							<TouchableOpacity
+								onPress={() => {
+									setAllergenen(3);
+								}}
+								style={[
+									styles.category,
+									{
+										borderColor:
+											allergenen === 3 ? COLORS.primary : COLORS.grey,
+									},
+								]}>
+								<Text
+									style={[
+										styles.subtitle,
+										{ color: allergenen === 3 ? COLORS.primary : COLORS.grey },
+									]}>
+									Melk
+								</Text>
+							</TouchableOpacity>
+							<TouchableOpacity
+								onPress={() => {
+									setAllergenen(4);
+								}}
+								style={[
+									styles.category,
+									{
+										borderColor:
+											allergenen === 4 ? COLORS.primary : COLORS.grey,
+									},
+								]}>
+								<Text
+									style={[
+										styles.subtitle,
+										{ color: allergenen === 4 ? COLORS.primary : COLORS.grey },
+									]}>
+									Vis
+								</Text>
+							</TouchableOpacity>
+						</View>
+					</View>
 				</View>
 			)}
 		</View>
@@ -271,6 +354,12 @@ const styles = StyleSheet.create({
 	container: {
 		flexDirection: "row",
 		alignItems: "center",
+	},
+	title: {
+		color: COLORS.title,
+		fontWeight: "bold",
+		fontSize: SIZES.h3,
+		marginVertical: 5,
 	},
 	button: {
 		backgroundColor: "white",
