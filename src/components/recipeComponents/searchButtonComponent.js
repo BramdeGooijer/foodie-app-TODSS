@@ -117,7 +117,8 @@ export default function SearchButtonComponent() {
 			)}
 		</View>
 	);
-};
+}
+
 const styles = StyleSheet.create({
 	input: {
 		fontSize: 36,
