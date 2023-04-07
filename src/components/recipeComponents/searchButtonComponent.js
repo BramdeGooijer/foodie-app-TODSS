@@ -139,22 +139,25 @@ export default function SearchButtonComponent() {
 
 const styles = StyleSheet.create({
 	input: {
-		fontSize: 36,
-		backgroundColor: "#DFDFDF",
+		fontSize: 16,
+		backgroundColor: "white",
 		minWidth: "100%",
-		borderRadius: 35,
-		paddingTop: 10,
-		paddingBottom: 10,
-		paddingLeft: 30,
-		paddingRight: 30,
+		borderRadius: 70,
+
+		height: 40,
+
+		paddingTop: 8,
+		paddingBottom: 8,
+		paddingLeft: 24,
+		paddingRight: 24,
+
 		shadowColor: "black",
-		shadowOpacity: 0.5,
+		shadowOpacity: 0.05,
 		shadowOffset: {
-			width: 0,
+			width: 2,
 			height: 2,
 		},
-		shadowRadius: 2,
-		elevation: 5,
+		shadowRadius: 6,
 	},
 
 	button: {
