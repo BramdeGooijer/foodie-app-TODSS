@@ -39,16 +39,18 @@ export default function FilterButtonComponent() {
 
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity style={styles.button} onPress={handleFilterToggle}>
+			<TouchableOpacity
+				style={[styles.button, styles.shadowProp]}
+				onPress={handleFilterToggle}>
 				<Animated.View style={[{ width: buttonWidth }]} />
 				<View style={styles.filterContainer}>
 					<Icon
-						style={styles.filterButtonItem}
+						style={styles.filterButtonIcon}
 						name="filter"
-						size={30}
+						size={16}
 						color="black"
 					/>
-					<Text style={styles.filterButtonItem}>Filter</Text>
+					<Text style={styles.filterButtonText}>Filter</Text>
 				</View>
 			</TouchableOpacity>
 			{isFilterOpen && (
@@ -356,22 +358,34 @@ const styles = StyleSheet.create({
 		marginVertical: 5,
 	},
 	button: {
-		backgroundColor: "white",
-		padding: 10,
-		paddingLeft: 30,
-		paddingRight: 30,
-		borderRadius: 50,
-		marginRight: 10,
 		alignItems: "center",
 		justifyContent: "center",
-		borderColor: "black",
-		borderWidth: 1,
+
+		width: 173,
+		height: 40,
+		borderRadius: 70,
+
+		paddingLeft: 24,
+		paddingRight: 24,
+		paddingTop: 8,
+		paddingBottom: 8,
+
+		backgroundColor: "white",
+		// marginRight: 10,
 	},
 	buttonText: {
 		color: "white",
 		textAlign: "center",
 		paddingBottom: 20,
 	},
+
+	shadowProp: {
+		shadowOffset: { width: 2, height: 2 },
+		shadowColor: "black",
+		shadowOpacity: 0.05,
+		shadowRadius: 6,
+	},
+
 	dropdown: {
 		position: "absolute",
 		top: 60,
@@ -401,8 +415,11 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 	},
-	filterButtonItem: {
+	filterButtonIcon: {
 		marginRight: 5,
+	},
+	filterButtonText: {
+		fontSize: 16,
 	},
 
 	subtitle: {
