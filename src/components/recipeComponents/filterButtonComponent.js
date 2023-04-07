@@ -48,7 +48,7 @@ export default function FilterButtonComponent() {
 						style={styles.filterButtonIcon}
 						name="filter"
 						size={16}
-						color="black"
+						color="#3A3938"
 					/>
 					<Text style={styles.filterButtonText}>Filter</Text>
 				</View>
@@ -419,6 +419,8 @@ const styles = StyleSheet.create({
 		marginRight: 5,
 	},
 	filterButtonText: {
+		fontFamily: "Plus-Jakarta-Sans-Semi-Bold",
+		color: "#3A3938",
 		fontSize: 16,
 	},
 
