@@ -7,6 +7,7 @@ import React, {
 } from "react-native";
 import RecipeItemComponent from "../../components/recipeComponents/recipeItemComponent";
 import SearchButtonComponent from "../../components/recipeComponents/searchButtonComponent";
+import FilterButtonComponent from "../../components/recipeComponents/filterButtonComponent";
 
 export default function RecepiesScreen() {
 	const data = [
@@ -106,6 +107,7 @@ export default function RecepiesScreen() {
 		return (
 			// <View style={styles.recipeItem}><Text>{item.text}</Text></View>
 			<RecipeItemComponent
+				id={item.id}
 				category={item.category}
 				subtext={item.subtext}
 				allergies={item.allergies}
@@ -122,7 +124,7 @@ export default function RecepiesScreen() {
 				<Text style={styles.pageTitle}>Alle plantaardige recepten</Text>
 				<View style={styles.buttonWrapper}>
 					<SearchButtonComponent />
-					<Text>placeHolderFilter</Text>
+					<FilterButtonComponent />
 				</View>
 			</View>
 			<View style={styles.mainArea}>
@@ -180,6 +182,7 @@ const styles = StyleSheet.create({
 
 		width: "80%",
 		margin: 20,
+		zIndex: 102,
 	},
 
 	// Styling for main area items

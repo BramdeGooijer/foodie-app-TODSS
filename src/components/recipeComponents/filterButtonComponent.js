@@ -1,21 +1,15 @@
 import React, { useState } from "react";
 import Icon from "react-native-vector-icons/AntDesign";
-import {
-	COLORS,
-	SIZES,
-} from "/home/alperen/vscode/foodie-app/foodie-app-2/theme.jsx";
+import { COLORS, SIZES } from "../../theme/theme.js";
 import {
 	View,
 	Text,
 	TouchableOpacity,
 	StyleSheet,
-	FlatList,
 	Animated,
-	SafeAreaView,
-	ScrollView,
 } from "react-native";
 
-const FilterButton = ({ options }) => {
+export default function FilterButtonComponent() {
 	const [isFilterOpen, setIsFilterOpen] = useState(false);
 	const [selectedOptions, setSelectedOptions] = useState([]);
 	const [buttonWidth, setButtonWidth] = useState(new Animated.Value(100));
@@ -348,7 +342,7 @@ const FilterButton = ({ options }) => {
 			)}
 		</View>
 	);
-};
+}
 
 const styles = StyleSheet.create({
 	container: {
@@ -428,5 +422,3 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 	},
 });
-
-export default FilterButton;
