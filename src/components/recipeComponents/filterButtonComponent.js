@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 import { COLORS, SIZES } from "../../theme/theme.js";
 import {
@@ -37,8 +37,26 @@ export default function FilterButtonComponent() {
 	const [cuisines, setCuisines] = useState(1);
 	const [allergenen, setAllergenen] = useState(1);
 
+	const [showView, setShowView] = useState(true);
+	const viewRef = useRef(null);
+
+	const onLayout = () => {
+		if (viewRef.current) {
+			viewRef.current.measure((x, y, width, height) => {
+				console.log(width);
+				if (width > 80) {
+					console.log("hi");
+					setShowView(true);
+				} else {
+					console.log("bye");
+					setShowView(false);
+				}
+			});
+		}
+	};
+
 	return (
-		<View style={styles.container}>
+		<View style={styles.container} ref={viewRef} onLayout={onLayout}>
 			<TouchableOpacity
 				style={[styles.button, styles.shadowProp]}
 				onPress={handleFilterToggle}>
@@ -50,7 +68,9 @@ export default function FilterButtonComponent() {
 						size={16}
 						color="#3A3938"
 					/>
-					<Text style={styles.filterButtonText}>Filter</Text>
+					{showView ? (
+						<Text style={styles.filterButtonText}>Filter</Text>
+					) : null}
 				</View>
 			</TouchableOpacity>
 			{isFilterOpen && (
@@ -361,12 +381,12 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 
-		width: 173,
+		width: "100%",
 		height: 40,
 		borderRadius: 70,
 
-		paddingLeft: 24,
-		paddingRight: 24,
+		// paddingLeft: 24,
+		// paddingRight: 24,
 		paddingTop: 8,
 		paddingBottom: 8,
 
@@ -416,7 +436,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	filterButtonIcon: {
-		marginRight: 5,
+		marginRight: 4,
 	},
 	filterButtonText: {
 		fontFamily: "Plus-Jakarta-Sans-Semi-Bold",

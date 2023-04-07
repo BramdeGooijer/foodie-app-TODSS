@@ -92,14 +92,32 @@ export default function SearchButtonComponent() {
 		],
 	};
 
+	const [showText, setShowText] = useState(true);
+	const viewRef = useRef(null);
+
+	const onLayout = () => {
+		if (viewRef.current) {
+			viewRef.current.measure((x, y, width, height) => {
+				console.log(width);
+				if (width > 80) {
+					console.log("hi");
+					setShowText(true);
+				} else {
+					console.log("bye");
+					setShowText(false);
+				}
+			});
+		}
+	};
+
 	return (
-		<View>
+		<View ref={viewRef} onLayout={onLayout}>
 			{!showSearchBar && (
 				<TouchableOpacity
 					style={[styles.button, buttonStyle]}
 					onPress={handleButtonClick}>
-					<Icon name="search" size={24} color="black" style={styles.icon} />
-					<Text style={styles.buttonText}>zoeken</Text>
+					<Icon name="search" size={18} color="#3A3938" style={styles.icon} />
+					{showText ? <Text style={styles.buttonText}>Zoeken</Text> : null}
 				</TouchableOpacity>
 			)}
 			{showSearchBar && (
@@ -140,30 +158,37 @@ const styles = StyleSheet.create({
 	},
 
 	button: {
-		backgroundColor: "#DFDFDF",
-		borderRadius: 35,
-		paddingTop: 10,
-		paddingBottom: 10,
-		paddingLeft: 20,
-		paddingRight: 20,
-		marginLeft: 40,
+		backgroundColor: "white",
+		borderRadius: 70,
+
+		paddingTop: 8,
+		paddingBottom: 8,
+		// paddingLeft: 24,
+		// paddingRight: 24,
+
+		width: "100%",
+		height: 40,
+
 		flexDirection: "row",
 		alignItems: "center",
+		justifyContent: "center",
+
 		shadowColor: "black",
-		shadowOpacity: 0.5,
+		shadowOpacity: 0.05,
 		shadowOffset: {
-			width: 0,
+			width: 2,
 			height: 2,
 		},
-		shadowRadius: 2,
-		elevation: 5,
+		shadowRadius: 6,
 	},
 
 	buttonText: {
-		fontSize: 18,
+		color: "#3A3938",
+		fontFamily: "Plus-Jakarta-Sans-Semi-Bold",
+		fontSize: 16,
 	},
 
 	icon: {
-		marginRight: 10,
+		marginRight: 4,
 	},
 });

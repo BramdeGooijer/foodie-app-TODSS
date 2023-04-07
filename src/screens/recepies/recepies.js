@@ -123,8 +123,12 @@ export default function RecepiesScreen() {
 			<View style={styles.topArea}>
 				<Text style={styles.pageTitle}>Alle plantaardige recepten</Text>
 				<View style={styles.buttonWrapper}>
-					<SearchButtonComponent />
-					<FilterButtonComponent />
+					<View style={styles.buttonItem1}>
+						<SearchButtonComponent />
+					</View>
+					<View style={styles.buttonItem2}>
+						<FilterButtonComponent />
+					</View>
 				</View>
 			</View>
 			<View style={styles.mainArea}>
@@ -154,6 +158,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 
 		alignItems: "center",
+		justifyContent: "space-evenly",
 	},
 
 	mainArea: {
@@ -168,7 +173,7 @@ const styles = StyleSheet.create({
 
 	// Styling for top area items
 	pageTitle: {
-		flex: 1,
+		// flex: 1,
 
 		fontSize: 18,
 		fontWeight: 700,
@@ -176,13 +181,23 @@ const styles = StyleSheet.create({
 	},
 
 	buttonWrapper: {
-		flex: 1,
 		flexDirection: "row",
 		justifyContent: "space-between",
+		gap: 8,
 
-		width: "80%",
-		margin: 20,
+		maxWidth: "90%",
+		width: "90%",
+
 		zIndex: 102,
+	},
+
+	buttonItem1: {
+		flex: 1,
+		// backgroundColor: "blue",
+	},
+	buttonItem2: {
+		flex: 1,
+		// backgroundColor: "blue",
 	},
 
 	// Styling for main area items
