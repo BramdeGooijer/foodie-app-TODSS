@@ -6,6 +6,7 @@ import React, {
 	FlatList,
 } from "react-native";
 import RecipeItemComponent from "../../components/recipeComponents/recipeItemComponent";
+import SearchButtonComponent from "../../components/recipeComponents/searchButtonComponent";
 
 export default function RecepiesScreen() {
 	const data = [
@@ -120,7 +121,7 @@ export default function RecepiesScreen() {
 			<View style={styles.topArea}>
 				<Text style={styles.pageTitle}>Alle plantaardige recepten</Text>
 				<View style={styles.buttonWrapper}>
-					<Text>placeHolderSearch</Text>
+					<SearchButtonComponent />
 					<Text>placeHolderFilter</Text>
 				</View>
 			</View>

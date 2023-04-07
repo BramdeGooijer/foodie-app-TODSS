@@ -11,7 +11,7 @@ import {
 import Icon from "react-native-vector-icons/Ionicons";
 import debounce from "lodash/debounce";
 
-const searchbar = () => {
+export default function SearchButtonComponent() {
 	const [showSearchBar, setShowSearchBar] = useState(false);
 	const inputRef = useRef(null);
 	const animatedValue = useRef(new Animated.Value(0)).current;
@@ -166,5 +166,3 @@ const styles = StyleSheet.create({
 		marginRight: 10,
 	},
 });
-
-export default searchbar;
