@@ -8,6 +8,7 @@ import React, {
 import RecipeItemComponent from "../../components/recipeComponents/recipeItemComponent";
 import SearchButtonComponent from "../../components/recipeComponents/searchButtonComponent";
 import FilterButtonComponent from "../../components/recipeComponents/filterButtonComponent";
+import FilterItemsComponent from "../../components/recipeComponents/filterItemsComponent";
 
 export default function RecepiesScreen() {
 	const data = [
@@ -131,6 +132,9 @@ export default function RecepiesScreen() {
 					</View>
 				</View>
 			</View>
+
+			{/* <FilterItemsComponent style={styles.filterArea} /> */}
+
 			<View style={styles.mainArea}>
 				<Text style={styles.amountOfRecipesText}>{data.length} resultaten</Text>
 				<FlatList
@@ -156,9 +160,11 @@ const styles = StyleSheet.create({
 	// Page areas
 	topArea: {
 		flex: 1,
+		minHeight: "0%",
 
 		alignItems: "center",
 		justifyContent: "space-evenly",
+		// backgroundColor: "blue",
 	},
 
 	mainArea: {

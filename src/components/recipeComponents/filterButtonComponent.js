@@ -444,16 +444,16 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 	},
 
-	subtitle: {
-		color: COLORS.grey,
-		fontWeight: "700",
-		fontSize: SIZES.h4,
-	},
 	category: {
 		borderRadius: 15,
 		borderWidth: 2,
 		padding: 5,
 		paddingHorizontal: 10,
+	},
+	subtitle: {
+		color: COLORS.grey,
+		fontWeight: "700",
+		fontSize: SIZES.h4,
 	},
 	row: {
 		flex: 1,
