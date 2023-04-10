@@ -107,7 +107,7 @@ export default function RecepiesScreen() {
 		return (
 			// <View style={styles.recipeItem}><Text>{item.text}</Text></View>
 			<RecipeItemComponent
-				id={item.id}
+				keyExtractor={item.id}
 				category={item.category}
 				subtext={item.subtext}
 				allergies={item.allergies}
