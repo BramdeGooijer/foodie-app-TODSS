@@ -19,11 +19,8 @@ export default function FilterItemsComponent(props) {
 				<View style={styles.titleWrapper}>
 					<Text style={styles.titleText}>Filter</Text>
 				</View>
-				<View style={styles.exitWrapper}>
-					<TouchableWithoutFeedback onPress={props.toggleFilter}>
-						<MaterialIcon size={35} name="close" color={"black"} style={styles.exitIcon} />
-					</TouchableWithoutFeedback>
-				</View>
+
+				<MaterialIcon size={35} name="close" color={"black"} style={styles.exitIcon} onPress={props.toggleFilter}/>
 				<View style={styles.item}>
 					<Text style={styles.title}>CUISINES</Text>
 					<View style={styles.row}>
@@ -339,18 +336,13 @@ const styles = StyleSheet.create({
 
 	titleWrapper: {
 		alignItems: "center",
+		// backgroundColor: "blue",
 	},
 	
 	titleText: {
 		fontSize: 18,
 		fontWeight: 700,
 		fontFamily: "Plus-Jakarta-Sans-Bold",
-	},
-
-	exitWrapper: {
-		alignItems: "flex-end",
-
-		marginTop: 10,
 	},
 
 	exitButton: {
@@ -361,6 +353,9 @@ const styles = StyleSheet.create({
 	},
 	
 	exitIcon: {
+		position: "absolute",
+		top: 64,
+		right: 15,
 	},
 
 	title: {
