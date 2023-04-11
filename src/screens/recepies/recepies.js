@@ -9,6 +9,8 @@ import RecipeItemComponent from "../../components/recipeComponents/recipeItemCom
 import SearchButtonComponent from "../../components/recipeComponents/searchButtonComponent";
 import FilterButtonComponent from "../../components/recipeComponents/filterButtonComponent";
 import FilterItemsComponent from "../../components/recipeComponents/filterItemsComponent";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { useState } from "react";
 
 export default function RecepiesScreen() {
 	const data = [
@@ -104,6 +106,8 @@ export default function RecepiesScreen() {
 		},
 	];
 
+	const [openFilter, setOpenFilter] = useState(false);
+
 	const renderItem = ({ item }) => {
 		return (
 			// <View style={styles.recipeItem}><Text>{item.text}</Text></View>
@@ -119,8 +123,14 @@ export default function RecepiesScreen() {
 		);
 	};
 
+	const handleFilter = () => {
+		setOpenFilter(!openFilter);
+	}
+
 	return (
 		<SafeAreaView style={styles.pageContainer}>
+			{openFilter && <FilterItemsComponent style={styles.filterArea} toggleFilter={handleFilter}/>}
+
 			<View style={styles.topArea}>
 				<Text style={styles.pageTitle}>Alle plantaardige recepten</Text>
 				<View style={styles.buttonWrapper}>
@@ -128,12 +138,11 @@ export default function RecepiesScreen() {
 						<SearchButtonComponent />
 					</View>
 					<View style={styles.buttonItem2}>
-						<FilterButtonComponent />
+						<FilterButtonComponent toggleFilter={handleFilter} />
 					</View>
 				</View>
 			</View>
 
-			{/* <FilterItemsComponent style={styles.filterArea} /> */}
 
 			<View style={styles.mainArea}>
 				<Text style={styles.amountOfRecipesText}>{data.length} resultaten</Text>

@@ -9,7 +9,7 @@ import {
 	Animated,
 } from "react-native";
 
-export default function FilterButtonComponent() {
+export default function FilterButtonComponent(props) {
 	const [isFilterOpen, setIsFilterOpen] = useState(false);
 	const [selectedOptions, setSelectedOptions] = useState([]);
 	const [buttonWidth, setButtonWidth] = useState(new Animated.Value(100));
@@ -59,7 +59,7 @@ export default function FilterButtonComponent() {
 		<View style={styles.container} ref={viewRef} onLayout={onLayout}>
 			<TouchableOpacity
 				style={[styles.button, styles.shadowProp]}
-				onPress={handleFilterToggle}>
+				onPress={props.toggleFilter}>
 				<Animated.View style={[{ width: buttonWidth }]} />
 				<View style={styles.filterContainer}>
 					<Icon

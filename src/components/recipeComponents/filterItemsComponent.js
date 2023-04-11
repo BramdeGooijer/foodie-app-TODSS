@@ -6,14 +6,24 @@ import {
 } from "react-native";
 import React, { useState, useRef } from "react";
 import { COLORS, SIZES } from "../../theme/theme.js";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
-export default function FilterItemsComponent() {
+export default function FilterItemsComponent(props) {
 	const [cuisines, setCuisines] = useState(1);
 	const [allergenen, setAllergenen] = useState(1);
 
 	return (
 		<View style={styles.filterItemContainer}>
 			<View style={styles.dropdown}>
+				<View style={styles.titleWrapper}>
+					<Text style={styles.titleText}>Filter</Text>
+				</View>
+				<View style={styles.exitWrapper}>
+					<TouchableWithoutFeedback onPress={props.toggleFilter}>
+						<MaterialIcon size={35} name="close" color={"black"} style={styles.exitIcon} />
+					</TouchableWithoutFeedback>
+				</View>
 				<View style={styles.item}>
 					<Text style={styles.title}>CUISINES</Text>
 					<View style={styles.row}>
@@ -302,27 +312,55 @@ export default function FilterItemsComponent() {
 
 const styles = StyleSheet.create({
 	filterItemContainer: {
-		color: "blue",
+		position: "absolute",
+		top: 0,
+		left: 0,
+		bottom: 0,
+		right: 0,
+		backgroundColor: 'rgba(0, 0, 0, 0.5)',
+		// opacity: 0.9,
+		zIndex: 102,
+
 		fontFamily: "Plus-Jakarta-Sans-Regular",
-		padding: 20,
+		// paddingTop: 40,
 	},
 
 	dropdown: {
-		// position: "absolute",
-		// top: 60,
-		// left: 0,
-		backgroundColor: COLORS.lightGray4,
-		width: 300, // <-- set the width to 300
-		// borderRadius: SIZES.radius,
-		// padding: SIZES.padding,
-		elevation: 1,
-		shadowColor: "black",
-		shadowOpacity: 0.8,
-		shadowRadius: 2,
-		shadowOffset: {
-			height: 1,
-			width: 1,
-		},
+		backgroundColor: "#F3F4F1",
+		// width: 300, // <-- set the width to 300
+
+		paddingTop: 70,
+		paddingHorizontal: 20,
+		paddingBottom: 40,
+
+		// height: "80%",
+
+	},
+
+	titleWrapper: {
+		alignItems: "center",
+	},
+	
+	titleText: {
+		fontSize: 18,
+		fontWeight: 700,
+		fontFamily: "Plus-Jakarta-Sans-Bold",
+	},
+
+	exitWrapper: {
+		alignItems: "flex-end",
+
+		marginTop: 10,
+	},
+
+	exitButton: {
+		backgroundColor:  "red",
+		position: "absolute",
+		right: 0,
+		top: 0,
+	},
+	
+	exitIcon: {
 	},
 
 	title: {
