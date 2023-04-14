@@ -3,7 +3,7 @@ import { Dimensions } from "react-native";
 const { width, height } = Dimensions.get("screen");
 
 export const COLORS = {
-	primary: "#f52d56",
+	primary: "#294406",
 	title: "#072F4A",
 	white: "#FFFFFF",
 	lightGrey: "#D3D6D6",
@@ -22,4 +22,21 @@ export const SIZES = {
 
 	width,
 	height,
+};
+
+export const FONTS = {
+	Regular: "PlusJakartaSans-Bold.tff",
+	Bold: "PlusJakartaSans-Bold.ttf",
+	BoldItalic: "PlusJakartaSans-BoldItalic.ttf",
+	ExtraBold: "PlusJakartaSans-ExtraBold.ttf",
+	ExtraBoldItalic: "PlusJakartaSans-ExtraBoldItalic.ttf",
+	ExtraLight: "PlusJakartaSans-ExtraLight.ttf",
+	ExtraLightItalic: "PlusJakartaSans-ExtraLightItalic.ttf",
+	Italic: "PlusJakartaSans-Italic.ttf",
+	Light: "PlusJakartaSans-Light.ttf",
+	LightItalic: "PlusJakartaSans-LightItalic.ttf",
+	Medium: "PlusJakartaSans-Medium.ttf",
+	MediumItalic: "PlusJakartaSans-MediumItalic.ttf",
+	SemiBold: "PlusJakartaSans-SemiBold.ttf",
+	SemiBoldItalic: "PlusJakartaSans-SemiBoldItalic.ttf",
 };

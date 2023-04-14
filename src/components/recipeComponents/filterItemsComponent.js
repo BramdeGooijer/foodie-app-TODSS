@@ -1,19 +1,27 @@
-import {
-	View,
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import React, { useState, useRef } from "react";
-import { COLORS, SIZES } from "../../theme/theme.js";
+import { COLORS, SIZES, FONTS } from "../../theme/theme.js";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
-export default function FilterItemsComponent() {
+export default function FilterItemsComponent(props) {
 	const [cuisines, setCuisines] = useState(1);
 	const [allergenen, setAllergenen] = useState(1);
 
 	return (
 		<View style={styles.filterItemContainer}>
 			<View style={styles.dropdown}>
+				<View style={styles.titleWrapper}>
+					<Text style={styles.titleText}>Filter</Text>
+				</View>
+
+				<MaterialIcon
+					size={35}
+					name="close"
+					color={"black"}
+					style={styles.exitIcon}
+					onPress={props.toggleFilter}
+				/>
 				<View style={styles.item}>
 					<Text style={styles.title}>CUISINES</Text>
 					<View style={styles.row}>
@@ -302,27 +310,53 @@ export default function FilterItemsComponent() {
 
 const styles = StyleSheet.create({
 	filterItemContainer: {
-		color: "blue",
-		fontFamily: "Plus-Jakarta-Sans-Regular",
-		padding: 20,
+		position: "absolute",
+		top: 0,
+		left: 0,
+		bottom: 0,
+		right: 0,
+		backgroundColor: "rgba(0, 0, 0, 0.5)",
+		// opacity: 0.9,
+		zIndex: 102,
+		margin: 1,
+
+		fontFamily: FONTS.Regular,
+		// paddingTop: 40,
 	},
 
 	dropdown: {
-		// position: "absolute",
-		// top: 60,
-		// left: 0,
-		backgroundColor: COLORS.lightGray4,
-		width: 300, // <-- set the width to 300
-		// borderRadius: SIZES.radius,
-		// padding: SIZES.padding,
-		elevation: 1,
-		shadowColor: "black",
-		shadowOpacity: 0.8,
-		shadowRadius: 2,
-		shadowOffset: {
-			height: 1,
-			width: 1,
-		},
+		backgroundColor: "#F3F4F1",
+		// width: 300, // <-- set the width to 300
+
+		paddingTop: 70,
+		paddingHorizontal: 20,
+		paddingBottom: 40,
+
+		// height: "80%",
+	},
+
+	titleWrapper: {
+		alignItems: "center",
+		// backgroundColor: "blue",
+	},
+
+	titleText: {
+		fontSize: 18,
+		fontWeight: 700,
+		fontFamily: FONTS.bold,
+	},
+
+	exitButton: {
+		backgroundColor: "red",
+		position: "absolute",
+		right: 0,
+		top: 0,
+	},
+
+	exitIcon: {
+		position: "absolute",
+		top: 64,
+		right: 15,
 	},
 
 	title: {
@@ -343,6 +377,7 @@ const styles = StyleSheet.create({
 		borderWidth: 2,
 		padding: 5,
 		paddingHorizontal: 10,
+		margin: 2,
 	},
 
 	subtitle: {
