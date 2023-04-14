@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useRef, useCallback } from "react";
 import {
 	View,
@@ -58,52 +57,15 @@ export default function SearchButtonComponent() {
 		}).start();
 	};
 
-	const buttonStyle = {
-		transform: [
-			{
-				translateX: animatedValue.interpolate({
-					inputRange: [0, 1],
-					outputRange: [0, 0],
-				}),
-			},
-			{
-				scaleX: animatedValue.interpolate({
-					inputRange: [0, 0.5, 1],
-					outputRange: [1, 0.5, 0],
-				}),
-			},
-		],
-	};
-
-	const inputStyle = {
-		transform: [
-			{
-				translateX: animatedValue.interpolate({
-					inputRange: [0, 1],
-					outputRange: [0, 0],
-				}),
-			},
-			{
-				scaleX: animatedValue.interpolate({
-					inputRange: [0, 0.5, 1],
-					outputRange: [0, 0.5, 1],
-				}),
-			},
-		],
-	};
-
 	const [showText, setShowText] = useState(true);
 	const viewRef = useRef(null);
 
 	const onLayout = () => {
 		if (viewRef.current) {
 			viewRef.current.measure((x, y, width, height) => {
-				console.log(width);
 				if (width > 80) {
-					console.log("hi");
 					setShowText(true);
 				} else {
-					console.log("bye");
 					setShowText(false);
 				}
 			});
@@ -113,19 +75,18 @@ export default function SearchButtonComponent() {
 	return (
 		<View ref={viewRef} onLayout={onLayout}>
 			{!showSearchBar && (
-				<TouchableOpacity
-					style={[styles.button, buttonStyle]}
-					onPress={handleButtonClick}>
+				<TouchableOpacity style={styles.button} onPress={handleButtonClick}>
 					<Icon name="search" size={18} color="#3A3938" style={styles.icon} />
 					{showText ? <Text style={styles.buttonText}>Zoeken</Text> : null}
 				</TouchableOpacity>
 			)}
 			{showSearchBar && (
-				<Animated.View style={[styles.inputContainer, inputStyle]}>
+				<Animated.View style={styles.inputContainer}>
 					<TextInput
 						ref={inputRef}
 						style={styles.input}
 						placeholder="zoeken..."
+						autoComplete={"off"}
 						onBlur={handleInputBlur}
 						autoFocus={true}
 						onChangeText={handleInputChange}

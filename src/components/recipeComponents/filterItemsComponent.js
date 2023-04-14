@@ -1,13 +1,29 @@
-import {
-	View,
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import React, { useState, useRef } from "react";
-import { COLORS, SIZES } from "../../theme/theme.js";
+import { COLORS, SIZES, FONTS } from "../../theme/theme.js";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+
+const cuisinesList = [
+	{ id: 1, name: "All" },
+	{ id: 2, name: "American" },
+	{ id: 3, name: "Asian" },
+	{ id: 4, name: "Burger" },
+	{ id: 5, name: "Chinese" },
+	{ id: 6, name: "Fast Food" },
+	{ id: 7, name: "Italian" },
+	{ id: 8, name: "Mexican" },
+	{ id: 9, name: "Pasta" },
+	{ id: 10, name: "Rice" },
+	{ id: 11, name: "Asian" },
+];
+
+const allergyList = [
+	{ id: 1, name: "All" },
+	{ id: 2, name: "Gluten" },
+	{ id: 3, name: "Melk" },
+	{ id: 4, name: "Vis" },
+];
 
 export default function FilterItemsComponent(props) {
 	const [cuisines, setCuisines] = useState(1);
@@ -20,286 +36,82 @@ export default function FilterItemsComponent(props) {
 					<Text style={styles.titleText}>Filter</Text>
 				</View>
 
-				<MaterialIcon size={35} name="close" color={"black"} style={styles.exitIcon} onPress={props.toggleFilter}/>
+				<MaterialIcon
+					size={35}
+					name="close"
+					color={"black"}
+					style={styles.exitIcon}
+					onPress={props.toggleFilter}
+				/>
 				<View style={styles.item}>
 					<Text style={styles.title}>CUISINES</Text>
 					<View style={styles.row}>
-						<TouchableOpacity
-							onPress={() => {
-								setCuisines(1);
-							}}
-							style={[
-								styles.category,
-								{
-									borderColor: cuisines === 1 ? COLORS.primary : COLORS.grey,
-								},
-							]}>
-							<Text
-								style={[
-									styles.subtitle,
-									{ color: cuisines === 1 ? COLORS.primary : COLORS.grey },
-								]}>
-								All
-							</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
-							onPress={() => {
-								setCuisines(2);
-							}}
-							style={[
-								styles.category,
-								{
-									borderColor: cuisines === 2 ? COLORS.primary : COLORS.grey,
-								},
-							]}>
-							<Text
-								style={[
-									styles.subtitle,
-									{ color: cuisines === 2 ? COLORS.primary : COLORS.grey },
-								]}>
-								American
-							</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
-							onPress={() => {
-								setCuisines(3);
-							}}
-							style={[
-								styles.category,
-								{
-									borderColor: cuisines === 3 ? COLORS.primary : COLORS.grey,
-								},
-							]}>
-							<Text
-								style={[
-									styles.subtitle,
-									{ color: cuisines === 3 ? COLORS.primary : COLORS.grey },
-								]}>
-								Asian
-							</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
-							onPress={() => {
-								setCuisines(4);
-							}}
-							style={[
-								styles.category,
-								{
-									borderColor: cuisines === 4 ? COLORS.primary : COLORS.grey,
-								},
-							]}>
-							<Text
-								style={[
-									styles.subtitle,
-									{ color: cuisines === 4 ? COLORS.primary : COLORS.grey },
-								]}>
-								Burger
-							</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
-							onPress={() => {
-								setCuisines(5);
-							}}
-							style={[
-								styles.category,
-								{
-									borderColor: cuisines === 5 ? COLORS.primary : COLORS.grey,
-								},
-							]}>
-							<Text
-								style={[
-									styles.subtitle,
-									{ color: cuisines === 5 ? COLORS.primary : COLORS.grey },
-								]}>
-								Chineese
-							</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
-							onPress={() => {
-								setCuisines(6);
-							}}
-							style={[
-								styles.category,
-								{
-									borderColor: cuisines === 6 ? COLORS.primary : COLORS.grey,
-								},
-							]}>
-							<Text
-								style={[
-									styles.subtitle,
-									{ color: cuisines === 6 ? COLORS.primary : COLORS.grey },
-								]}>
-								Fast Food
-							</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
-							onPress={() => {
-								setCuisines(7);
-							}}
-							style={[
-								styles.category,
-								{
-									borderColor: cuisines === 7 ? COLORS.primary : COLORS.grey,
-								},
-							]}>
-							<Text
-								style={[
-									styles.subtitle,
-									{ color: cuisines === 7 ? COLORS.primary : COLORS.grey },
-								]}>
-								Italian
-							</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
-							onPress={() => {
-								setCuisines(8);
-							}}
-							style={[
-								styles.category,
-								{
-									borderColor: cuisines === 8 ? COLORS.primary : COLORS.grey,
-								},
-							]}>
-							<Text
-								style={[
-									styles.subtitle,
-									{ color: cuisines === 8 ? COLORS.primary : COLORS.grey },
-								]}>
-								Mexican
-							</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
-							onPress={() => {
-								setCuisines(9);
-							}}
-							style={[
-								styles.category,
-								{
-									borderColor: cuisines === 9 ? COLORS.primary : COLORS.grey,
-								},
-							]}>
-							<Text
-								style={[
-									styles.subtitle,
-									{ color: cuisines === 9 ? COLORS.primary : COLORS.grey },
-								]}>
-								Pasta
-							</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
-							onPress={() => {
-								setCuisines(10);
-							}}
-							style={[
-								styles.category,
-								{
-									borderColor: cuisines === 10 ? COLORS.primary : COLORS.grey,
-								},
-							]}>
-							<Text
-								style={[
-									styles.subtitle,
-									{ color: cuisines === 10 ? COLORS.primary : COLORS.grey },
-								]}>
-								Rice
-							</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
-							onPress={() => {
-								setCuisines(11);
-							}}
-							style={[
-								styles.category,
-								{
-									borderColor: cuisines === 11 ? COLORS.primary : COLORS.grey,
-								},
-							]}>
-							<Text
-								style={[
-									styles.subtitle,
-									{ color: cuisines === 11 ? COLORS.primary : COLORS.grey },
-								]}>
-								Asian
-							</Text>
-						</TouchableOpacity>
+						{cuisinesList.map(cuisineItem => {
+							return (
+								<TouchableOpacity
+									onPress={() => {
+										setCuisines(cuisineItem.id);
+									}}
+									style={[
+										styles.category,
+										{
+											borderColor:
+												cuisines === cuisineItem.id
+													? COLORS.primary
+													: COLORS.grey,
+										},
+									]}>
+									<Text
+										style={[
+											styles.subtitle,
+											{
+												color:
+													cuisines === cuisineItem.id
+														? COLORS.primary
+														: COLORS.grey,
+											},
+										]}>
+										{cuisineItem.name}
+									</Text>
+								</TouchableOpacity>
+							);
+						})}
 					</View>
 				</View>
 
 				<View style={styles.item}>
 					<Text style={styles.title}>ALLERGENEN</Text>
 					<View style={styles.row}>
-						<TouchableOpacity
-							onPress={() => {
-								setAllergenen(1);
-							}}
-							style={[
-								styles.category,
-								{
-									borderColor: allergenen === 1 ? COLORS.primary : COLORS.grey,
-								},
-							]}>
-							<Text
-								style={[
-									styles.subtitle,
-									{ color: allergenen === 1 ? COLORS.primary : COLORS.grey },
-								]}>
-								All
-							</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
-							onPress={() => {
-								setAllergenen(2);
-							}}
-							style={[
-								styles.category,
-								{
-									borderColor: allergenen === 2 ? COLORS.primary : COLORS.grey,
-								},
-							]}>
-							<Text
-								style={[
-									styles.subtitle,
-									{ color: allergenen === 2 ? COLORS.primary : COLORS.grey },
-								]}>
-								Gluten
-							</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
-							onPress={() => {
-								setAllergenen(3);
-							}}
-							style={[
-								styles.category,
-								{
-									borderColor: allergenen === 3 ? COLORS.primary : COLORS.grey,
-								},
-							]}>
-							<Text
-								style={[
-									styles.subtitle,
-									{ color: allergenen === 3 ? COLORS.primary : COLORS.grey },
-								]}>
-								Melk
-							</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
-							onPress={() => {
-								setAllergenen(4);
-							}}
-							style={[
-								styles.category,
-								{
-									borderColor: allergenen === 4 ? COLORS.primary : COLORS.grey,
-								},
-							]}>
-							<Text
-								style={[
-									styles.subtitle,
-									{ color: allergenen === 4 ? COLORS.primary : COLORS.grey },
-								]}>
-								Vis
-							</Text>
-						</TouchableOpacity>
+						{allergyList.map(allergyItem => {
+							return (
+								<TouchableOpacity
+									onPress={() => {
+										setAllergenen(allergyItem.id);
+									}}
+									style={[
+										styles.category,
+										{
+											borderColor:
+												allergenen === allergyItem.id
+													? COLORS.primary
+													: COLORS.grey,
+										},
+									]}>
+									<Text
+										style={[
+											styles.subtitle,
+											{
+												color:
+													allergenen === allergyItem.id
+														? COLORS.primary
+														: COLORS.grey,
+											},
+										]}>
+										{allergyItem.name}
+									</Text>
+								</TouchableOpacity>
+							);
+						})}
 					</View>
 				</View>
 			</View>
@@ -314,11 +126,12 @@ const styles = StyleSheet.create({
 		left: 0,
 		bottom: 0,
 		right: 0,
-		backgroundColor: 'rgba(0, 0, 0, 0.5)',
+		backgroundColor: "rgba(0, 0, 0, 0.5)",
 		// opacity: 0.9,
 		zIndex: 102,
+		margin: 1,
 
-		fontFamily: "Plus-Jakarta-Sans-Regular",
+		fontFamily: FONTS.Regular,
 		// paddingTop: 40,
 	},
 
@@ -331,27 +144,26 @@ const styles = StyleSheet.create({
 		paddingBottom: 40,
 
 		// height: "80%",
-
 	},
 
 	titleWrapper: {
 		alignItems: "center",
 		// backgroundColor: "blue",
 	},
-	
+
 	titleText: {
 		fontSize: 18,
 		fontWeight: 700,
-		fontFamily: "Plus-Jakarta-Sans-Bold",
+		fontFamily: FONTS.bold,
 	},
 
 	exitButton: {
-		backgroundColor:  "red",
+		backgroundColor: "red",
 		position: "absolute",
 		right: 0,
 		top: 0,
 	},
-	
+
 	exitIcon: {
 		position: "absolute",
 		top: 64,
@@ -376,6 +188,7 @@ const styles = StyleSheet.create({
 		borderWidth: 2,
 		padding: 5,
 		paddingHorizontal: 10,
+		margin: 2,
 	},
 
 	subtitle: {

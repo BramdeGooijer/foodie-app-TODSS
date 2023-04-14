@@ -11,6 +11,10 @@ import * as Haptics from "expo-haptics";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
+import glutenIcon from "../../../assets/allergyIcons/allergyIcon.png";
+import lactoseIcon from "../../../assets/allergyIcons/lactosefreeTestIcon.png";
+import sugarIcon from "../../../assets/allergyIcons/sugarfreeTestIcon.png";
+
 export default function RecipeItemComponent(props) {
 	const [liked, setLiked] = useState(props.liked);
 	let recipeImage;
@@ -65,26 +69,27 @@ export default function RecipeItemComponent(props) {
 						<Text style={styles.recipeSubText}>{props.subtext}</Text>
 
 						<View style={styles.allergyIconWrapper}>
-							{props.allergies.map(item => {
-								if (item === "gluten") {
+							{props.allergies.map((item, index) => {
+								let imageUrl;
+
+								switch (item) {
+									case "gluten":
+										imageUrl = glutenIcon;
+										break;
+									case "lactose":
+										imageUrl = lactoseIcon;
+										break;
+									case "sugar":
+										imageUrl = sugarIcon;
+										break;
+								}
+
+								if (imageUrl) {
 									return (
 										<Image
+											key={`${props.keyExtractor}-${index}`}
 											style={styles.allergyIcon}
-											source={require("../../../assets/allergyIcons/allergyIcon.png")}
-										/>
-									);
-								} else if (item === "lactose") {
-									return (
-										<Image
-											style={styles.allergyIcon}
-											source={require("../../../assets/allergyIcons/lactosefreeTestIcon.png")}
-										/>
-									);
-								} else if (item === "sugar") {
-									return (
-										<Image
-											style={styles.allergyIcon}
-											source={require("../../../assets/allergyIcons/sugarfreeTestIcon.png")}
+											source={imageUrl}
 										/>
 									);
 								}

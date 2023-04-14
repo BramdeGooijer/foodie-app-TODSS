@@ -6,6 +6,7 @@ import React, {
 	FlatList,
 } from "react-native";
 import RecipeItemComponent from "../../components/recipeComponents/recipeItemComponent";
+import { COLORS, SIZES, FONTS } from "../../theme/theme.js";
 import SearchButtonComponent from "../../components/recipeComponents/searchButtonComponent";
 import FilterButtonComponent from "../../components/recipeComponents/filterButtonComponent";
 import FilterItemsComponent from "../../components/recipeComponents/filterItemsComponent";
@@ -112,6 +113,7 @@ export default function RecepiesScreen() {
 		return (
 			// <View style={styles.recipeItem}><Text>{item.text}</Text></View>
 			<RecipeItemComponent
+				key={item.id}
 				keyExtractor={item.id}
 				category={item.category}
 				subtext={item.subtext}
@@ -125,11 +127,16 @@ export default function RecepiesScreen() {
 
 	const handleFilter = () => {
 		setOpenFilter(!openFilter);
-	}
+	};
 
 	return (
 		<SafeAreaView style={styles.pageContainer}>
-			{openFilter && <FilterItemsComponent style={styles.filterArea} toggleFilter={handleFilter}/>}
+			{openFilter && (
+				<FilterItemsComponent
+					style={styles.filterArea}
+					toggleFilter={handleFilter}
+				/>
+			)}
 
 			<View style={styles.topArea}>
 				<Text style={styles.pageTitle}>Alle plantaardige recepten</Text>
@@ -143,14 +150,12 @@ export default function RecepiesScreen() {
 				</View>
 			</View>
 
-
 			<View style={styles.mainArea}>
 				<Text style={styles.amountOfRecipesText}>{data.length} resultaten</Text>
 				<FlatList
 					style={styles.recipeList}
 					data={data}
 					renderItem={renderItem}
-					keyExtractor={item => item.id}
 				/>
 			</View>
 		</SafeAreaView>
@@ -192,7 +197,7 @@ const styles = StyleSheet.create({
 
 		fontSize: 18,
 		fontWeight: 700,
-		fontFamily: "Plus-Jakarta-Sans-Bold",
+		fontFamily: FONTS.bold,
 	},
 
 	buttonWrapper: {
@@ -218,7 +223,7 @@ const styles = StyleSheet.create({
 	// Styling for main area items
 	amountOfRecipesText: {
 		fontSize: 16,
-		fontFamily: "Plus-Jakarta-Sans-Semi-Bold",
+		fontFamily: FONTS.SemiBold,
 
 		marginBottom: 15,
 	},
