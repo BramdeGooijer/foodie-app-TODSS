@@ -108,6 +108,7 @@ export default function RecepiesScreen() {
 		return (
 			// <View style={styles.recipeItem}><Text>{item.text}</Text></View>
 			<RecipeItemComponent
+				key={item.id}
 				keyExtractor={item.id}
 				category={item.category}
 				subtext={item.subtext}
@@ -141,7 +142,6 @@ export default function RecepiesScreen() {
 					style={styles.recipeList}
 					data={data}
 					renderItem={renderItem}
-					keyExtractor={item => item.id}
 				/>
 			</View>
 		</SafeAreaView>

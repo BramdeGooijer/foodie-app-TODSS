@@ -43,12 +43,9 @@ export default function FilterButtonComponent() {
 	const onLayout = () => {
 		if (viewRef.current) {
 			viewRef.current.measure((x, y, width, height) => {
-				console.log(width);
 				if (width > 80) {
-					console.log("hi");
 					setShowView(true);
 				} else {
-					console.log("bye");
 					setShowView(false);
 				}
 			});
