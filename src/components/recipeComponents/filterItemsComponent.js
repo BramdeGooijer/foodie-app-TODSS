@@ -49,6 +49,7 @@ export default function FilterItemsComponent(props) {
 						{cuisinesList.map(cuisineItem => {
 							return (
 								<TouchableOpacity
+									key={`${cuisineItem.name}-${cuisineItem.id}`}
 									onPress={() => {
 										setCuisines(cuisineItem.id);
 									}}
@@ -85,6 +86,7 @@ export default function FilterItemsComponent(props) {
 						{allergyList.map(allergyItem => {
 							return (
 								<TouchableOpacity
+									key={`${allergyItem.name}-${allergyItem.id}`}
 									onPress={() => {
 										setAllergenen(allergyItem.id);
 									}}
