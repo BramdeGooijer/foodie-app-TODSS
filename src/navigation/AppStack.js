@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import DashboardScreen from "../screens/dashboard/dashboard";
-import RecepiesScreen from "../screens/recepies/recepies";
+import RecipesScreen from "../screens/recipes/recipes";
 import FavoritesScreen from "../screens/favorites/favorites";
 import ProfileScreen from "../screens/profile/profile";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
@@ -14,7 +14,7 @@ const Tab = createBottomTabNavigator();
 
 // stacks
 const DashboardStack = createStackNavigator();
-const RecepiesStack = createStackNavigator();
+const RecipesStack = createStackNavigator();
 const FavoritesStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 const MainStack = createStackNavigator();
@@ -60,8 +60,8 @@ function MainTabs() {
 				}}
 			/>
 			<Tab.Screen
-				name="Recepies"
-				component={RecepiesStackScreen}
+				name="Recipes"
+				component={RecipesStackScreen}
 				options={{
 					...defaultOptions,
 					tabBarLabel: "Recepten",
@@ -88,7 +88,7 @@ function MainTabs() {
 					tabBarIcon: ({ focused }) => {
 						return (
 							<MaterialIcon
-								size={22}
+								size={24}
 								name="favorite-outline"
 								color={focused && theme.colors.success}
 							/>
@@ -106,7 +106,7 @@ function MainTabs() {
 					tabBarIcon: ({ focused }) => {
 						return (
 							<MaterialIcon
-								size={22}
+								size={24}
 								name="person-outline"
 								color={focused && theme.colors.success}
 							/>
@@ -129,15 +129,15 @@ function DashboardStackScreen() {
 		</DashboardStack.Navigator>
 	);
 }
-function RecepiesStackScreen() {
+function RecipesStackScreen() {
 	return (
-		<RecepiesStack.Navigator initialRouteName="Recepies">
-			<RecepiesStack.Screen
-				name="RecepiesStack"
-				component={RecepiesScreen}
+		<RecipesStack.Navigator initialRouteName="Recipes">
+			<RecipesStack.Screen
+				name="RecipesStack"
+				component={RecipesScreen}
 				options={{ ...defaultOptions }}
 			/>
-		</RecepiesStack.Navigator>
+		</RecipesStack.Navigator>
 	);
 }
 function FavoritesStackScreen() {
