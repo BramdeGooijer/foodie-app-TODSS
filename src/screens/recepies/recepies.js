@@ -6,6 +6,7 @@ import React, {
 	FlatList,
 } from "react-native";
 import RecipeItemComponent from "../../components/recipeComponents/recipeItemComponent";
+import { COLORS, SIZES, FONTS } from "../../theme/theme.js";
 import SearchButtonComponent from "../../components/recipeComponents/searchButtonComponent";
 import FilterButtonComponent from "../../components/recipeComponents/filterButtonComponent";
 import FilterItemsComponent from "../../components/recipeComponents/filterItemsComponent";
@@ -196,7 +197,7 @@ const styles = StyleSheet.create({
 
 		fontSize: 18,
 		fontWeight: 700,
-		fontFamily: "Plus-Jakarta-Sans-Bold",
+		fontFamily: FONTS.bold,
 	},
 
 	buttonWrapper: {
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
 	// Styling for main area items
 	amountOfRecipesText: {
 		fontSize: 16,
-		fontFamily: "Plus-Jakarta-Sans-Semi-Bold",
+		fontFamily: FONTS.SemiBold,
 
 		marginBottom: 15,
 	},

@@ -1,6 +1,6 @@
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import React, { useState, useRef } from "react";
-import { COLORS, SIZES } from "../../theme/theme.js";
+import { COLORS, SIZES, FONTS } from "../../theme/theme.js";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
 		zIndex: 102,
 		margin: 1,
 
-		fontFamily: "Plus-Jakarta-Sans-Regular",
+		fontFamily: FONTS.Regular,
 		// paddingTop: 40,
 	},
 
@@ -343,7 +343,7 @@ const styles = StyleSheet.create({
 	titleText: {
 		fontSize: 18,
 		fontWeight: 700,
-		fontFamily: "Plus-Jakarta-Sans-Bold",
+		fontFamily: FONTS.bold,
 	},
 
 	exitButton: {
