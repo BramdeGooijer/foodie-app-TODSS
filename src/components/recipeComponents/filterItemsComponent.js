@@ -1,9 +1,4 @@
-import {
-	View,
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import React, { useState, useRef } from "react";
 import { COLORS, SIZES } from "../../theme/theme.js";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
@@ -20,7 +15,13 @@ export default function FilterItemsComponent(props) {
 					<Text style={styles.titleText}>Filter</Text>
 				</View>
 
-				<MaterialIcon size={35} name="close" color={"black"} style={styles.exitIcon} onPress={props.toggleFilter}/>
+				<MaterialIcon
+					size={35}
+					name="close"
+					color={"black"}
+					style={styles.exitIcon}
+					onPress={props.toggleFilter}
+				/>
 				<View style={styles.item}>
 					<Text style={styles.title}>CUISINES</Text>
 					<View style={styles.row}>
@@ -314,7 +315,7 @@ const styles = StyleSheet.create({
 		left: 0,
 		bottom: 0,
 		right: 0,
-		backgroundColor: 'rgba(0, 0, 0, 0.5)',
+		backgroundColor: "rgba(0, 0, 0, 0.5)",
 		// opacity: 0.9,
 		zIndex: 102,
 		margin: 1,
@@ -332,7 +333,6 @@ const styles = StyleSheet.create({
 		paddingBottom: 40,
 
 		// height: "80%",
-
 	},
 
 	titleWrapper: {
@@ -347,7 +347,7 @@ const styles = StyleSheet.create({
 	},
 
 	exitButton: {
-		backgroundColor:  "red",
+		backgroundColor: "red",
 		position: "absolute",
 		right: 0,
 		top: 0,

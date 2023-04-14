@@ -125,11 +125,16 @@ export default function RecepiesScreen() {
 
 	const handleFilter = () => {
 		setOpenFilter(!openFilter);
-	}
+	};
 
 	return (
 		<SafeAreaView style={styles.pageContainer}>
-			{openFilter && <FilterItemsComponent style={styles.filterArea} toggleFilter={handleFilter}/>}
+			{openFilter && (
+				<FilterItemsComponent
+					style={styles.filterArea}
+					toggleFilter={handleFilter}
+				/>
+			)}
 
 			<View style={styles.topArea}>
 				<Text style={styles.pageTitle}>Alle plantaardige recepten</Text>
@@ -142,7 +147,6 @@ export default function RecepiesScreen() {
 					</View>
 				</View>
 			</View>
-
 
 			<View style={styles.mainArea}>
 				<Text style={styles.amountOfRecipesText}>{data.length} resultaten</Text>
