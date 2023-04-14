@@ -320,6 +320,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'rgba(0, 0, 0, 0.5)',
 		// opacity: 0.9,
 		zIndex: 102,
+		margin: 1,
 
 		fontFamily: "Plus-Jakarta-Sans-Regular",
 		// paddingTop: 40,
@@ -340,7 +341,7 @@ const styles = StyleSheet.create({
 	titleWrapper: {
 		alignItems: "center",
 	},
-	
+
 	titleText: {
 		fontSize: 18,
 		fontWeight: 700,
@@ -359,7 +360,7 @@ const styles = StyleSheet.create({
 		right: 0,
 		top: 0,
 	},
-	
+
 	exitIcon: {
 	},
 
@@ -381,6 +382,7 @@ const styles = StyleSheet.create({
 		borderWidth: 2,
 		padding: 5,
 		paddingHorizontal: 10,
+		margin: 2,
 	},
 
 	subtitle: {
