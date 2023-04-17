@@ -25,5 +25,7 @@
 		"web": {
 			"favicon": "./assets/favicon.png"
 		}
-	}
+	},
+
+	"ENDPOINT": "http://192.168.2.198:5000"
 }

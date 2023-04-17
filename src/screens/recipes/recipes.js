@@ -11,8 +11,11 @@ import SearchButtonComponent from "../../components/recipeComponents/searchButto
 import FilterButtonComponent from "../../components/recipeComponents/filterButtonComponent";
 import FilterItemsComponent from "../../components/recipeComponents/filterItemsComponent";
 import { useState } from "react";
+import { getAllRecipes } from "../../service/RecipeService";
 
 export default function RecepiesScreen() {
+	console.log(getAllRecipes(100, 0, ""));
+
 	const data = [
 		{
 			id: 1,
