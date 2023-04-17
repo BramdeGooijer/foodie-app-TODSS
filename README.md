@@ -15,17 +15,17 @@ Take a look at the `package.json` for the various launch/lint/format commands.
 
 ```json
 {
- "scripts": {
-  "start": "expo start",
-  "android": "expo start --android",
-  "ios": "expo start --ios",
-  "web": "expo start --web",
-  "lint": "eslint .",
-  "lint:fix": "eslint .",
-  "prettier": "npx prettier --check .",
-  "prettier:fix": "npx prettier --write .",
-  "format": "npm run prettier:fix && npm run lint:fix"
- },
+	"scripts": {
+		"start": "expo start",
+		"android": "expo start --android",
+		"ios": "expo start --ios",
+		"web": "expo start --web",
+		"lint": "eslint .",
+		"lint:fix": "eslint .",
+		"prettier": "npx prettier --check .",
+		"prettier:fix": "npx prettier --write .",
+		"format": "npm run prettier:fix && npm run lint:fix"
+	}
 }
 ```
 
