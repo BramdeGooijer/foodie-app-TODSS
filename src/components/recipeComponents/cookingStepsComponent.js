@@ -39,22 +39,9 @@ export default function CookingStepsComponent() {
 	return (
 		<View>
 			{lijst.map((html, index) => (
-				<View
-					key={index}
-					style={{
-						flexDirection: "row",
-						alignItems: "flex-start",
-						backgroundColor: "white",
-					}}>
-					<View style={{ width: 60, padding: 8, marginLeft: 8 }}>
-						<Text
-							style={{
-								fontSize: 32,
-								color: "#294406",
-								opacity: 0.6,
-								fontWeight: 700,
-								lineHeight: 32,
-							}}>{`${index + 1}`}</Text>
+				<View key={index} style={[styles.container]}>
+					<View style={[styles.numberContainer]}>
+						<Text style={[styles.stepNumber]}>{`${index + 1}`}</Text>
 					</View>
 					<HTML
 						source={{ html }}
@@ -67,4 +54,22 @@ export default function CookingStepsComponent() {
 	);
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+	container: {
+		flexDirection: "row",
+		alignItems: "flex-start",
+		backgroundColor: "white",
+	},
+	stepNumber: {
+		fontSize: 32,
+		color: "#294406",
+		opacity: 0.6,
+		fontWeight: 700,
+		lineHeight: 32,
+	},
+	numberContainer: {
+		width: 60,
+		padding: 8,
+		marginLeft: 8,
+	},
+});
