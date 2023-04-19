@@ -5,6 +5,7 @@ import React, {
 	StyleSheet,
 	ScrollView,
 } from "react-native";
+import CookingStepsComponent from "../../components/recipeComponents/cookingStepsComponent";
 
 export default function FavoritesScreen() {
 	return (
@@ -18,6 +19,7 @@ export default function FavoritesScreen() {
 				</View>
 				<View style={styles.ingredientArea}>
 					<Text>Placeholder for recipe ingrediënts and preperation steps</Text>
+					<CookingStepsComponent />
 				</View>
 			</ScrollView>
 		</SafeAreaView>
@@ -44,6 +46,6 @@ const styles = StyleSheet.create({
 	ingredientArea: {
 		backgroundColor: "red",
 		// flex: 1,
-		height: 500,
+		height: 1000,
 	},
 });
