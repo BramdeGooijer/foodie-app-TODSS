@@ -11,6 +11,7 @@ import SearchButtonComponent from "../../components/recipeComponents/searchButto
 import FilterButtonComponent from "../../components/recipeComponents/filterButtonComponent";
 import FilterItemsComponent from "../../components/recipeComponents/filterItemsComponent";
 import { useState } from "react";
+import { IconButton } from "../../components/globalComponents/buttonComponents";
 
 export default function RecepiesScreen() {
 	const data = [
@@ -142,9 +143,15 @@ export default function RecepiesScreen() {
 				<View style={styles.buttonWrapper}>
 					<View style={styles.buttonItem1}>
 						<SearchButtonComponent />
+						{/* <IconButton icon="search1" text="Search" /> */}
 					</View>
 					<View style={styles.buttonItem2}>
-						<FilterButtonComponent toggleFilter={handleFilter} />
+						{/* <FilterButtonComponent toggleFilter={handleFilter} /> */}
+						<IconButton
+							icon="filter"
+							text="Filter"
+							handleOnPress={handleFilter}
+						/>
 					</View>
 				</View>
 			</View>

@@ -1,3 +1,4 @@
+/* eslint-disable react/self-closing-comp */
 import React, {
 	View,
 	Text,
@@ -5,19 +6,28 @@ import React, {
 	StyleSheet,
 	ScrollView,
 } from "react-native";
-import IconButton from "../../components/globalComponents/buttonComponents";
+import {
+	IconButton,
+	RedirectButton,
+} from "../../components/globalComponents/buttonComponents";
 
 export default function FavoritesScreen() {
 	return (
 		<SafeAreaView>
+			<IconButton icon="arrowleft" style={styles.returnButton} />
 			<ScrollView style={styles.recipeInfoContainer}>
 				<View style={styles.topArea}>
 					<Text>Placeholder for main recipe info</Text>
-					<View style={StyleSheet.create({width: "90%", backgroundColor: "black"})}>
-						<View style={StyleSheet.create({width: "80%", backgroundColor:"green"})}>
-							<IconButton icon="filter-alt" text="Filter"></IconButton>
-						</View>
-
+					<View
+						style={StyleSheet.create({
+							width: "90%",
+							backgroundColor: "black",
+						})}>
+						<View
+							style={StyleSheet.create({
+								width: "80%",
+								backgroundColor: "green",
+							})}></View>
 					</View>
 				</View>
 				<View style={styles.descriptionArea}>
@@ -34,6 +44,13 @@ export default function FavoritesScreen() {
 const styles = StyleSheet.create({
 	recipeInfoContainer: {
 		height: "100%",
+	},
+
+	returnButton: {
+		position: "absolute",
+		top: 50,
+		left: 100,
+		zIndex: 999,
 	},
 
 	topArea: {
