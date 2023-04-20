@@ -29,6 +29,8 @@ export default function CookingStepsComponent() {
 			color: "#3A3938",
 			marginBottom: 4,
 			padding: 4,
+			paddingTop: 8,
+			marginTop: 5,
 			paddingLeft: 0,
 			lineHeight: 24,
 			textAlign: "justify",
