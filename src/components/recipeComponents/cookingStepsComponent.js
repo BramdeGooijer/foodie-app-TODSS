@@ -7,13 +7,13 @@ import { FONTS } from "../../theme/theme.js";
 export default function CookingStepsComponent() {
 	const lijst = [
 		"<p>Preheat the oven to 350°F.</p>",
-		"<p>Mix the flour and sugar in a bowl.</p>",
-		"<p>In a separate bowl, mix together the eggs, milk, and vanilla extract.</p>",
+		"<p>Mix the <b>flour</b> and <b>sugar</b> in a bowl.</p>",
+		"<p>In a separate bowl, mix together the <b>eggs</b>, <b>milk</b>, and <b>vanilla extract</b>.</p>",
 		"<p>Combine the wet and dry ingredients, and mix until the batter is smooth.</p>",
 		"<p>Grease a baking pan with cooking spray, and pour in the batter.</p>",
 		"<p>Bake the cake for 30 minutes, or until a toothpick inserted in the center comes out clean.</p>",
 		"<p>Let the cake cool in the pan for 10 minutes, then remove it from the pan and let it cool completely on a wire rack.</p>",
-		"<p>Meanwhile, make the frosting by beating together the butter, powdered sugar, and vanilla extract until smooth.</p>",
+		"<p>Meanwhile, make the frosting by beating together the <b>butter</b>, <b>powdered sugar</b>, and <b>vanilla extract</b> until smooth.</p>",
 		"<p>Spread the frosting over the top of the cooled cake.</p>",
 		"<p>Refrigerate the cake for at least 30 minutes before serving.</p>",
 		"<p>Enjoy your delicious cake!</p>",
