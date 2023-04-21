@@ -7,11 +7,11 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useState } from "react";
 
 export function IconButton(props) {
-    const [textItem, setTextItem] = useState();
+    // const [textItem, setTextItem] = useState();
 
-    if (props.text) {
-        setTextItem(<Text style={iconButtonStyles.text}>{props.text}</Text>);
-    }
+    // if (props.text) {
+    //     setTextItem(<Text style={iconButtonStyles.text}>{props.text}</Text>);
+    // }
 
 	return (
 		<TouchableWithoutFeedback onPress={props.handleOnPress}>
@@ -22,6 +22,7 @@ export function IconButton(props) {
 				]}>
 				<Icon size={24} name={props.icon} color="#3A3938" />
 
+				{props.text && <Text style={iconButtonStyles.text}>{props.text}</Text>}
 			</View>
 		</TouchableWithoutFeedback>
 	);
