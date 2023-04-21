@@ -4,8 +4,15 @@ import Icon from "react-native-vector-icons/AntDesign";
 import { StyleSheet, View, Text } from "react-native";
 import { FONTS } from "../../theme/theme";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { useState } from "react";
 
 export function IconButton(props) {
+    const [textItem, setTextItem] = useState();
+
+    if (props.text) {
+        setTextItem(<Text style={iconButtonStyles.text}>{props.text}</Text>);
+    }
+
 	return (
 		<TouchableWithoutFeedback onPress={props.handleOnPress}>
 			<View
@@ -15,9 +22,28 @@ export function IconButton(props) {
 				]}>
 				<Icon size={24} name={props.icon} color="#3A3938" />
 
-				{props.text !== null && (
-					<Text style={iconButtonStyles.text}>{props.text}</Text>
-				)}
+			</View>
+		</TouchableWithoutFeedback>
+	);
+}
+
+export function MaterialIconButton(props) {
+    const [textItem, setTextItem] = useState();
+
+    if (props.text) {
+        setTextItem(<Text style={iconButtonStyles.text}>{props.text}</Text>);
+    }
+
+	return (
+		<TouchableWithoutFeedback onPress={props.handleOnPress}>
+			<View
+				style={[
+					iconButtonStyles.container,
+					props.text === undefined && iconButtonStyles.round,
+				]}>
+				<MaterialIcon size={24} name={props.icon} color="#3A3938" />
+
+                {textItem}
 			</View>
 		</TouchableWithoutFeedback>
 	);
