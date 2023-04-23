@@ -64,6 +64,7 @@ export default function RecepiesScreen() {
 						recipeItems.map(item => {
 							return (
 								<RecipeItemComponent
+									key={item.id}
 									liked={item.plusRecipe}
 									recipeImage="recipeTestImage"
 									category={item.categories[0]}
