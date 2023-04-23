@@ -85,6 +85,7 @@ export default function RecepiesScreen() {
 							return (
 								<RecipeItemComponent
 									key={item.id}
+									id={item.id}
 									liked={item.plusRecipe}
 									recipeImage="recipeTestImage"
 									category={item.categories[0]}
