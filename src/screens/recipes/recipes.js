@@ -4,14 +4,18 @@ import { FONTS } from "../../theme/theme.js";
 import SearchButtonComponent from "../../components/recipeComponents/searchButtonComponent";
 import FilterButtonComponent from "../../components/recipeComponents/filterButtonComponent";
 import FilterItemsComponent from "../../components/recipeComponents/filterItemsComponent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getAllRecipes } from "../../service/RecipeService";
 import { ScrollView } from "react-native-gesture-handler";
 import { loginAsAdmin } from "../../service/BearerService";
 
 export default function RecepiesScreen() {
 	const [openFilter, setOpenFilter] = useState(false);
-	const [recipeItems, setRecipeItems] = useState([]);
+	const [recipeItems, setRecipeItems] = useState();
+
+	if (recipeItems === undefined) {
+		loadData();
+	}
 
 	async function loadData() {
 		await loginAsAdmin();
@@ -48,27 +52,28 @@ export default function RecepiesScreen() {
 						<SearchButtonComponent />
 					</View>
 					<View style={styles.buttonItem2}>
-						<FilterButtonComponent toggleFilter={loadData} />
+						<FilterButtonComponent toggleFilter={handleFilter} />
 					</View>
 				</View>
 			</View>
 
 			<View style={styles.mainArea}>
 				<Text style={styles.amountOfRecipesText}>
-					{recipeItems.length} resultaten
+					{recipeItems !== undefined ? recipeItems.length : 0} resultaten
 				</Text>
 				<ScrollView style={styles.recipeList}>
-					{recipeItems.map(item => {
-						return (
-							<RecipeItemComponent
-								liked={item.plusRecipe}
-								recipeImage="recipeTestImage"
-								category={item.categories[0]}
-								subtext={item.name}
-								allergies={["gluten"]}
-							/>
-						);
-					})}
+					{recipeItems !== undefined &&
+						recipeItems.map(item => {
+							return (
+								<RecipeItemComponent
+									liked={item.plusRecipe}
+									recipeImage="recipeTestImage"
+									category={item.categories[0]}
+									subtext={item.name}
+									allergies={["gluten"]}
+								/>
+							);
+						})}
 				</ScrollView>
 			</View>
 		</SafeAreaView>
