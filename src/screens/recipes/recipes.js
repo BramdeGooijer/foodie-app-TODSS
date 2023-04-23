@@ -1,4 +1,11 @@
-import React, { View, Text, SafeAreaView, StyleSheet } from "react-native";
+import {
+	View,
+	Text,
+	SafeAreaView,
+	StyleSheet,
+	RefreshControl,
+} from "react-native";
+import React from "react";
 import RecipeItemComponent from "../../components/recipeComponents/recipeItemComponent";
 import { FONTS } from "../../theme/theme.js";
 import SearchButtonComponent from "../../components/recipeComponents/searchButtonComponent";
@@ -12,9 +19,18 @@ import { loginAsAdmin } from "../../service/BearerService";
 export default function RecepiesScreen() {
 	const [openFilter, setOpenFilter] = useState(false);
 	const [recipeItems, setRecipeItems] = useState();
+	const [refreshing, setRefreshing] = useState(false);
 
 	useEffect(() => {
 		loadData();
+	}, []);
+
+	const onRefresh = React.useCallback(() => {
+		setRefreshing(true);
+		loadData();
+		setTimeout(() => {
+			setRefreshing(false);
+		}, 1000);
 	}, []);
 
 	async function loadData() {
@@ -59,7 +75,11 @@ export default function RecepiesScreen() {
 				<Text style={styles.amountOfRecipesText}>
 					{recipeItems !== undefined ? recipeItems.length : 0} resultaten
 				</Text>
-				<ScrollView style={styles.recipeList}>
+				<ScrollView
+					style={styles.recipeList}
+					refreshControl={
+						<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+					}>
 					{recipeItems !== undefined &&
 						recipeItems.map(item => {
 							return (
