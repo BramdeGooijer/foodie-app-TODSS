@@ -18,8 +18,6 @@ export default function RecepiesScreen() {
 	}, []);
 
 	async function loadData() {
-		await loginAsAdmin();
-
 		await getAllRecipes(100, 0, "")
 			.then(response => response.json())
 			.then(data => {
