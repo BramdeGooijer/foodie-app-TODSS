@@ -13,9 +13,9 @@ export default function RecepiesScreen() {
 	const [openFilter, setOpenFilter] = useState(false);
 	const [recipeItems, setRecipeItems] = useState();
 
-	if (recipeItems === undefined) {
+	useEffect(() => {
 		loadData();
-	}
+	}, []);
 
 	async function loadData() {
 		await loginAsAdmin();
