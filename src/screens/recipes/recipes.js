@@ -1,178 +1,32 @@
-import React, {
-	View,
-	Text,
-	SafeAreaView,
-	StyleSheet,
-	FlatList,
-} from "react-native";
+import React, { View, Text, SafeAreaView, StyleSheet } from "react-native";
 import RecipeItemComponent from "../../components/recipeComponents/recipeItemComponent";
 import { FONTS } from "../../theme/theme.js";
 import SearchButtonComponent from "../../components/recipeComponents/searchButtonComponent";
 import FilterButtonComponent from "../../components/recipeComponents/filterButtonComponent";
 import FilterItemsComponent from "../../components/recipeComponents/filterItemsComponent";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getAllRecipes } from "../../service/RecipeService";
 import { ScrollView } from "react-native-gesture-handler";
+import { loginAsAdmin } from "../../service/BearerService";
 
 export default function RecepiesScreen() {
 	const [openFilter, setOpenFilter] = useState(false);
 	const [recipeItems, setRecipeItems] = useState([]);
 
-	// const data = [
-	// 	{
-	// 		id: 1,
-	// 		category: "Ontbijt",
-	// 		subtext: "Heerlijke ei met bacon",
-	// 		allergies: ["gluten"],
-	// 		recipeImage: "recipeTestImage",
-	// 		liked: true,
-	// 		lennaplus: false,
-	// 	},
-	// 	{
-	// 		id: 2,
-	// 		category: "Diner",
-	// 		subtext: "Romige en eiwitrijke paste met geroosterde groenten",
-	// 		allergies: ["gluten", "lactose"],
-	// 		recipeImage: "recipeTestImageMarrokaans",
-	// 		liked: false,
-	// 		lennaplus: true,
-	// 	},
-	// 	{
-	// 		id: 3,
-	// 		category: "Desert",
-	// 		subtext: "Zachte appeltaart met kaneel",
-	// 		allergies: ["gluten", "lactose", "sugar"],
-	// 		recipeImage: "recipeTestImageMarrokaans",
-	// 		liked: false,
-	// 		lennaplus: false,
-	// 	},
-	// 	{
-	// 		id: 4,
-	// 		category: "Ontbijt",
-	// 		subtext: "Simpele havermout kracker met kaas",
-	// 		allergies: ["gluten", "lactose"],
-	// 		recipeImage: "recipeTestImage",
-	// 		liked: false,
-	// 		lennaplus: false,
-	// 	},
-	// 	{
-	// 		id: 5,
-	// 		category: "Tussendoortje",
-	// 		subtext: "Romige en eiwitrijke paste met geroosterde groenten",
-	// 		allergies: ["gluten", "sugar"],
-	// 		recipeImage: "recipeTestImageMarrokaans",
-	// 		liked: false,
-	// 		lennaplus: true,
-	// 	},
-	// 	{
-	// 		id: 6,
-	// 		category: "Tussendoortje",
-	// 		subtext: "Romige en eiwitrijke paste met geroosterde groenten",
-	// 		allergies: ["lactose"],
-	// 		recipeImage: "recipeTestImageMarrokaans",
-	// 		liked: false,
-	// 		lennaplus: true,
-	// 	},
-	// 	{
-	// 		id: 7,
-	// 		category: "Diner",
-	// 		subtext: "Romige en eiwitrijke paste met geroosterde groenten",
-	// 		allergies: ["lactose", "sugar"],
-	// 		recipeImage: "recipeTestImageMarrokaans",
-	// 		liked: false,
-	// 		lennaplus: true,
-	// 	},
-	// 	{
-	// 		id: 8,
-	// 		category: "Ontbijt",
-	// 		subtext: "Romige en eiwitrijke paste met geroosterde groenten",
-	// 		allergies: ["gluten", "lactose"],
-	// 		recipeImage: "recipeTestImageMarrokaans",
-	// 		liked: false,
-	// 		lennaplus: true,
-	// 	},
-	// 	{
-	// 		id: 9,
-	// 		category: "Borrel",
-	// 		subtext: "Romige en eiwitrijke paste met geroosterde groenten",
-	// 		allergies: ["gluten", "lactose"],
-	// 		recipeImage: "recipeTestImageMarrokaans",
-	// 		liked: false,
-	// 		lennaplus: true,
-	// 	},
-	// 	{
-	// 		id: 10,
-	// 		category: "Lunch",
-	// 		subtext: "Romige en eiwitrijke paste met geroosterde groenten",
-	// 		allergies: ["gluten", "lactose"],
-	// 		recipeImage: "recipeTestImageMarrokaans",
-	// 		liked: false,
-	// 		lennaplus: true,
-	// 	},
-	// ];
+	async function loadData() {
+		await loginAsAdmin();
 
-	// useEffect(() => {
-	// 	loadData();
-	// });
+		await getAllRecipes(100, 0, "")
+			.then(response => response.json())
+			.then(data => {
+				console.log(data.items);
 
-	loadData();
-
-	function loadData() {
-		getAllRecipes(100, 0, "")
-		.then(response => response.json())
-		.then(data => {
-			// console.log(response);
-				const items = [];
-
-				for (let i = 0; i < data.items.length; i++) {
-					console.log(data.items[i]);
-					console.log(i);
-					items.push({
-						itemNumber: `${i + 1}`,
-						category: `${data.items[i].categories[0]}`,
-						subText: `${data.items[i].subName}`,
-						allergies: `${data.items[i].allergies}`,
-						recipeImage: "recipeTestImageMarrokaans",
-						liked: `${false}`,
-						lennaplus: `${data.items[i].plusRecipe}`,
-					});
-					break;
-				}
-
-				console.log(items);
-				console.log(typeof items);
-
-				// let recipeViews = [];
-
-				// // items.map(item => {
-				// // 	recipeViews.push(item);
-				// // });
-
-				setRecipeItems(items);
-
-				console.log(recipeItems);
+				setRecipeItems(data.items);
 			})
 			.catch(error => {
 				console.log(error);
 			});
 	}
-
-	const renderItem = (item) => {
-		console.log(item);
-		return (
-			// <View style={styles.recipeItem}><Text>{item.text}</Text></View>
-			<RecipeItemComponent
-				key={item.itemNumber}
-				keyExtractor={item.itemNumber}
-				category={item.category}
-				subtext={item.subtext}
-				allergies={item.allergies}
-				recipeImage={item.recipeImage}
-				liked={item.liked}
-				lennaplus={item.lennaplus}
-			/>
-		);
-	};
 
 	const handleFilter = () => {
 		setOpenFilter(!openFilter);
@@ -194,7 +48,7 @@ export default function RecepiesScreen() {
 						<SearchButtonComponent />
 					</View>
 					<View style={styles.buttonItem2}>
-						<FilterButtonComponent toggleFilter={handleFilter} />
+						<FilterButtonComponent toggleFilter={loadData} />
 					</View>
 				</View>
 			</View>
@@ -203,12 +57,19 @@ export default function RecepiesScreen() {
 				<Text style={styles.amountOfRecipesText}>
 					{recipeItems.length} resultaten
 				</Text>
-				{/* <ScrollView style={styles.recipeList}></ScrollView> */}
-				<FlatList
-					style={styles.recipeList}
-					data={recipeItems}
-					renderItem={renderItem}
-				/>
+				<ScrollView style={styles.recipeList}>
+					{recipeItems.map(item => {
+						return (
+							<RecipeItemComponent
+								liked={item.plusRecipe}
+								recipeImage="recipeTestImage"
+								category={item.categories[0]}
+								subtext={item.name}
+								allergies={["gluten"]}
+							/>
+						);
+					})}
+				</ScrollView>
 			</View>
 		</SafeAreaView>
 	);

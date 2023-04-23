@@ -3,7 +3,6 @@ import * as Linking from "expo-linking";
 import { StatusBar } from "react-native";
 import AppNavigator from "./src/navigation/AppNavigator";
 import * as Font from "expo-font";
-import { loginAsAdmin } from "./src/service/BearerService";
 
 async function loadFonts() {
 	await Font.loadAsync({
@@ -31,7 +30,6 @@ export default function App() {
 	};
 
 	loadFonts();
-	loginAsAdmin();
 
 	return (
 		<>

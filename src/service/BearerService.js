@@ -1,10 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ENDPOINT } from "../../app.json";
 
-export function loginAsAdmin() {
+export async function loginAsAdmin() {
 	console.log("[INFO] get Bearer Token from api");
 
-	fetch(`${ENDPOINT}/oauth2/token`, {
+	await fetch(`${ENDPOINT}/oauth2/token`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -18,7 +18,7 @@ export function loginAsAdmin() {
 	})
 		.then(response => response.json())
 		.then(data => {
-			// console.log(data.accessToken);
+			console.log(data.accessToken);
 			saveTokenToAsyncStorage(data.accessToken);
 		});
 }
