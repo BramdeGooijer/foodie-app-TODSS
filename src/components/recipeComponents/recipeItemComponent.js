@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import { useState } from "react";
 import React, {
 	View,
@@ -10,6 +9,7 @@ import React, {
 import * as Haptics from "expo-haptics";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 
 import glutenIcon from "../../../assets/allergyIcons/allergyIcon.png";
 import lactoseIcon from "../../../assets/allergyIcons/lactosefreeTestIcon.png";
@@ -17,6 +17,7 @@ import sugarIcon from "../../../assets/allergyIcons/sugarfreeTestIcon.png";
 
 export default function RecipeItemComponent(props) {
 	const [liked, setLiked] = useState(props.liked);
+	const navigation = useNavigation();
 	let recipeImage;
 
 	const handleLikeRecipe = () => {
@@ -30,6 +31,7 @@ export default function RecipeItemComponent(props) {
 
 	const handleNavToRecipe = () => {
 		console.log("hi");
+		navigation.navigate("RecipeInfoOverlay");
 	};
 
 	switch (props.recipeImage) {

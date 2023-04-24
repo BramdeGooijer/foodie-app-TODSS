@@ -8,6 +8,8 @@ import FavoritesScreen from "../screens/favorites/favorites";
 import ProfileScreen from "../screens/profile/profile";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import theme from "../theme";
+import RecipeInfoOverlay from "../screens/recipes/recipeInfoOverlay";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 // tabs
 const Tab = createBottomTabNavigator();
@@ -23,6 +25,12 @@ const RootStack = createStackNavigator();
 const defaultOptions = {
 	headerShown: false,
 	// 	cardStyle: { backgroundColor: theme.background },
+};
+
+const BackButton = ({ navigation }) => {
+	const onPress = () => navigation.goBack();
+
+	return <Icon name="arrow-back" onPress={onPress} />;
 };
 
 function MainTabs() {
@@ -181,6 +189,13 @@ export default function AppStack() {
 				name="MainStack"
 				component={MainStackScreen}
 				options={{ ...defaultOptions }}
+			/>
+			<RootStack.Screen
+				name="RecipeInfoOverlay"
+				component={RecipeInfoOverlay}
+				options={({ navigation }) => ({
+					headerLeft: () => <BackButton navigation={navigation} />,
+				})}
 			/>
 		</RootStack.Navigator>
 	);
