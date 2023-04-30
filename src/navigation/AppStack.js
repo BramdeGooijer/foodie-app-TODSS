@@ -194,7 +194,7 @@ export default function AppStack() {
 				name="RecipeInfoOverlay"
 				component={RecipeInfoOverlay}
 				options={({ navigation }) => ({
-					headerLeft: () => <BackButton navigation={navigation} />,
+					headerShown: false,
 				})}
 			/>
 		</RootStack.Navigator>
