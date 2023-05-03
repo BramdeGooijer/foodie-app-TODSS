@@ -7,6 +7,7 @@ import React, {
 	TouchableOpacity,
 } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Feather from "react-native-vector-icons/Feather";
 import { FONTS } from "../theme/theme.js";
 import { useState } from "react";
 
@@ -48,10 +49,16 @@ export default function Ingredients() {
 								<FontAwesome
 									size={28}
 									name={isChecked ? "check" : "circle-o"}
-									color={isChecked ? "#FBBA00" : "#FBBA00"}
+									color="#FBBA00"
 								/>
 							</View>
-							<Text style={styles.checkboxLabel}>{ingredient}</Text>
+							<Text
+								style={[
+									styles.checkboxLabel,
+									isChecked ? styles.checkboxLabelChecked : null,
+								]}>
+								{ingredient}
+							</Text>
 						</TouchableOpacity>
 					);
 				})}
@@ -71,10 +78,16 @@ export default function Ingredients() {
 								<FontAwesome
 									size={28}
 									name={isChecked ? "check" : "circle-o"}
-									color={isChecked ? "#FBBA00" : "#FBBA00"}
+									color="#FBBA00"
 								/>
 							</View>
-							<Text style={styles.checkboxLabel}>{neededItem}</Text>
+							<Text
+								style={[
+									styles.checkboxLabel,
+									isChecked ? styles.checkboxLabelChecked : null,
+								]}>
+								{neededItem}
+							</Text>
 						</TouchableOpacity>
 					);
 				})}
@@ -115,6 +128,12 @@ const styles = StyleSheet.create({
 	checkboxLabel: {
 		fontSize: 16,
 		marginRight: 5,
+		opacity: 1, // Initial opacity of 1 (fully visible)
+		textDecorationLine: "none",
+	},
+	checkboxLabelChecked: {
+		opacity: 0.5, // Opacity of 0.5 (slightly opaque)
+		textDecorationLine: "line-through", // Strikethrough text
 	},
 	checkbox: {
 		width: 40,
