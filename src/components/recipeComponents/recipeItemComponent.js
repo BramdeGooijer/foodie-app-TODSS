@@ -9,6 +9,7 @@ import React, {
 import * as Haptics from "expo-haptics";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 
 import glutenIcon from "../../../assets/allergyIcons/allergyIcon.png";
 import lactoseIcon from "../../../assets/allergyIcons/lactosefreeTestIcon.png";
@@ -17,6 +18,7 @@ import { getRecipe } from "../../service/RecipeService";
 
 export default function RecipeItemComponent(props) {
 	const [liked, setLiked] = useState(props.liked);
+	const navigation = useNavigation();
 	let recipeImage;
 
 	const handleLikeRecipe = () => {
@@ -31,10 +33,11 @@ export default function RecipeItemComponent(props) {
 	const handleNavToRecipe = () => {
 		console.log("hi");
 		getRecipe(props.id)
-			.then(response => response.json())
-			.then(data => {
-				console.log(data);
-			});
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+		});
+		navigation.navigate("RecipeInfoOverlay");
 	};
 
 	switch (props.recipeImage) {
