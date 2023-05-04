@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import { useState } from "react";
 import React, {
 	View,
@@ -14,6 +13,7 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import glutenIcon from "../../../assets/allergyIcons/allergyIcon.png";
 import lactoseIcon from "../../../assets/allergyIcons/lactosefreeTestIcon.png";
 import sugarIcon from "../../../assets/allergyIcons/sugarfreeTestIcon.png";
+import { getRecipe } from "../../service/RecipeService";
 
 export default function RecipeItemComponent(props) {
 	const [liked, setLiked] = useState(props.liked);
@@ -30,6 +30,11 @@ export default function RecipeItemComponent(props) {
 
 	const handleNavToRecipe = () => {
 		console.log("hi");
+		getRecipe(props.id)
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+			});
 	};
 
 	switch (props.recipeImage) {

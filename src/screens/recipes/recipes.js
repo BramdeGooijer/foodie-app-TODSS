@@ -1,129 +1,51 @@
-import React, {
+import {
 	View,
 	Text,
 	SafeAreaView,
 	StyleSheet,
-	FlatList,
+	RefreshControl,
 } from "react-native";
+import React from "react";
 import RecipeItemComponent from "../../components/recipeComponents/recipeItemComponent";
 import { FONTS } from "../../theme/theme.js";
 import SearchButtonComponent from "../../components/recipeComponents/searchButtonComponent";
 import FilterButtonComponent from "../../components/recipeComponents/filterButtonComponent";
 import FilterItemsComponent from "../../components/recipeComponents/filterItemsComponent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getAllRecipes } from "../../service/RecipeService";
+import { ScrollView } from "react-native-gesture-handler";
+import { loginAsAdmin } from "../../service/BearerService";
 import { IconButton } from "../../components/globalComponents/buttonComponents";
 
 export default function RecepiesScreen() {
-	const data = [
-		{
-			id: 1,
-			category: "Ontbijt",
-			subtext: "Heerlijke ei met bacon",
-			allergies: ["gluten"],
-			recipeImage: "recipeTestImage",
-			liked: true,
-			lennaplus: false,
-		},
-		{
-			id: 2,
-			category: "Diner",
-			subtext: "Romige en eiwitrijke paste met geroosterde groenten",
-			allergies: ["gluten", "lactose"],
-			recipeImage: "recipeTestImageMarrokaans",
-			liked: false,
-			lennaplus: true,
-		},
-		{
-			id: 3,
-			category: "Desert",
-			subtext: "Zachte appeltaart met kaneel",
-			allergies: ["gluten", "lactose", "sugar"],
-			recipeImage: "recipeTestImageMarrokaans",
-			liked: false,
-			lennaplus: false,
-		},
-		{
-			id: 4,
-			category: "Ontbijt",
-			subtext: "Simpele havermout kracker met kaas",
-			allergies: ["gluten", "lactose"],
-			recipeImage: "recipeTestImage",
-			liked: false,
-			lennaplus: false,
-		},
-		{
-			id: 5,
-			category: "Tussendoortje",
-			subtext: "Romige en eiwitrijke paste met geroosterde groenten",
-			allergies: ["gluten", "sugar"],
-			recipeImage: "recipeTestImageMarrokaans",
-			liked: false,
-			lennaplus: true,
-		},
-		{
-			id: 6,
-			category: "Tussendoortje",
-			subtext: "Romige en eiwitrijke paste met geroosterde groenten",
-			allergies: ["lactose"],
-			recipeImage: "recipeTestImageMarrokaans",
-			liked: false,
-			lennaplus: true,
-		},
-		{
-			id: 7,
-			category: "Diner",
-			subtext: "Romige en eiwitrijke paste met geroosterde groenten",
-			allergies: ["lactose", "sugar"],
-			recipeImage: "recipeTestImageMarrokaans",
-			liked: false,
-			lennaplus: true,
-		},
-		{
-			id: 8,
-			category: "Ontbijt",
-			subtext: "Romige en eiwitrijke paste met geroosterde groenten",
-			allergies: ["gluten", "lactose"],
-			recipeImage: "recipeTestImageMarrokaans",
-			liked: false,
-			lennaplus: true,
-		},
-		{
-			id: 9,
-			category: "Borrel",
-			subtext: "Romige en eiwitrijke paste met geroosterde groenten",
-			allergies: ["gluten", "lactose"],
-			recipeImage: "recipeTestImageMarrokaans",
-			liked: false,
-			lennaplus: true,
-		},
-		{
-			id: 10,
-			category: "Lunch",
-			subtext: "Romige en eiwitrijke paste met geroosterde groenten",
-			allergies: ["gluten", "lactose"],
-			recipeImage: "recipeTestImageMarrokaans",
-			liked: false,
-			lennaplus: true,
-		},
-	];
-
 	const [openFilter, setOpenFilter] = useState(false);
+	const [recipeItems, setRecipeItems] = useState();
+	const [refreshing, setRefreshing] = useState(false);
 
-	const renderItem = ({ item }) => {
-		return (
-			// <View style={styles.recipeItem}><Text>{item.text}</Text></View>
-			<RecipeItemComponent
-				key={item.id}
-				keyExtractor={item.id}
-				category={item.category}
-				subtext={item.subtext}
-				allergies={item.allergies}
-				recipeImage={item.recipeImage}
-				liked={item.liked}
-				lennaplus={item.lennaplus}
-			/>
-		);
-	};
+	useEffect(() => {
+		loadData();
+	}, []);
+
+	const onRefresh = React.useCallback(() => {
+		setRefreshing(true);
+		loadData();
+		setTimeout(() => {
+			setRefreshing(false);
+		}, 1000);
+	}, []);
+
+	async function loadData() {
+		await getAllRecipes(100, 0, "")
+			.then(response => response.json())
+			.then(data => {
+				console.log(data.items);
+
+				setRecipeItems(data.items);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	}
 
 	const handleFilter = () => {
 		setOpenFilter(!openFilter);
@@ -153,12 +75,29 @@ export default function RecepiesScreen() {
 			</View>
 
 			<View style={styles.mainArea}>
-				<Text style={styles.amountOfRecipesText}>{data.length} resultaten</Text>
-				<FlatList
+				<Text style={styles.amountOfRecipesText}>
+					{recipeItems !== undefined ? recipeItems.length : 0} resultaten
+				</Text>
+				<ScrollView
 					style={styles.recipeList}
-					data={data}
-					renderItem={renderItem}
-				/>
+					refreshControl={
+						<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+					}>
+					{recipeItems !== undefined &&
+						recipeItems.map(item => {
+							return (
+								<RecipeItemComponent
+									key={item.id}
+									id={item.id}
+									liked={item.plusRecipe}
+									recipeImage="recipeTestImage"
+									category={item.categories[0]}
+									subtext={item.name}
+									allergies={["gluten"]}
+								/>
+							);
+						})}
+				</ScrollView>
 			</View>
 		</SafeAreaView>
 	);
