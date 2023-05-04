@@ -3,14 +3,14 @@ import { StyleSheet, Text, View } from "react-native";
 
 export default function SubscriptionText({ title }) {
 	return (
-		<View style={styles.lennaPlusIcon}>
-			<Text style={styles.lennaPlusIconText}>{title}</Text>
+		<View style={styles.subscriptionIcon}>
+			<Text style={styles.subscriptionIconText}>{title}</Text>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
-	lennaPlusIcon: {
+	subscriptionIcon: {
 		position: "absolute",
 		top: 15,
 		left: 15,
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "#294406",
 	},
 
-	lennaPlusIconText: {
+	subscriptionIconText: {
 		color: "#FFFFFF",
 	},
 });
