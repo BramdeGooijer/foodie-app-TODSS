@@ -19,3 +19,18 @@ export async function getAllRecipes(pageSize, pageNumber, categoryName) {
 		console.log(error);
 	});
 }
+
+export async function getRecipe(id) {
+	console.log(`[INFO] get recipe: ${id}`);
+
+	let bearerToken = "Bearer " + (await getTokenFromAsyncStorage());
+
+	return await fetch(`${ENDPOINT}/api/recipes/${id}`, {
+		method: "GET",
+		headers: {
+			Authorization: bearerToken,
+		},
+	}).catch(error => {
+		console.log(error);
+	});
+}
