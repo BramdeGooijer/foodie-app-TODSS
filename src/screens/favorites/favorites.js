@@ -5,10 +5,9 @@ import React, {
 	Text,
 	SafeAreaView,
 	StyleSheet,
-	ScrollView
-	Image,
+	ScrollView,
+	Image
 } from "react-native";
-import { useState } from "react";
 import {
 	IconButton,
 	MaterialIconButton,
