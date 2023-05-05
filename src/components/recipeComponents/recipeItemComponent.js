@@ -33,10 +33,10 @@ export default function RecipeItemComponent(props) {
 	const handleNavToRecipe = () => {
 		console.log("hi");
 		getRecipe(props.id)
-		.then(response => response.json())
-		.then(data => {
-			console.log(data);
-		});
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+			});
 		navigation.navigate("RecipeInfoOverlay");
 	};
 
@@ -72,7 +72,9 @@ export default function RecipeItemComponent(props) {
 			<View style={styles.recipeInfoWrapper}>
 				<TouchableWithoutFeedback onPress={handleNavToRecipe}>
 					<View style={styles.recipeInfo}>
-						<Text style={styles.recipeCategoryText}>{props.category}</Text>
+						<Text style={styles.recipeCategoryText}>
+							{props.category.toUpperCase()}
+						</Text>
 
 						<Text style={styles.recipeSubText}>{props.subtext}</Text>
 
