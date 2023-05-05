@@ -33,11 +33,11 @@ export default function RecipeItemComponent(props) {
 	const handleNavToRecipe = () => {
 		console.log("hi");
 		getRecipe(props.id)
-		.then(response => response.json())
-		.then(data => {
-			console.log(data);
-		});
-		navigation.navigate("RecipeInfoOverlay");
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+				navigation.navigate("RecipeInfoOverlay", { recipeInfo: data });
+			});
 	};
 
 	switch (props.recipeImage) {

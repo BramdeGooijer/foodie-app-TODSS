@@ -4,7 +4,7 @@ import { View, StyleSheet, useWindowDimensions, Text } from "react-native";
 import HTML from "react-native-render-html";
 import { FONTS } from "../../theme/theme.js";
 
-export default function CookingStepsComponent() {
+export default function CookingStepsComponent(props) {
 	const lijst = [
 		"<p>Preheat the oven to 350°F.</p>",
 		"<p>Mix the <b>flour</b> and <b>sugar</b> in a bowl.</p>",
@@ -40,13 +40,14 @@ export default function CookingStepsComponent() {
 
 	return (
 		<View>
-			{lijst.map((html, index) => (
+			{props.cookingsteps.map((html, index) => (
+				console.log(html.description),
 				<View key={index} style={[styles.container]}>
 					<View style={[styles.numberContainer]}>
 						<Text style={[styles.stepNumber]}>{`${index + 1}`}</Text>
 					</View>
 					<HTML
-						source={{ html }}
+						source={ html }
 						contentWidth={width}
 						tagsStyles={tagsStyles}
 					/>
