@@ -9,9 +9,8 @@ import React, {
 import * as Haptics from "expo-haptics";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import glutenIcon from "../../../assets/allergyIcons/allergyIcon.png";
-import lactoseIcon from "../../../assets/allergyIcons/lactosefreeTestIcon.png";
-import sugarIcon from "../../../assets/allergyIcons/sugarfreeTestIcon.png";
+import AllergyIcon from "./iconComponent";
+
 import SubscriptionText from "../subscriptionTextComponent";
 import { useNavigation } from "@react-navigation/native";
 import { getRecipe } from "../../service/RecipeService";
@@ -74,29 +73,12 @@ export default function RecipeItemComponent(props) {
 
 						<View style={styles.allergyIconWrapper}>
 							{props.allergies.map((item, index) => {
-								let imageUrl;
-
-								switch (item) {
-									case "gluten":
-										imageUrl = glutenIcon;
-										break;
-									case "lactose":
-										imageUrl = lactoseIcon;
-										break;
-									case "sugar":
-										imageUrl = sugarIcon;
-										break;
-								}
-
-								if (imageUrl) {
-									return (
-										<Image
-											key={`${props.keyExtractor}-${index}`}
-											style={styles.allergyIcon}
-											source={imageUrl}
-										/>
-									);
-								}
+								return (
+									<AllergyIcon
+										type={item}
+										key={`${props.keyExtractor}-${index}`}
+									/>
+								);
 							})}
 						</View>
 					</View>
@@ -165,11 +147,5 @@ const styles = StyleSheet.create({
 	allergyIconWrapper: {
 		flex: 2,
 		flexDirection: "row",
-	},
-
-	allergyIcon: {
-		width: 30,
-		height: 30,
-		marginRight: 5,
 	},
 });
