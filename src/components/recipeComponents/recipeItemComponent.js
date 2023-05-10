@@ -9,11 +9,11 @@ import React, {
 import * as Haptics from "expo-haptics";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
-
 import glutenIcon from "../../../assets/allergyIcons/allergyIcon.png";
 import lactoseIcon from "../../../assets/allergyIcons/lactosefreeTestIcon.png";
 import sugarIcon from "../../../assets/allergyIcons/sugarfreeTestIcon.png";
+import SubscriptionText from "../subscriptionTextComponent";
+import { useNavigation } from "@react-navigation/native";
 import { getRecipe } from "../../service/RecipeService";
 
 export default function RecipeItemComponent(props) {
@@ -33,10 +33,10 @@ export default function RecipeItemComponent(props) {
 	const handleNavToRecipe = () => {
 		console.log("hi");
 		getRecipe(props.id)
-		.then(response => response.json())
-		.then(data => {
-			console.log(data);
-		});
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+			});
 		navigation.navigate("RecipeInfoOverlay");
 	};
 
@@ -53,11 +53,7 @@ export default function RecipeItemComponent(props) {
 		<View style={styles.itemContainer}>
 			<Image style={styles.recipeImage} source={recipeImage} />
 
-			{props.lennaplus ? (
-				<View style={styles.lennaPlusIcon}>
-					<Text style={styles.lennaPlusIconText}>Lenna +</Text>
-				</View>
-			) : undefined}
+			{props.lennaplus ? <SubscriptionText title={"lenna +"} /> : undefined}
 
 			<TouchableOpacity
 				onPress={handleLikeRecipe}
@@ -127,30 +123,6 @@ const styles = StyleSheet.create({
 		width: 133,
 		height: 149,
 		backgroundColor: "lightblue",
-	},
-
-	lennaPlusIcon: {
-		position: "absolute",
-		top: 15,
-		left: 15,
-		justifyContent: "center",
-		alignItems: "center",
-
-		// For bottom right use the code below
-		// bottom: 20,
-		// right: 20,
-
-		height: 20,
-		width: 60,
-		borderRadius: 4,
-
-		fontFamily: "Plus-Jakarta-Sans-Bold",
-		fontSize: 12,
-		backgroundColor: "#294406",
-	},
-
-	lennaPlusIconText: {
-		color: "#FFFFFF",
 	},
 
 	likedIconTouchable: {
