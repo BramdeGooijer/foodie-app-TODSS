@@ -1,9 +1,11 @@
 import {
 	View,
 	Text,
+	TextInput,
 	SafeAreaView,
 	StyleSheet,
 	RefreshControl,
+	Animated,
 } from "react-native";
 import React from "react";
 import RecipeItemComponent from "../../components/recipeComponents/recipeItemComponent";
@@ -11,7 +13,8 @@ import { FONTS } from "../../theme/theme.js";
 import SearchButtonComponent from "../../components/recipeComponents/searchButtonComponent";
 import FilterButtonComponent from "../../components/recipeComponents/filterButtonComponent";
 import FilterItemsComponent from "../../components/recipeComponents/filterItemsComponent";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
+import debounce from "lodash/debounce";
 import { getAllRecipes } from "../../service/RecipeService";
 import { ScrollView } from "react-native-gesture-handler";
 import { loginAsAdmin } from "../../service/BearerService";
@@ -21,6 +24,54 @@ export default function RecepiesScreen() {
 	const [openFilter, setOpenFilter] = useState(false);
 	const [recipeItems, setRecipeItems] = useState();
 	const [refreshing, setRefreshing] = useState(false);
+
+	const [showSearchBar, setShowSearchBar] = useState(false);
+	const inputRef = useRef(null);
+	const animatedValue = useRef(new Animated.Value(0)).current;
+	const [inputValue, setInputValue] = useState("");
+
+	const handleInputSubmit = text => {
+		console.log(text);
+	};
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const debouncedHandleInputSubmit = useCallback(
+		debounce(text => {
+			handleInputSubmit(text);
+		}, 500),
+		[]
+	);
+
+	const handleInputChange = useCallback(
+		text => {
+			setInputValue(text);
+			clearTimeout(debouncedHandleInputSubmit.timerId);
+			debouncedHandleInputSubmit.timerId = setTimeout(() => {
+				debouncedHandleInputSubmit(text);
+			}, 500);
+		},
+		[debouncedHandleInputSubmit]
+	);
+
+	const handleButtonClick = () => {
+		setShowSearchBar(true);
+		Animated.timing(animatedValue, {
+			toValue: 1,
+			duration: 500,
+			useNativeDriver: true,
+		}).start(() => inputRef.current.focus());
+	};
+
+	const handleInputBlur = () => {
+		setShowSearchBar(false);
+		Animated.timing(animatedValue, {
+			toValue: 0,
+			duration: 500,
+			useNativeDriver: true,
+		}).start();
+	};
+
+	const [showText, setShowText] = useState(true);
 
 	useEffect(() => {
 		loadData();
@@ -64,12 +115,35 @@ export default function RecepiesScreen() {
 				<Text style={styles.pageTitle}>Alle plantaardige recepten</Text>
 				<View style={styles.buttonWrapper}>
 					<View style={styles.buttonItem1}>
-						<SearchButtonComponent />
-						{/* <IconButton icon="search1" text="Search" /> */}
+						{!showSearchBar && (
+							<IconButton
+								icon="search1"
+								text="zoeken"
+								handleOnPress={handleButtonClick}
+							/>
+						)}
+						{showSearchBar && (
+							<Animated.View style={styles.inputContainer}>
+								<TextInput
+									ref={inputRef}
+									style={styles.input}
+									placeholder="zoeken..."
+									autoComplete={"off"}
+									onBlur={handleInputBlur}
+									autoFocus={true}
+									onChangeText={handleInputChange}
+									value={inputValue}
+								/>
+							</Animated.View>
+						)}
 					</View>
 					<View style={styles.buttonItem2}>
 						{/* <FilterButtonComponent toggleFilter={handleFilter} /> */}
-						<IconButton icon="filter" text="Filter" handleOnPress={handleFilter} />
+						<IconButton
+							icon="filter"
+							text="Filter"
+							handleOnPress={handleFilter}
+						/>
 					</View>
 				</View>
 			</View>
@@ -172,5 +246,28 @@ const styles = StyleSheet.create({
 	recipeList: {
 		// borderWidth: 2,
 		// borderColor: "yellow",
+	},
+
+	// Search bar
+	input: {
+		fontSize: 16,
+		backgroundColor: "white",
+		minWidth: "100%",
+		borderRadius: 70,
+
+		height: 40,
+
+		paddingTop: 8,
+		paddingBottom: 8,
+		paddingLeft: 24,
+		paddingRight: 24,
+
+		shadowColor: "black",
+		shadowOpacity: 0.05,
+		shadowOffset: {
+			width: 2,
+			height: 2,
+		},
+		shadowRadius: 6,
 	},
 });

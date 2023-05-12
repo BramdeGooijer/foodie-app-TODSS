@@ -1,12 +1,6 @@
-import React, {
-	SafeAreaView,
-	StyleSheet,
-	Text,
-} from "react-native";
+import React, { SafeAreaView, StyleSheet, Text } from "react-native";
 
 export default function FavoritesScreen(props) {
-	
-
 	return (
 		<SafeAreaView>
 			<Text>Placeholder for favorite screen!</Text>
@@ -14,6 +8,4 @@ export default function FavoritesScreen(props) {
 	);
 }
 
-const styles = StyleSheet.create({
-
-});
+const styles = StyleSheet.create({});
