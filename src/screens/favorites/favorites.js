@@ -1,3 +1,4 @@
+/* eslint-disable react/self-closing-comp */
 import { useState } from "react";
 import React, {
 	View,
@@ -5,8 +6,14 @@ import React, {
 	SafeAreaView,
 	StyleSheet,
 	ScrollView,
-	Image,
+	Image
 } from "react-native";
+import {
+	IconButton,
+	MaterialIconButton,
+	RedirectButton,
+} from "../../components/globalComponents/buttonComponents";
+import * as Haptics from "expo-haptics";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/AntDesign";
 import CookingStepsComponent from "../../components/recipeComponents/cookingStepsComponent";
@@ -25,8 +32,47 @@ export default function FavoritesScreen(props) {
 		setFullDescription(!fullDescription);
 	}
 
+	const [liked, setLiked] = useState(false);
+
+	// function handleLike() {
+		// }
+		function handleReturn() {
+			console.log("return");
+		}
+		function handleRedirect() {
+			console.log("redirect");
+		}
+		
+		const handleLike = () => {
+			setLiked(!liked);
+			if (liked) {
+				console.log("unlike");
+				Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+			} else {
+				console.log("like");
+				Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+			}
+		};
+
 	return (
 		<SafeAreaView>
+			{/* <View style={styles.buttonWrapper}>
+				<View style={styles.topButtonWrapper}>
+				</View>
+				<View style={styles.bottomButtonWrapper}>
+				</View>
+				
+			</View> */}
+			<View style={styles.returnButtonWrapper}>
+				<IconButton icon="arrowleft" handleOnPress={handleReturn} />
+			</View>
+			<View style={styles.likeButtonWrapper}>
+				<MaterialIconButton icon={liked ? "favorite" : "favorite-outline"} handleOnPress={handleLike} />
+			</View>
+			<View style={styles.redirectButtonWrapper}>
+				<RedirectButton text="Start de kookstand" handleOnPress={handleRedirect}  />
+			</View>
+
 			<ScrollView style={styles.recipeInfoContainer}>
 				<View style={styles.topArea}>
 					<View style={styles.mainContentWrapper}>
@@ -80,6 +126,64 @@ export default function FavoritesScreen(props) {
 }
 
 const styles = StyleSheet.create({
+	// buttonWrapper: {
+	// 	position: "absolute",
+	// 	// flexDirection: "row",
+	// 	justifyContent: "space-between",
+
+	// 	// width: "100%",
+	// 	// marginHorizontal: 32,
+
+	// 	top: 50,
+	// 	left: 0,
+	// 	right: 0,
+	// 	bottom: 0,
+
+	// 	zIndex: 999,
+	// 	// pointerEvents: "auto",
+	// },
+
+	// topButtonWrapper: {
+	// 	flexDirection: "row",
+	// 	justifyContent: "space-between",
+
+	// 	marginHorizontal: 32,
+	// },
+
+	// bottomButtonWrapper: {
+	// 	alignItems: "center",
+	// },
+
+	returnButtonWrapper: {
+		position: "absolute",
+
+		top: 50,
+		left: 32,
+
+		zIndex: 999,
+	},
+
+	likeButtonWrapper: {
+		position: "absolute",
+
+		top: 50,
+		right: 32,
+
+		zIndex: 999,
+
+	},
+	
+	redirectButtonWrapper: {
+		position: "absolute",
+
+		bottom: 0,
+		width: "100%",
+		
+		alignItems: "center",
+
+		zIndex: 999,
+	},
+
 	recipeInfoContainer: {
 		height: "100%",
 	},

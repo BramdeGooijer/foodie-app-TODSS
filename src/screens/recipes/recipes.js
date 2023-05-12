@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { getAllRecipes } from "../../service/RecipeService";
 import { ScrollView } from "react-native-gesture-handler";
 import { loginAsAdmin } from "../../service/BearerService";
+import { IconButton } from "../../components/globalComponents/buttonComponents";
 
 export default function RecepiesScreen() {
 	const [openFilter, setOpenFilter] = useState(false);
@@ -64,9 +65,11 @@ export default function RecepiesScreen() {
 				<View style={styles.buttonWrapper}>
 					<View style={styles.buttonItem1}>
 						<SearchButtonComponent />
+						{/* <IconButton icon="search1" text="Search" /> */}
 					</View>
 					<View style={styles.buttonItem2}>
-						<FilterButtonComponent toggleFilter={handleFilter} />
+						{/* <FilterButtonComponent toggleFilter={handleFilter} /> */}
+						<IconButton icon="filter" text="Filter" handleOnPress={handleFilter} />
 					</View>
 				</View>
 			</View>
