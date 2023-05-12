@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import { useState } from "react";
 import React, {
 	View,
@@ -10,13 +9,15 @@ import React, {
 import * as Haptics from "expo-haptics";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import AllergyIcon from "./iconComponent";
 
-import glutenIcon from "../../../assets/allergyIcons/allergyIcon.png";
-import lactoseIcon from "../../../assets/allergyIcons/lactosefreeTestIcon.png";
-import sugarIcon from "../../../assets/allergyIcons/sugarfreeTestIcon.png";
+import SubscriptionText from "../subscriptionTextComponent";
+import { useNavigation } from "@react-navigation/native";
+import { getRecipe } from "../../service/RecipeService";
 
 export default function RecipeItemComponent(props) {
 	const [liked, setLiked] = useState(props.liked);
+	const navigation = useNavigation();
 	let recipeImage;
 
 	const handleLikeRecipe = () => {
@@ -30,6 +31,12 @@ export default function RecipeItemComponent(props) {
 
 	const handleNavToRecipe = () => {
 		console.log("hi");
+		getRecipe(props.id)
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+			});
+		navigation.navigate("RecipeInfoOverlay");
 	};
 
 	switch (props.recipeImage) {
@@ -45,11 +52,7 @@ export default function RecipeItemComponent(props) {
 		<View style={styles.itemContainer}>
 			<Image style={styles.recipeImage} source={recipeImage} />
 
-			{props.lennaplus ? (
-				<View style={styles.lennaPlusIcon}>
-					<Text style={styles.lennaPlusIconText}>Lenna +</Text>
-				</View>
-			) : undefined}
+			{props.lennaplus ? <SubscriptionText title={"lenna +"} /> : undefined}
 
 			<TouchableOpacity
 				onPress={handleLikeRecipe}
@@ -64,35 +67,20 @@ export default function RecipeItemComponent(props) {
 			<View style={styles.recipeInfoWrapper}>
 				<TouchableWithoutFeedback onPress={handleNavToRecipe}>
 					<View style={styles.recipeInfo}>
-						<Text style={styles.recipeCategoryText}>{props.category}</Text>
+						<Text style={styles.recipeCategoryText}>
+							{props.category.toUpperCase()}
+						</Text>
 
 						<Text style={styles.recipeSubText}>{props.subtext}</Text>
 
 						<View style={styles.allergyIconWrapper}>
 							{props.allergies.map((item, index) => {
-								let imageUrl;
-
-								switch (item) {
-									case "gluten":
-										imageUrl = glutenIcon;
-										break;
-									case "lactose":
-										imageUrl = lactoseIcon;
-										break;
-									case "sugar":
-										imageUrl = sugarIcon;
-										break;
-								}
-
-								if (imageUrl) {
-									return (
-										<Image
-											key={`${props.keyExtractor}-${index}`}
-											style={styles.allergyIcon}
-											source={imageUrl}
-										/>
-									);
-								}
+								return (
+									<AllergyIcon
+										type={item}
+										key={`${props.keyExtractor}-${index}`}
+									/>
+								);
 							})}
 						</View>
 					</View>
@@ -119,30 +107,6 @@ const styles = StyleSheet.create({
 		width: 133,
 		height: 149,
 		backgroundColor: "lightblue",
-	},
-
-	lennaPlusIcon: {
-		position: "absolute",
-		top: 15,
-		left: 15,
-		justifyContent: "center",
-		alignItems: "center",
-
-		// For bottom right use the code below
-		// bottom: 20,
-		// right: 20,
-
-		height: 20,
-		width: 60,
-		borderRadius: 4,
-
-		fontFamily: "Plus-Jakarta-Sans-Bold",
-		fontSize: 12,
-		backgroundColor: "#294406",
-	},
-
-	lennaPlusIconText: {
-		color: "#FFFFFF",
 	},
 
 	likedIconTouchable: {
@@ -185,11 +149,5 @@ const styles = StyleSheet.create({
 	allergyIconWrapper: {
 		flex: 2,
 		flexDirection: "row",
-	},
-
-	allergyIcon: {
-		width: 30,
-		height: 30,
-		marginRight: 5,
 	},
 });
