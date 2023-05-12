@@ -35,8 +35,8 @@ export default function RecipeItemComponent(props) {
 			.then(response => response.json())
 			.then(data => {
 				console.log(data);
+				navigation.navigate("RecipeInfoOverlay", { recipeInfo: data });
 			});
-		navigation.navigate("RecipeInfoOverlay");
 	};
 
 	switch (props.recipeImage) {

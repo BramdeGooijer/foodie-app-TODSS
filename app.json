@@ -30,5 +30,5 @@
 		}
 	},
 
-	"ENDPOINT": "http://192.168.2.198:5000"
+	"ENDPOINT": "https://foodie.students.chippr.dev"
 }

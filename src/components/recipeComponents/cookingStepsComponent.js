@@ -4,7 +4,7 @@ import { View, StyleSheet, useWindowDimensions, Text } from "react-native";
 import HTML from "react-native-render-html";
 import { FONTS } from "../../theme/theme.js";
 
-export default function CookingStepsComponent() {
+export default function CookingStepsComponent(props) {
 	const lijst = [
 		"<p>Preheat the oven to 350°F.</p>",
 		"<p>Mix the <b>flour</b> and <b>sugar</b> in a bowl.</p>",
@@ -22,34 +22,20 @@ export default function CookingStepsComponent() {
 
 	const { width } = useWindowDimensions();
 
-	const tagsStyles = {
-		p: {
-			fontFamily: "FONTS.Regular",
-			fontSize: 18,
-			color: "#3A3938",
-			marginBottom: 4,
-			padding: 4,
-			paddingTop: 8,
-			marginTop: 5,
-			paddingLeft: 0,
-			lineHeight: 24,
-			textAlign: "justify",
-			maxWidth: width - 80,
-		},
-	};
-
 	return (
 		<View>
-			{lijst.map((html, index) => (
+			{props.cookingsteps.map((html, index) => (
+				console.log(html.description),
 				<View key={index} style={[styles.container]}>
 					<View style={[styles.numberContainer]}>
 						<Text style={[styles.stepNumber]}>{`${index + 1}`}</Text>
 					</View>
-					<HTML
-						source={{ html }}
+					<Text style={styles.tagsStyles}>{html.description}</Text>
+					{/* <HTML
+						source={ <p>{html.description}</p> }
 						contentWidth={width}
 						tagsStyles={tagsStyles}
-					/>
+					/> */}
 				</View>
 			))}
 		</View>
@@ -61,6 +47,19 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "flex-start",
 		backgroundColor: "white",
+	},
+	tagsStyles: {
+		fontFamily: FONTS.Regular,
+		fontSize: 18,
+		color: "#3A3938",
+		marginBottom: 4,
+		padding: 4,
+		paddingTop: 8,
+		marginTop: 5,
+		paddingLeft: 0,
+		lineHeight: 24,
+		textAlign: "justify",
+		maxWidth: "80%",
 	},
 	stepNumber: {
 		fontSize: 32,
