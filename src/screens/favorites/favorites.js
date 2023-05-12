@@ -8,6 +8,7 @@ import React, {
 	ScrollView,
 	Image
 } from "react-native";
+import IngredientsComponent from "../../ingredients/ingredients";
 import {
 	IconButton,
 	MaterialIconButton,
@@ -118,7 +119,7 @@ export default function FavoritesScreen(props) {
 				</View>
 				<View style={styles.ingredientArea}>
 					<Text>Placeholder for recipe ingrediënts and preperation steps</Text>
-					<CookingStepsComponent />
+					<IngredientsComponent></IngredientsComponent>
 				</View>
 			</ScrollView>
 		</SafeAreaView>
