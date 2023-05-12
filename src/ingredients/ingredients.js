@@ -11,7 +11,7 @@ import Feather from "react-native-vector-icons/Feather";
 import { FONTS } from "../theme/theme.js";
 import { useState } from "react";
 
-export default function Ingredients() {
+export default function IngredientsComponent() {
 	const [checkedItems, setCheckedItems] = useState([]);
 
 	const data = [
@@ -143,7 +143,6 @@ const styles = StyleSheet.create({
 	},
 	neededTitle: {
 		fontSize: 16,
-		fontFamily: FONTS.Regular,
-		fontWeight: "bold",
+		fontFamily: FONTS.Bold,
 	},
 });
