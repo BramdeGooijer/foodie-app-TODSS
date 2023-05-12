@@ -15,10 +15,11 @@ import FilterButtonComponent from "../../components/recipeComponents/filterButto
 import FilterItemsComponent from "../../components/recipeComponents/filterItemsComponent";
 import { useEffect, useState, useRef, useCallback } from "react";
 import debounce from "lodash/debounce";
-import { getAllRecipes } from "../../service/RecipeService";
+import { getAllRecipes, getRecipe } from "../../service/RecipeService";
 import { ScrollView } from "react-native-gesture-handler";
 import { loginAsAdmin } from "../../service/BearerService";
 import { IconButton } from "../../components/globalComponents/buttonComponents";
+import { searchRecipe } from "../../service/RecipeService";
 
 export default function RecepiesScreen() {
 	const [openFilter, setOpenFilter] = useState(false);
@@ -30,8 +31,17 @@ export default function RecepiesScreen() {
 	const animatedValue = useRef(new Animated.Value(0)).current;
 	const [inputValue, setInputValue] = useState("");
 
-	const handleInputSubmit = text => {
-		console.log(text);
+	async function handleInputSubmit(text) {
+		await searchRecipe(text, 0, "")
+			.then(response => response.json())
+			.then(data => {
+				console.log(data.items);
+
+				setRecipeItems(data.items);
+			})
+			.catch(error => {
+				console.log(error);
+			});
 	};
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
