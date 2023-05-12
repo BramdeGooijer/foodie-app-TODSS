@@ -72,7 +72,7 @@ export default function FavoritesScreen(props) {
 				</View>
 				<View style={styles.ingredientArea}>
 					<Text>Placeholder for recipe ingrediënts and preperation steps</Text>
-					<CookingStepsComponent />
+					{/* <CookingStepsComponent cookingsteps={props.cookingSteps}/> */}
 				</View>
 			</ScrollView>
 		</SafeAreaView>
