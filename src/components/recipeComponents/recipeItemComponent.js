@@ -67,7 +67,9 @@ export default function RecipeItemComponent(props) {
 			<View style={styles.recipeInfoWrapper}>
 				<TouchableWithoutFeedback onPress={handleNavToRecipe}>
 					<View style={styles.recipeInfo}>
-						<Text style={styles.recipeCategoryText}>{props.category}</Text>
+						<Text style={styles.recipeCategoryText}>
+							{props.category.toUpperCase()}
+						</Text>
 
 						<Text style={styles.recipeSubText}>{props.subtext}</Text>
 
