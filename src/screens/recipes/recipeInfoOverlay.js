@@ -8,22 +8,56 @@ import React, {
 	ScrollView,
 	Image,
 } from "react-native";
+import * as Haptics from "expo-haptics";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/AntDesign";
 import CookingStepsComponent from "../../components/recipeComponents/cookingStepsComponent";
+import { IconButton, MaterialIconButton, RedirectButton } from "../../components/globalComponents/buttonComponents";
+import IngredientsComponent from "../../ingredients/ingredients";
 
 export default function RecipeInfoOverlay({ navigation, route }) {
 	const { recipeInfo } = route.params;
 	const [description, setDescription] = useState(recipeInfo.description);
 	const [fullDescription, setFullDescription] = useState(false);
+	const [liked, setLiked] = useState(false);
 
 	function handleReadMore() {
 		setFullDescription(!fullDescription);
 	}
 
+	function handleReturn() {
+		console.log("return");
+		navigation.goBack();
+	}
+
+	function handleRedirect() {
+		console.log("redirect");
+	}
+
+	const handleLike = () => {
+		setLiked(!liked);
+		if (liked) {
+			console.log("unlike");
+			Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+		} else {
+			console.log("like");
+			Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+		}
+	};
+
 	return (
 		<SafeAreaView>
-			<Button title="go back" onPress={() => navigation.goBack()}></Button>
+
+			<View style={styles.returnButtonWrapper}>
+				<IconButton icon="arrowleft" handleOnPress={handleReturn} />
+			</View>
+			<View style={styles.likeButtonWrapper}>
+				<MaterialIconButton icon={liked ? "favorite" : "favorite-outline"} handleOnPress={handleLike} />
+			</View>
+			<View style={styles.redirectButtonWrapper}>
+				<RedirectButton text="Start de kookstand" handleOnPress={handleRedirect}  />
+			</View>
+
 			<ScrollView style={styles.recipeInfoContainer}>
 				<View style={styles.topArea}>
 					<View style={styles.mainContentWrapper}>
@@ -57,6 +91,7 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 				<View style={styles.ingredientArea}>
 					<Text>Placeholder for recipe ingrediënts and preperation steps</Text>
 					<CookingStepsComponent cookingsteps={recipeInfo.cookingSteps} />
+					<IngredientsComponent></IngredientsComponent>
 				</View>
 			</ScrollView>
 		</SafeAreaView>
@@ -66,6 +101,36 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 const styles = StyleSheet.create({
 	recipeInfoContainer: {
 		height: "100%",
+	},
+
+	returnButtonWrapper: {
+		position: "absolute",
+
+		top: 60,
+		left: 32,
+
+		zIndex: 999,
+	},
+
+	likeButtonWrapper: {
+		position: "absolute",
+
+		top: 60,
+		right: 32,
+
+		zIndex: 999,
+
+	},
+	
+	redirectButtonWrapper: {
+		position: "absolute",
+
+		bottom: 40,
+		width: "100%",
+		
+		alignItems: "center",
+
+		zIndex: 999,
 	},
 
 	topArea: {
@@ -141,7 +206,7 @@ const styles = StyleSheet.create({
 	},
 
 	ingredientArea: {
-		backgroundColor: "red",
+		// backgroundColor: "red",
 		// flex: 1,
 		height: 1000,
 	},
