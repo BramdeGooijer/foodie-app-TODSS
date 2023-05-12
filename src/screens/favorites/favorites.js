@@ -5,8 +5,7 @@ import React, {
 	StyleSheet,
 	ScrollView,
 } from "react-native";
-
-import IngredientsComponent from "/home/alperen/vscode/foodie-app-1/src/ingredients/ingredients.js";
+import IngredientsComponent from "../../ingredients/ingredients";
 
 export default function FavoritesScreen() {
 	return (
@@ -20,7 +19,7 @@ export default function FavoritesScreen() {
 				</View>
 				<View style={styles.ingredientArea}>
 					<Text>Placeholder for recipe ingrediënts and preperation steps</Text>
-					<IngredientsComponent />
+					<IngredientsComponent></IngredientsComponent>
 				</View>
 			</ScrollView>
 		</SafeAreaView>
