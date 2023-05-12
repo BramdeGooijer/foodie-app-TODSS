@@ -22,22 +22,6 @@ export default function CookingStepsComponent(props) {
 
 	const { width } = useWindowDimensions();
 
-	const tagsStyles = {
-		p: {
-			fontFamily: "FONTS.Regular",
-			fontSize: 18,
-			color: "#3A3938",
-			marginBottom: 4,
-			padding: 4,
-			paddingTop: 8,
-			marginTop: 5,
-			paddingLeft: 0,
-			lineHeight: 24,
-			textAlign: "justify",
-			maxWidth: width - 80,
-		},
-	};
-
 	return (
 		<View>
 			{props.cookingsteps.map((html, index) => (
@@ -46,11 +30,12 @@ export default function CookingStepsComponent(props) {
 					<View style={[styles.numberContainer]}>
 						<Text style={[styles.stepNumber]}>{`${index + 1}`}</Text>
 					</View>
-					<HTML
-						source={ html }
+					<Text style={styles.tagsStyles}>{html.description}</Text>
+					{/* <HTML
+						source={ <p>{html.description}</p> }
 						contentWidth={width}
 						tagsStyles={tagsStyles}
-					/>
+					/> */}
 				</View>
 			))}
 		</View>
@@ -62,6 +47,19 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "flex-start",
 		backgroundColor: "white",
+	},
+	tagsStyles: {
+		fontFamily: FONTS.Regular,
+		fontSize: 18,
+		color: "#3A3938",
+		marginBottom: 4,
+		padding: 4,
+		paddingTop: 8,
+		marginTop: 5,
+		paddingLeft: 0,
+		lineHeight: 24,
+		textAlign: "justify",
+		maxWidth: "80%",
 	},
 	stepNumber: {
 		fontSize: 32,
