@@ -69,7 +69,11 @@ export default function RecepiesScreen() {
 					</View>
 					<View style={styles.buttonItem2}>
 						{/* <FilterButtonComponent toggleFilter={handleFilter} /> */}
-						<IconButton icon="filter" text="Filter" handleOnPress={handleFilter} />
+						<IconButton
+							icon="filter"
+							text="Filter"
+							handleOnPress={handleFilter}
+						/>
 					</View>
 				</View>
 			</View>
