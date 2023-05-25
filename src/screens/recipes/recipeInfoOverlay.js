@@ -7,19 +7,26 @@ import React, {
 	StyleSheet,
 	ScrollView,
 	Image,
+	Pressable,
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/AntDesign";
 import CookingStepsComponent from "../../components/recipeComponents/cookingStepsComponent";
-import { IconButton, MaterialIconButton, RedirectButton } from "../../components/globalComponents/buttonComponents";
+import {
+	IconButton,
+	MaterialIconButton,
+	RedirectButton,
+} from "../../components/globalComponents/buttonComponents";
 import IngredientsComponent from "../../ingredients/ingredients";
+import { COLORS, SIZES } from "../../theme/theme";
 
 export default function RecipeInfoOverlay({ navigation, route }) {
 	const { recipeInfo } = route.params;
 	const [description, setDescription] = useState(recipeInfo.description);
 	const [fullDescription, setFullDescription] = useState(false);
 	const [liked, setLiked] = useState(false);
+	const [showIngredients, setShowIngredients] = useState(true);
 
 	function handleReadMore() {
 		setFullDescription(!fullDescription);
@@ -47,24 +54,35 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 
 	return (
 		<SafeAreaView>
-
 			<View style={styles.returnButtonWrapper}>
 				<IconButton icon="arrowleft" handleOnPress={handleReturn} />
 			</View>
 			<View style={styles.likeButtonWrapper}>
-				<MaterialIconButton icon={liked ? "favorite" : "favorite-outline"} handleOnPress={handleLike} />
+				<MaterialIconButton
+					icon={liked ? "favorite" : "favorite-outline"}
+					handleOnPress={handleLike}
+				/>
 			</View>
 			<View style={styles.redirectButtonWrapper}>
-				<RedirectButton text="Start de kookstand" handleOnPress={handleRedirect}  />
+				<RedirectButton
+					text="Start de kookstand"
+					handleOnPress={handleRedirect}
+				/>
 			</View>
 
 			<ScrollView style={styles.recipeInfoContainer}>
 				<View style={styles.topArea}>
 					<View style={styles.mainContentWrapper}>
-						<Image style={styles.recipeImage} source={require("../../../assets/recipeImages/dummyRecipe1.png")}/>
+						<Image
+							style={styles.recipeImage}
+							source={require("../../../assets/recipeImages/dummyRecipe1.png")}
+						/>
 						<Text style={styles.recipeSlogan}>{recipeInfo.subName}</Text>
 						<Text style={styles.recipeTitle}>{recipeInfo.name}</Text>
-						<Text style={styles.recipePrepTime}>{recipeInfo.prepTimeMinutes} minuten, {recipeInfo.prepDifficulties[0]}</Text>
+						<Text style={styles.recipePrepTime}>
+							{recipeInfo.prepTimeMinutes} minuten,{" "}
+							{recipeInfo.prepDifficulties[0]}
+						</Text>
 					</View>
 				</View>
 				<View style={styles.descriptionArea}>
@@ -89,16 +107,62 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 					</View>
 				</View>
 				<View style={styles.ingredientArea}>
-					<Text>Placeholder for recipe ingrediënts and preperation steps</Text>
-					<CookingStepsComponent cookingsteps={recipeInfo.cookingSteps} />
-					<IngredientsComponent></IngredientsComponent>
+					<View style={styles.tabButtonContainer}>
+						<Pressable
+							disabled={recipeInfo.plusRecipe}
+							style={styles.tabButton({ focused: showIngredients })}
+							onPress={() => setShowIngredients(true)}>
+							<Text style={styles.tabButtonText({ focused: showIngredients })}>
+								Ingrediënten
+							</Text>
+						</Pressable>
+						<Pressable
+							disabled={recipeInfo.plusRecipe}
+							style={styles.tabButton({ focused: !showIngredients })}
+							onPress={() => setShowIngredients(false)}>
+							<Text style={styles.tabButtonText({ focused: !showIngredients })}>
+								Bereiding
+							</Text>
+						</Pressable>
+					</View>
+					{recipeInfo.plusRecipe ? (
+						<View>
+							<Text>lenna plus</Text>
+						</View>
+					) : showIngredients ? (
+						<IngredientsComponent />
+					) : (
+						<CookingStepsComponent cookingsteps={recipeInfo.cookingSteps} />
+					)}
 				</View>
+
+				{console.log("blablabla", styles.tabButton(false))}
 			</ScrollView>
 		</SafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
+	tabButtonContainer: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+		paddingHorizontal: 18,
+		borderBottomColor: COLORS.primary,
+		borderBottomWidth: 1,
+	},
+	tabButton: ({ focused }) => ({
+		alignItems: "center",
+		paddingVertical: 16,
+		backgroundColor: "transparent",
+		flex: 1,
+		borderBottomWidth: focused ? 2 : 0,
+		borderBottomColor: COLORS.primary,
+	}),
+	tabButtonText: ({ focused }) => ({
+		color: focused ? COLORS.primary : COLORS.grey,
+		fontWeight: "bold",
+		fontSize: SIZES.h4,
+	}),
 	recipeInfoContainer: {
 		height: "100%",
 	},
@@ -119,15 +183,14 @@ const styles = StyleSheet.create({
 		right: 32,
 
 		zIndex: 999,
-
 	},
-	
+
 	redirectButtonWrapper: {
 		position: "absolute",
 
 		bottom: 40,
 		width: "100%",
-		
+
 		alignItems: "center",
 
 		zIndex: 999,
