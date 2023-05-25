@@ -12,7 +12,11 @@ import * as Haptics from "expo-haptics";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/AntDesign";
 import CookingStepsComponent from "../../components/recipeComponents/cookingStepsComponent";
-import { IconButton, MaterialIconButton, RedirectButton } from "../../components/globalComponents/buttonComponents";
+import {
+	IconButton,
+	MaterialIconButton,
+	RedirectButton,
+} from "../../components/globalComponents/buttonComponents";
 import IngredientsComponent from "../../ingredients/ingredients";
 
 export default function RecipeInfoOverlay({ navigation, route }) {
@@ -47,24 +51,35 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 
 	return (
 		<SafeAreaView>
-
 			<View style={styles.returnButtonWrapper}>
 				<IconButton icon="arrowleft" handleOnPress={handleReturn} />
 			</View>
 			<View style={styles.likeButtonWrapper}>
-				<MaterialIconButton icon={liked ? "favorite" : "favorite-outline"} handleOnPress={handleLike} />
+				<MaterialIconButton
+					icon={liked ? "favorite" : "favorite-outline"}
+					handleOnPress={handleLike}
+				/>
 			</View>
 			<View style={styles.redirectButtonWrapper}>
-				<RedirectButton text="Start de kookstand" handleOnPress={handleRedirect}  />
+				<RedirectButton
+					text="Start de kookstand"
+					handleOnPress={handleRedirect}
+				/>
 			</View>
 
 			<ScrollView style={styles.recipeInfoContainer}>
 				<View style={styles.topArea}>
 					<View style={styles.mainContentWrapper}>
-						<Image style={styles.recipeImage} source={require("../../../assets/recipeImages/dummyRecipe1.png")}/>
+						<Image
+							style={styles.recipeImage}
+							source={require("../../../assets/recipeImages/dummyRecipe1.png")}
+						/>
 						<Text style={styles.recipeSlogan}>{recipeInfo.subName}</Text>
 						<Text style={styles.recipeTitle}>{recipeInfo.name}</Text>
-						<Text style={styles.recipePrepTime}>{recipeInfo.prepTimeMinutes} minuten, {recipeInfo.prepDifficulties[0]}</Text>
+						<Text style={styles.recipePrepTime}>
+							{recipeInfo.prepTimeMinutes} minuten,{" "}
+							{recipeInfo.prepDifficulties[0]}
+						</Text>
 					</View>
 				</View>
 				<View style={styles.descriptionArea}>
@@ -119,15 +134,14 @@ const styles = StyleSheet.create({
 		right: 32,
 
 		zIndex: 999,
-
 	},
-	
+
 	redirectButtonWrapper: {
 		position: "absolute",
 
 		bottom: 40,
 		width: "100%",
-		
+
 		alignItems: "center",
 
 		zIndex: 999,

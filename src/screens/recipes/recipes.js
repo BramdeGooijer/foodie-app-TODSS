@@ -14,7 +14,6 @@ import FilterItemsComponent from "../../components/recipeComponents/filterItemsC
 import { useEffect, useState } from "react";
 import { getAllRecipes } from "../../service/RecipeService";
 import { ScrollView } from "react-native-gesture-handler";
-import { loginAsAdmin } from "../../service/BearerService";
 import { IconButton } from "../../components/globalComponents/buttonComponents";
 
 export default function RecepiesScreen() {
@@ -69,7 +68,11 @@ export default function RecepiesScreen() {
 					</View>
 					<View style={styles.buttonItem2}>
 						{/* <FilterButtonComponent toggleFilter={handleFilter} /> */}
-						<IconButton icon="filter" text="Filter" handleOnPress={handleFilter} />
+						<IconButton
+							icon="filter"
+							text="Filter"
+							handleOnPress={handleFilter}
+						/>
 					</View>
 				</View>
 			</View>
@@ -167,10 +170,5 @@ const styles = StyleSheet.create({
 		fontFamily: FONTS.SemiBold,
 
 		marginBottom: 15,
-	},
-
-	recipeList: {
-		// borderWidth: 2,
-		// borderColor: "yellow",
 	},
 });

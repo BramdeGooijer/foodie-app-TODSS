@@ -24,20 +24,24 @@ export default function CookingStepsComponent(props) {
 
 	return (
 		<View>
-			{props.cookingsteps.map((html, index) => (
-				console.log(html.description),
-				<View key={index} style={[styles.container]}>
-					<View style={[styles.numberContainer]}>
-						<Text style={[styles.stepNumber]}>{`${index + 1}`}</Text>
-					</View>
-					<Text style={styles.tagsStyles}>{html.description}</Text>
-					{/* <HTML
+			{props.cookingsteps.map(
+				(html, index) => (
+					console.log(html.description),
+					(
+						<View key={index} style={[styles.container]}>
+							<View style={[styles.numberContainer]}>
+								<Text style={[styles.stepNumber]}>{`${index + 1}`}</Text>
+							</View>
+							<Text style={styles.tagsStyles}>{html.description}</Text>
+							{/* <HTML
 						source={ <p>{html.description}</p> }
 						contentWidth={width}
 						tagsStyles={tagsStyles}
 					/> */}
-				</View>
-			))}
+						</View>
+					)
+				)
+			)}
 		</View>
 	);
 }
