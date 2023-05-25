@@ -255,4 +255,27 @@ const styles = StyleSheet.create({
 		// borderWidth: 2,
 		// borderColor: "yellow",
 	},
+
+	// Search bar
+	input: {
+		fontSize: 16,
+		backgroundColor: "white",
+		minWidth: "100%",
+		borderRadius: 70,
+
+		height: 40,
+
+		paddingTop: 8,
+		paddingBottom: 8,
+		paddingLeft: 24,
+		paddingRight: 24,
+
+		shadowColor: "black",
+		shadowOpacity: 0.05,
+		shadowOffset: {
+			width: 2,
+			height: 2,
+		},
+		shadowRadius: 6,
+	},
 });
