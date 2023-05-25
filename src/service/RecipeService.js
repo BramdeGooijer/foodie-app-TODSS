@@ -20,6 +20,24 @@ export async function getAllRecipes(pageSize, pageNumber, categoryName) {
 	});
 }
 
+export async function getFavoriteRecipes(pageSize, pageNumber) {
+	console.log("[INFO] get all favorite recipes");
+
+	let bearerToken = "Bearer " + (await getTokenFromAsyncStorage());
+
+	return await fetch(
+		`${ENDPOINT}/api/recipes/favorite?PageNumber=${pageNumber}&PageSize=${pageSize}&UserId=4ee675ca-d24d-45a4-a427-0ecb4e01bbe0`,
+		{
+			method: "GET",
+			headers: {
+				Authorization: bearerToken,
+			},
+		}
+	).catch(error => {
+		console.log(error);
+	});
+}
+
 export async function getRecipe(id) {
 	console.log(`[INFO] get recipe: ${id}`);
 
@@ -40,12 +58,15 @@ export async function searchRecipe(name, pageNumber, categoryName) {
 
 	console.log(`[INFO] search recipe: ${name}`);
 
-	return await fetch(`${ENDPOINT}/api/recipes?pageSize=10&Categoryname=${categoryName}&RecipeName=${name}&pageNumber=${pageNumber}`, {
-		method: "GET",
-		headers: {
-			Authorization: bearerToken,
-		},
-	}).catch(error => {
+	return await fetch(
+		`${ENDPOINT}/api/recipes?pageSize=10&Categoryname=${categoryName}&RecipeName=${name}&pageNumber=${pageNumber}`,
+		{
+			method: "GET",
+			headers: {
+				Authorization: bearerToken,
+			},
+		}
+	).catch(error => {
 		console.log(error);
 	});
 }

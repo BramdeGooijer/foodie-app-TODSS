@@ -17,7 +17,6 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import debounce from "lodash/debounce";
 import { getAllRecipes, getRecipe } from "../../service/RecipeService";
 import { ScrollView } from "react-native-gesture-handler";
-import { loginAsAdmin } from "../../service/BearerService";
 import { IconButton } from "../../components/globalComponents/buttonComponents";
 import { searchRecipe } from "../../service/RecipeService";
 
@@ -42,7 +41,7 @@ export default function RecepiesScreen() {
 			.catch(error => {
 				console.log(error);
 			});
-	};
+	}
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const debouncedHandleInputSubmit = useCallback(
@@ -148,7 +147,6 @@ export default function RecepiesScreen() {
 						)}
 					</View>
 					<View style={styles.buttonItem2}>
-						{/* <FilterButtonComponent toggleFilter={handleFilter} /> */}
 						<IconButton
 							icon="filter"
 							text="Filter"
@@ -256,28 +254,5 @@ const styles = StyleSheet.create({
 	recipeList: {
 		// borderWidth: 2,
 		// borderColor: "yellow",
-	},
-
-	// Search bar
-	input: {
-		fontSize: 16,
-		backgroundColor: "white",
-		minWidth: "100%",
-		borderRadius: 70,
-
-		height: 40,
-
-		paddingTop: 8,
-		paddingBottom: 8,
-		paddingLeft: 24,
-		paddingRight: 24,
-
-		shadowColor: "black",
-		shadowOpacity: 0.05,
-		shadowOffset: {
-			width: 2,
-			height: 2,
-		},
-		shadowRadius: 6,
 	},
 });
