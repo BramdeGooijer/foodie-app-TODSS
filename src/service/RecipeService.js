@@ -52,3 +52,21 @@ export async function getRecipe(id) {
 		console.log(error);
 	});
 }
+
+export async function searchRecipe(name, pageNumber, categoryName) {
+	let bearerToken = "Bearer " + (await getTokenFromAsyncStorage());
+
+	console.log(`[INFO] search recipe: ${name}`);
+
+	return await fetch(
+		`${ENDPOINT}/api/recipes?pageSize=10&Categoryname=${categoryName}&RecipeName=${name}&pageNumber=${pageNumber}`,
+		{
+			method: "GET",
+			headers: {
+				Authorization: bearerToken,
+			},
+		}
+	).catch(error => {
+		console.log(error);
+	});
+}
