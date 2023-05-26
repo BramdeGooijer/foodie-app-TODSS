@@ -104,7 +104,6 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 					</View>
 				</View>
 				<View style={styles.ingredientArea}>
-					<Text>Placeholder for recipe ingrediënts and preperation steps</Text>
 					<CookingStepsComponent cookingsteps={recipeInfo.cookingSteps} />
 					<IngredientsComponent></IngredientsComponent>
 				</View>
@@ -153,6 +152,7 @@ const styles = StyleSheet.create({
 		// height: 500,
 		paddingHorizontal: 20,
 		alignItems: "center",
+		backgroundColor: "#F7F7F7",
 	},
 
 	mainContentWrapper: {
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
 	},
 
 	descriptionArea: {
-		backgroundColor: "#F7F7F7",
+		// backgroundColor: "#F7F7F7",
 		// flex: 1,
 		// height: 200,
 	},
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
 	},
 
 	ingredientArea: {
-		// backgroundColor: "red",
+		backgroundColor: "white",
 		// flex: 1,
 		height: 1000,
 	},
