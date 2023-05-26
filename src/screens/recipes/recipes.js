@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
 	input: {
 		fontSize: 16,
 		backgroundColor: "white",
-		minWidth: "100%",
+		width: 173,
 		borderRadius: 70,
 
 		height: 40,
