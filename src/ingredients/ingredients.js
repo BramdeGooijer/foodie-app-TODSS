@@ -1,27 +1,12 @@
-import React, {
-	View,
-	Text,
-	SafeAreaView,
-	StyleSheet,
-	FlatList,
-	TouchableOpacity,
-} from "react-native";
+import React, { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import Feather from "react-native-vector-icons/Feather";
 import { FONTS } from "../theme/theme.js";
 import { useState } from "react";
 
-export default function IngredientsComponent() {
+export default function IngredientsComponent(props) {
 	const [checkedItems, setCheckedItems] = useState([]);
-
-	const data = [
-		{
-			id: "1",
-			name: "Salmon Cakes",
-			ingredients: ["salmon", "breadcrumbs", "seasonings", "tartar sauce"],
-			neededItems: ["pan", "silverware", "knife", "oven"],
-		},
-	];
+	const [ingredients, setIngredients] = useState(props.ingredients);
+	const [requirements, setRequirements] = useState(props.requirements);
 
 	const handleToggleCheck = ingredient => {
 		if (checkedItems.includes(ingredient)) {
@@ -31,16 +16,16 @@ export default function IngredientsComponent() {
 		}
 	};
 
-	const renderItem = ({ item }) => {
-		return (
+	return (
+		<View style={styles.container}>
 			<View style={styles.item}>
-				{item.ingredients.map((ingredient, index) => {
-					const isChecked = checkedItems.includes(ingredient);
+				{ingredients.map((ingredient, index) => {
+					const isChecked = checkedItems.includes(ingredient.ingredientName);
 					return (
 						<TouchableOpacity
 							key={index}
 							style={styles.checkboxContainer}
-							onPress={() => handleToggleCheck(ingredient)}>
+							onPress={() => handleToggleCheck(ingredient.ingredientName)}>
 							<View
 								style={[
 									styles.checkbox,
@@ -57,19 +42,19 @@ export default function IngredientsComponent() {
 									styles.checkboxLabel,
 									isChecked ? styles.checkboxLabelChecked : null,
 								]}>
-								{ingredient}
+								{ingredient.amount} {ingredient.ingredientName}
 							</Text>
 						</TouchableOpacity>
 					);
 				})}
 				<Text style={styles.neededTitle}>Benodigden:</Text>
-				{item.neededItems.map((neededItem, index) => {
-					const isChecked = checkedItems.includes(neededItem);
+				{requirements.map((neededItem, index) => {
+					const isChecked = checkedItems.includes(neededItem.name);
 					return (
 						<TouchableOpacity
 							key={index}
 							style={styles.checkboxContainer}
-							onPress={() => handleToggleCheck(neededItem)}>
+							onPress={() => handleToggleCheck(neededItem.name)}>
 							<View
 								style={[
 									styles.checkbox,
@@ -86,23 +71,12 @@ export default function IngredientsComponent() {
 									styles.checkboxLabel,
 									isChecked ? styles.checkboxLabelChecked : null,
 								]}>
-								{neededItem}
+								{neededItem.name}
 							</Text>
 						</TouchableOpacity>
 					);
 				})}
 			</View>
-		);
-	};
-
-	return (
-		<View style={styles.container}>
-			<FlatList
-				data={data}
-				renderItem={renderItem}
-				keyExtractor={item => item.id}
-				extraData={checkedItems}
-			/>
 		</View>
 	);
 }

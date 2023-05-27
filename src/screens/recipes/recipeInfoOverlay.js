@@ -106,7 +106,10 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 				<View style={styles.ingredientArea}>
 					<Text>Placeholder for recipe ingrediënts and preperation steps</Text>
 					<CookingStepsComponent cookingsteps={recipeInfo.cookingSteps} />
-					<IngredientsComponent></IngredientsComponent>
+					<IngredientsComponent
+						ingredients={recipeInfo.ingredients}
+						requirements={recipeInfo.requirements}
+					/>
 				</View>
 			</ScrollView>
 		</SafeAreaView>
