@@ -22,11 +22,9 @@ export default function RecipeItemComponent(props) {
 
 	const handleLikeRecipe = () => {
 		setLiked(!liked);
-		if (liked) {
-			Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-		} else {
-			Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-		}
+		liked
+			? Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
+			: Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 	};
 
 	const handleNavToRecipe = () => {
