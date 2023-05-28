@@ -1,12 +1,34 @@
 import React, { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { FONTS } from "../theme/theme.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function IngredientsComponent(props) {
 	const [checkedItems, setCheckedItems] = useState([]);
 	const [ingredients, setIngredients] = useState(props.ingredients);
 	const [requirements, setRequirements] = useState(props.requirements);
+
+	useEffect(() => {
+		// AsyncStorage.removeItem("checklist");
+		AsyncStorage.getItem("checklist").then(data => {
+			console.log(data);
+			if (data === null) {
+				saveCheckedItems();
+			} else {
+				setCheckedItems(JSON.parse(data));
+			}
+		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	useEffect(() => {
+		saveCheckedItems();
+	  }, [checkedItems]);
+
+	function saveCheckedItems() {
+		AsyncStorage.setItem("checklist", JSON.stringify(checkedItems));
+	}
 
 	const handleToggleCheck = ingredient => {
 		if (checkedItems.includes(ingredient)) {
@@ -20,12 +42,12 @@ export default function IngredientsComponent(props) {
 		<View style={styles.container}>
 			<View style={styles.item}>
 				{ingredients.map((ingredient, index) => {
-					const isChecked = checkedItems.includes(ingredient.ingredientName);
+					const isChecked = checkedItems.includes(ingredient.id);
 					return (
 						<TouchableOpacity
 							key={index}
 							style={styles.checkboxContainer}
-							onPress={() => handleToggleCheck(ingredient.ingredientName)}>
+							onPress={() => handleToggleCheck(ingredient.id)}>
 							<View
 								style={[
 									styles.checkbox,
@@ -49,12 +71,12 @@ export default function IngredientsComponent(props) {
 				})}
 				<Text style={styles.neededTitle}>Benodigden:</Text>
 				{requirements.map((neededItem, index) => {
-					const isChecked = checkedItems.includes(neededItem.name);
+					const isChecked = checkedItems.includes(neededItem.id);
 					return (
 						<TouchableOpacity
 							key={index}
 							style={styles.checkboxContainer}
-							onPress={() => handleToggleCheck(neededItem.name)}>
+							onPress={() => handleToggleCheck(neededItem.id)}>
 							<View
 								style={[
 									styles.checkbox,
