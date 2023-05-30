@@ -36,6 +36,7 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 
 	function handleRedirect() {
 		console.log("redirect");
+		navigation.navigate("RecipeCookingState", { recipeInfo: recipeInfo });
 	}
 
 	const handleLike = () => {
