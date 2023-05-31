@@ -53,8 +53,18 @@ export function MaterialIconButton(props) {
 export function RedirectButton(props) {
 	return (
 		<TouchableWithoutFeedback onPress={props.handleOnPress}>
-			<View style={[redirectButtonStyles.container, props.invert && redirectButtonStyles.invertBackground]}>
-				<Text style={[redirectButtonStyles.text, props.invert && redirectButtonStyles.invertText]}>{props.text}</Text>
+			<View
+				style={[
+					redirectButtonStyles.container,
+					props.invert && redirectButtonStyles.invertBackground,
+				]}>
+				<Text
+					style={[
+						redirectButtonStyles.text,
+						props.invert && redirectButtonStyles.invertText,
+					]}>
+					{props.text}
+				</Text>
 				<MaterialIcon size={24} color="white" name={props.icon} />
 			</View>
 		</TouchableWithoutFeedback>
@@ -128,5 +138,5 @@ const redirectButtonStyles = StyleSheet.create({
 		color: "#294406",
 		fontFamily: FONTS.SemiBold,
 		fontSize: 20,
-	}
+	},
 });

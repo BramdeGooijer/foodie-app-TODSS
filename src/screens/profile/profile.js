@@ -1,17 +1,23 @@
 import React, { View, Text, SafeAreaView, StyleSheet } from "react-native";
 import { RedirectButton } from "../../components/globalComponents/buttonComponents";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ProfileScreen() {
+	const navigation = useNavigation();
+
 	function handleEditPassword() {
 		console.log("edit password");
+		navigation.navigate("EditProfileOverlay");
 	}
 
 	function handleEditUsername() {
 		console.log("edit username");
+		navigation.navigate("EditProfileOverlay");
 	}
 
 	function handleLogout() {
 		console.log("logout");
+		navigation.navigate("EditProfileOverlay");
 	}
 
 	return (
