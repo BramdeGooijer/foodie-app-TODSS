@@ -6,6 +6,7 @@ import React, {
 	StyleSheet,
 	ScrollView,
 	Image,
+	Pressable,
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
@@ -17,12 +18,14 @@ import {
 	RedirectButton,
 } from "../../components/globalComponents/buttonComponents";
 import IngredientsComponent from "../../ingredients/ingredients";
+import { COLORS, SIZES } from "../../theme/theme";
 
 export default function RecipeInfoOverlay({ navigation, route }) {
 	const { recipeInfo } = route.params;
 	const [description, setDescription] = useState(recipeInfo.description);
 	const [fullDescription, setFullDescription] = useState(false);
 	const [liked, setLiked] = useState(false);
+	const [showIngredients, setShowIngredients] = useState(true);
 
 	function handleReadMore() {
 		setFullDescription(!fullDescription);
@@ -104,18 +107,62 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 					</View>
 				</View>
 				<View style={styles.ingredientArea}>
-					<CookingStepsComponent cookingsteps={recipeInfo.cookingSteps} />
-					<IngredientsComponent
-						ingredients={recipeInfo.ingredients}
-						requirements={recipeInfo.requirements}
-					/>
+					<View style={styles.tabButtonContainer}>
+						<Pressable
+							disabled={recipeInfo.plusRecipe}
+							style={styles.tabButton({ focused: showIngredients })}
+							onPress={() => setShowIngredients(true)}>
+							<Text style={styles.tabButtonText({ focused: showIngredients })}>
+								Ingrediënten
+							</Text>
+						</Pressable>
+						<Pressable
+							disabled={recipeInfo.plusRecipe}
+							style={styles.tabButton({ focused: !showIngredients })}
+							onPress={() => setShowIngredients(false)}>
+							<Text style={styles.tabButtonText({ focused: !showIngredients })}>
+								Bereiding
+							</Text>
+						</Pressable>
+					</View>
+					{recipeInfo.plusRecipe ? (
+						<View>
+							<Text>lenna plus</Text>
+						</View>
+					) : showIngredients ? (
+						<IngredientsComponent />
+					) : (
+						<CookingStepsComponent cookingsteps={recipeInfo.cookingSteps} />
+					)}
 				</View>
+
+				{console.log("blablabla", styles.tabButton(false))}
 			</ScrollView>
 		</SafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
+	tabButtonContainer: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+		paddingHorizontal: 18,
+		borderBottomColor: COLORS.primary,
+		borderBottomWidth: 1,
+	},
+	tabButton: ({ focused }) => ({
+		alignItems: "center",
+		paddingVertical: 16,
+		backgroundColor: "transparent",
+		flex: 1,
+		borderBottomWidth: focused ? 2 : 0,
+		borderBottomColor: COLORS.primary,
+	}),
+	tabButtonText: ({ focused }) => ({
+		color: focused ? COLORS.primary : COLORS.grey,
+		fontWeight: "bold",
+		fontSize: SIZES.h4,
+	}),
 	recipeInfoContainer: {
 		height: "100%",
 	},
