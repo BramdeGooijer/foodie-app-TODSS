@@ -10,8 +10,6 @@ import {
 import React from "react";
 import RecipeItemComponent from "../../components/recipeComponents/recipeItemComponent";
 import { FONTS } from "../../theme/theme.js";
-import SearchButtonComponent from "../../components/recipeComponents/searchButtonComponent";
-import FilterButtonComponent from "../../components/recipeComponents/filterButtonComponent";
 import FilterItemsComponent from "../../components/recipeComponents/filterItemsComponent";
 import { useEffect, useState, useRef, useCallback } from "react";
 import debounce from "lodash/debounce";

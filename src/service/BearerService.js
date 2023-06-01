@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ENDPOINT } from "../../app.json";
+import { Alert } from "react-native";
 
 export async function loginAsAdmin() {
 	console.log("[INFO] get Bearer Token from api");
@@ -18,8 +19,13 @@ export async function loginAsAdmin() {
 	})
 		.then(response => response.json())
 		.then(data => {
-			console.log(data.accessToken);
 			saveTokenToAsyncStorage(data.accessToken);
+		})
+		.catch(error => {
+			Alert.alert(
+				"Er is iets mis gegaan!",
+				"Het inloggen met je account is mislukt"
+			);
 		});
 }
 

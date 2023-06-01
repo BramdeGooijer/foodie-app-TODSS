@@ -24,7 +24,7 @@ export default function IngredientsComponent(props) {
 
 	useEffect(() => {
 		saveCheckedItems();
-	  }, [checkedItems]);
+	}, [checkedItems]);
 
 	function saveCheckedItems() {
 		AsyncStorage.setItem("checklist", JSON.stringify(checkedItems));

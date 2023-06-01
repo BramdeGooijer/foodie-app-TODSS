@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import React from "react";
 import { IconButton } from "../../components/globalComponents/buttonComponents";
-import SearchButtonComponent from "../../components/recipeComponents/searchButtonComponent";
 import { FONTS } from "../../theme/theme";
 import { useState, useEffect, useRef, useCallback } from "react";
 import FilterItemsComponent from "../../components/recipeComponents/filterItemsComponent";

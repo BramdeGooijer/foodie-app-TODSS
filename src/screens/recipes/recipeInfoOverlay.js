@@ -50,16 +50,16 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 
 	return (
 		<SafeAreaView>
-			<View style={styles.returnButtonWrapper}>
+			<View style={[styles.returnButtonWrapper, styles.globalButtonStyle]}>
 				<IconButton icon="arrowleft" handleOnPress={handleReturn} />
 			</View>
-			<View style={styles.likeButtonWrapper}>
+			<View style={[styles.likeButtonWrapper, styles.globalButtonStyle]}>
 				<MaterialIconButton
 					icon={liked ? "favorite" : "favorite-outline"}
 					handleOnPress={handleLike}
 				/>
 			</View>
-			<View style={styles.redirectButtonWrapper}>
+			<View style={[styles.redirectButtonWrapper, styles.globalButtonStyle]}>
 				<RedirectButton
 					text="Start de kookstand"
 					handleOnPress={handleRedirect}
@@ -119,26 +119,25 @@ const styles = StyleSheet.create({
 		height: "100%",
 	},
 
-	returnButtonWrapper: {
+	globalButtonStyle: {
 		position: "absolute",
+		zIndex: 999,
+	},
+
+	returnButtonWrapper: {
 		top: 60,
 		left: 32,
-		zIndex: 999,
 	},
 
 	likeButtonWrapper: {
-		position: "absolute",
 		top: 60,
 		right: 32,
-		zIndex: 999,
 	},
 
 	redirectButtonWrapper: {
-		position: "absolute",
 		bottom: 40,
 		width: "100%",
 		alignItems: "center",
-		zIndex: 999,
 	},
 
 	topArea: {
