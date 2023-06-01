@@ -19,6 +19,7 @@ import {
 } from "../../components/globalComponents/buttonComponents";
 import IngredientsComponent from "../../ingredients/ingredients";
 import { COLORS, SIZES } from "../../theme/theme";
+import SubscriptionText from "../../components/subscriptionTextComponent";
 
 export default function RecipeInfoOverlay({ navigation, route }) {
 	const { recipeInfo } = route.params;
@@ -79,10 +80,13 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 						/>
 						<Text style={styles.recipeSlogan}>{recipeInfo.subName}</Text>
 						<Text style={styles.recipeTitle}>{recipeInfo.name}</Text>
-						<Text style={styles.recipePrepTime}>
-							{recipeInfo.prepTimeMinutes} minuten,{" "}
-							{recipeInfo.prepDifficulties[0]}
-						</Text>
+						<View style={styles.recipesubText}>
+							<Text style={styles.recipePrepTime}>
+								{recipeInfo.prepTimeMinutes} minuten,{" "}
+								{recipeInfo.prepDifficulties[0]}
+							</Text>
+							<SubscriptionText title="lenna +"></SubscriptionText>
+						</View>
 					</View>
 				</View>
 				<View style={styles.descriptionArea}>
@@ -217,6 +221,12 @@ const styles = StyleSheet.create({
 	recipeTitle: {
 		fontSize: 28,
 		fontFamily: "Plus-Jakarta-Sans-Bold",
+	},
+
+	recipesubText: {
+		flexDirection: "row",
+		alignItems: "center",
+		gap: 10,
 	},
 
 	recipePrepTime: {
