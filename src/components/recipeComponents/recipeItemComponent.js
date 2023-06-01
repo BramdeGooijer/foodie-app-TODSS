@@ -18,7 +18,7 @@ import { getRecipe } from "../../service/RecipeService";
 export default function RecipeItemComponent(props) {
 	const [liked, setLiked] = useState(props.liked);
 	const navigation = useNavigation();
-	let recipeImage;
+	let recipeImage = require("../../../assets/recipe_load_image.png");
 
 	const handleLikeRecipe = () => {
 		setLiked(!liked);
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
 	recipeImage: {
 		width: 133,
 		height: 149,
-		backgroundColor: "lightblue",
+		backgroundColor: "#F3F4F1",
 	},
 
 	likedIconTouchable: {
