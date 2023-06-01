@@ -19,7 +19,6 @@ export async function loginAsAdmin() {
 	})
 		.then(response => response.json())
 		.then(data => {
-			console.log(data.accessToken);
 			saveTokenToAsyncStorage(data.accessToken);
 		})
 		.catch(error => {
@@ -27,7 +26,6 @@ export async function loginAsAdmin() {
 				"Er is iets mis gegaan!",
 				"Het inloggen met je account is mislukt"
 			);
-			console.log(error);
 		});
 }
 
