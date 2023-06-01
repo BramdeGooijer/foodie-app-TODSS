@@ -1,7 +1,6 @@
 import { useState } from "react";
 import React, {
 	View,
-	Button,
 	Text,
 	SafeAreaView,
 	StyleSheet,
@@ -104,9 +103,11 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 					</View>
 				</View>
 				<View style={styles.ingredientArea}>
-					<Text>Placeholder for recipe ingrediënts and preperation steps</Text>
 					<CookingStepsComponent cookingsteps={recipeInfo.cookingSteps} />
-					<IngredientsComponent></IngredientsComponent>
+					<IngredientsComponent
+						ingredients={recipeInfo.ingredients}
+						requirements={recipeInfo.requirements}
+					/>
 				</View>
 			</ScrollView>
 		</SafeAreaView>
@@ -136,36 +137,29 @@ const styles = StyleSheet.create({
 	redirectButtonWrapper: {
 		bottom: 40,
 		width: "100%",
-
 		alignItems: "center",
 	},
 
 	topArea: {
-		// backgroundColor: "blue",
-		// flex: 2,
-		// height: 500,
 		paddingHorizontal: 20,
 		alignItems: "center",
+		backgroundColor: "#F7F7F7",
 	},
 
 	mainContentWrapper: {
 		width: "100%",
-		// backgroundColor: "blue",
 	},
 
 	recipeImage: {
-		// alignSelf: "center",
 		borderRadius: 5,
 		width: "100%",
 		height: 400,
-		// aspectRatio: 1,
 	},
 
 	recipeSlogan: {
 		fontSize: 20,
 		color: "#FBBA00",
 		fontFamily: "Nexa-Rust-Script-Cursive",
-
 		marginTop: 18,
 	},
 
@@ -178,14 +172,7 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		fontFamily: "Plus-Jakarta-Sans-Semi-Bold",
 		color: "#AAAAAA",
-
 		marginVertical: 16,
-	},
-
-	descriptionArea: {
-		backgroundColor: "#F7F7F7",
-		// flex: 1,
-		// height: 200,
 	},
 
 	descriptionWrapper: {
@@ -206,15 +193,12 @@ const styles = StyleSheet.create({
 	readMoreText: {
 		fontFamily: "Plus-Jakarta-Sans-Extra-Bold",
 		fontSize: 13,
-
 		marginRight: 3,
-
 		color: "#FBBA00",
 	},
 
 	ingredientArea: {
-		// backgroundColor: "red",
-		// flex: 1,
+		backgroundColor: "white",
 		height: 1000,
 	},
 });
