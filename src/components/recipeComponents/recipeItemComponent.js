@@ -50,7 +50,7 @@ export default function RecipeItemComponent(props) {
 		<View style={styles.itemContainer}>
 			<Image style={styles.recipeImage} source={recipeImage} />
 
-			{props.lennaplus ? <SubscriptionText title={"lenna +"} /> : undefined}
+			{props.lennaplus ? <View style={styles.lennaPlusIcon}><SubscriptionText title={"lenna +"} /></View> : undefined}
 
 			<TouchableOpacity
 				onPress={handleLikeRecipe}
@@ -105,6 +105,12 @@ const styles = StyleSheet.create({
 		width: 133,
 		height: 149,
 		backgroundColor: "#F3F4F1",
+	},
+
+	lennaPlusIcon: {
+		position: "absolute",
+		top: 15,
+		left: 15,
 	},
 
 	likedIconTouchable: {
