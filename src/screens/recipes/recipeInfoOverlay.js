@@ -130,7 +130,10 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 							<Text>lenna plus</Text>
 						</View>
 					) : showIngredients ? (
-						<IngredientsComponent />
+						<IngredientsComponent
+							ingredients={recipeInfo.ingredients}
+							requirements={recipeInfo.requirements}
+						/>
 					) : (
 						<CookingStepsComponent cookingsteps={recipeInfo.cookingSteps} />
 					)}
