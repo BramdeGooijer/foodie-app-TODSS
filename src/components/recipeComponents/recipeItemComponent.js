@@ -18,15 +18,13 @@ import { getRecipe } from "../../service/RecipeService";
 export default function RecipeItemComponent(props) {
 	const [liked, setLiked] = useState(props.liked);
 	const navigation = useNavigation();
-	let recipeImage;
+	let recipeImage = require("../../../assets/recipe_load_image.png");
 
 	const handleLikeRecipe = () => {
 		setLiked(!liked);
-		if (liked) {
-			Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-		} else {
-			Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-		}
+		liked
+			? Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
+			: Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 	};
 
 	const handleNavToRecipe = () => {
@@ -106,7 +104,7 @@ const styles = StyleSheet.create({
 	recipeImage: {
 		width: 133,
 		height: 149,
-		backgroundColor: "lightblue",
+		backgroundColor: "#F3F4F1",
 	},
 
 	likedIconTouchable: {

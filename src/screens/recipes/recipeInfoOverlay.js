@@ -1,7 +1,6 @@
 import { useState } from "react";
 import React, {
 	View,
-	Button,
 	Text,
 	SafeAreaView,
 	StyleSheet,
@@ -39,6 +38,7 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 
 	function handleRedirect() {
 		console.log("redirect");
+		navigation.navigate("RecipeCookingState", { recipeInfo: recipeInfo });
 	}
 
 	const handleLike = () => {
@@ -54,16 +54,16 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 
 	return (
 		<SafeAreaView>
-			<View style={styles.returnButtonWrapper}>
+			<View style={[styles.returnButtonWrapper, styles.globalButtonStyle]}>
 				<IconButton icon="arrowleft" handleOnPress={handleReturn} />
 			</View>
-			<View style={styles.likeButtonWrapper}>
+			<View style={[styles.likeButtonWrapper, styles.globalButtonStyle]}>
 				<MaterialIconButton
 					icon={liked ? "favorite" : "favorite-outline"}
 					handleOnPress={handleLike}
 				/>
 			</View>
-			<View style={styles.redirectButtonWrapper}>
+			<View style={[styles.redirectButtonWrapper, styles.globalButtonStyle]}>
 				<RedirectButton
 					text="Start de kookstand"
 					handleOnPress={handleRedirect}
@@ -167,61 +167,47 @@ const styles = StyleSheet.create({
 		height: "100%",
 	},
 
-	returnButtonWrapper: {
+	globalButtonStyle: {
 		position: "absolute",
+		zIndex: 999,
+	},
 
+	returnButtonWrapper: {
 		top: 60,
 		left: 32,
-
-		zIndex: 999,
 	},
 
 	likeButtonWrapper: {
-		position: "absolute",
-
 		top: 60,
 		right: 32,
-
-		zIndex: 999,
 	},
 
 	redirectButtonWrapper: {
-		position: "absolute",
-
 		bottom: 40,
 		width: "100%",
-
 		alignItems: "center",
-
-		zIndex: 999,
 	},
 
 	topArea: {
-		// backgroundColor: "blue",
-		// flex: 2,
-		// height: 500,
 		paddingHorizontal: 20,
 		alignItems: "center",
+		backgroundColor: "#F7F7F7",
 	},
 
 	mainContentWrapper: {
 		width: "100%",
-		// backgroundColor: "blue",
 	},
 
 	recipeImage: {
-		// alignSelf: "center",
 		borderRadius: 5,
 		width: "100%",
 		height: 400,
-		// aspectRatio: 1,
 	},
 
 	recipeSlogan: {
 		fontSize: 20,
 		color: "#FBBA00",
 		fontFamily: "Nexa-Rust-Script-Cursive",
-
 		marginTop: 18,
 	},
 
@@ -234,14 +220,7 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		fontFamily: "Plus-Jakarta-Sans-Semi-Bold",
 		color: "#AAAAAA",
-
 		marginVertical: 16,
-	},
-
-	descriptionArea: {
-		backgroundColor: "#F7F7F7",
-		// flex: 1,
-		// height: 200,
 	},
 
 	descriptionWrapper: {
@@ -262,15 +241,12 @@ const styles = StyleSheet.create({
 	readMoreText: {
 		fontFamily: "Plus-Jakarta-Sans-Extra-Bold",
 		fontSize: 13,
-
 		marginRight: 3,
-
 		color: "#FBBA00",
 	},
 
 	ingredientArea: {
-		// backgroundColor: "red",
-		// flex: 1,
+		backgroundColor: "white",
 		height: 1000,
 	},
 });

@@ -10,6 +10,7 @@ import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import theme from "../theme";
 import RecipeInfoOverlay from "../screens/recipes/recipeInfoOverlay";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import RecipeCookingState from "../screens/recipes/recipeCookingState";
 
 // tabs
 const Tab = createBottomTabNavigator();
@@ -193,6 +194,13 @@ export default function AppStack() {
 			<RootStack.Screen
 				name="RecipeInfoOverlay"
 				component={RecipeInfoOverlay}
+				options={({ navigation }) => ({
+					headerShown: false,
+				})}
+			/>
+			<RootStack.Screen
+				name="RecipeCookingState"
+				component={RecipeCookingState}
 				options={({ navigation }) => ({
 					headerShown: false,
 				})}

@@ -22,7 +22,7 @@ async function loadFonts() {
 		"Plus-Jakarta-Sans-Semi-Bold": require("./assets/fonts/PlusJakartaSans-SemiBold.ttf"),
 		"Plus-Jakarta-Sans-Semi-Bold-Italic": require("./assets/fonts/PlusJakartaSans-SemiBoldItalic.ttf"),
 
-		"Nexa-Rust-Script-Cursive": require("./assets/fonts/nexa-rust.script-cursive.otf"),
+		"Nexa-Rust-Script-Cursive": require("./assets/fonts/nexa_rust_script_b_00-webfont.ttf"),
 	});
 }
 
