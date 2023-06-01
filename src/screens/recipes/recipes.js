@@ -170,6 +170,7 @@ export default function RecepiesScreen() {
 									key={item.id}
 									id={item.id}
 									liked={item.plusRecipe}
+									lennaplus={item.plusRecipe}
 									recipeImage="recipeTestImage"
 									category={item.categories[0]}
 									subtext={item.name}
