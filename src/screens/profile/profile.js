@@ -1,18 +1,20 @@
 import React, { View, Text, SafeAreaView, StyleSheet } from "react-native";
 import { RedirectButton } from "../../components/globalComponents/buttonComponents";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 
 export default function ProfileScreen() {
 	const navigation = useNavigation();
+	const [username, setUsername] = useState("Gerard Joling")
 
 	function handleEditPassword() {
 		console.log("edit password");
-		navigation.navigate("EditProfileOverlay");
+		navigation.navigate("EditProfileOverlay", { editType: "password" });
 	}
 
 	function handleEditUsername() {
 		console.log("edit username");
-		navigation.navigate("EditProfileOverlay");
+		navigation.navigate("EditProfileOverlay", { editType: "username", currentUsername:  username});
 	}
 
 	function handleLogout() {
@@ -26,7 +28,7 @@ export default function ProfileScreen() {
 				<Text style={styles.pageTitle}>Profiel</Text>
 			</View>
 			<View style={styles.mainArea}>
-				<Text style={styles.usernameText}>Gerard Joling</Text>
+				<Text style={styles.usernameText}>{username}</Text>
 				<View style={styles.buttonWrapper}>
 					<RedirectButton
 						handleOnPress={handleEditPassword}

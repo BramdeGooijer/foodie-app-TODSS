@@ -57,6 +57,7 @@ export function RedirectButton(props) {
 				style={[
 					redirectButtonStyles.container,
 					props.invert && redirectButtonStyles.invertBackground,
+					props.maximumWidth && { width: "100%" },
 				]}>
 				<Text
 					style={[
@@ -65,7 +66,7 @@ export function RedirectButton(props) {
 					]}>
 					{props.text}
 				</Text>
-				<MaterialIcon size={24} color="white" name={props.icon} />
+				{props.icon && <MaterialIcon size={24} color="white" name={props.icon} />}
 			</View>
 		</TouchableWithoutFeedback>
 	);
