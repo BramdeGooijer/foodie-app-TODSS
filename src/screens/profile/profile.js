@@ -17,7 +17,7 @@ export default function ProfileScreen() {
 
 	function handleLogout() {
 		console.log("logout");
-		navigation.navigate("EditProfileOverlay");
+		navigation.navigate("LoginPage");
 	}
 
 	return (

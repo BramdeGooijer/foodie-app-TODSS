@@ -89,3 +89,10 @@ export async function getTokenFromAsyncStorage() {
 		return response;
 	});
 }
+
+export async function removeTokenFromAsyncStorage() {
+	console.log("[INFO] remove token from storage");
+	return await AsyncStorage.removeItem("accessToken").then(response => {
+		return response;
+	});
+}
