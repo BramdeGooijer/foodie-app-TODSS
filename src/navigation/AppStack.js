@@ -11,6 +11,7 @@ import theme from "../theme";
 import RecipeInfoOverlay from "../screens/recipes/recipeInfoOverlay";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import EditProfileOverlay from "../screens/profile/editProfileOverlay";
+import LoginPageOverlay from "../screens/profile/loginPageOverlay";
 
 // tabs
 const Tab = createBottomTabNavigator();
@@ -185,7 +186,12 @@ function MainStackScreen() {
 
 export default function AppStack() {
 	return (
-		<RootStack.Navigator initialRouteName="MainStack" presentation="modal">
+		<RootStack.Navigator initialRouteName="LoginPage" presentation="modal">
+			<RootStack.Screen
+				name="LoginPage"
+				component={LoginPageOverlay}
+				options={{ ...defaultOptions }}
+			/>
 			<RootStack.Screen
 				name="MainStack"
 				component={MainStackScreen}
