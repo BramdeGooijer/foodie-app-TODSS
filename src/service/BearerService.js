@@ -23,10 +23,63 @@ export async function loginAsAdmin() {
 		});
 }
 
+export async function loginWithEmailAndPassword(email, password) {
+	console.log("[INFO] login with email and password");
+
+	return await fetch(`${ENDPOINT}/oauth2/token`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			username: email,
+			password: password,
+			GrantType: "password",
+			clientid: "05004bd2-18d9-402f-9a1b-673fcf1d46e7",
+		}),
+	})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data.accessToken);
+			saveTokenToAsyncStorage(data.accessToken);
+			return true;
+		})
+		.catch(error => {
+			console.log(error);
+		});
+}
+
+export async function createUserWithEmailAndPassword(
+	username,
+	email,
+	password
+) {
+	console.log("[INFO] create user with email and password");
+
+	await fetch(`${ENDPOINT}/api/users`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			username: email,
+			name: username,
+			password: password,
+		}),
+	})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+		})
+		.catch(error => {
+			console.log(error);
+		});
+}
+
 async function saveTokenToAsyncStorage(token) {
 	console.log("[INFO] saveToken to storage");
 	// console.log(token);
-	AsyncStorage.setItem("accessToken", token);
+	AsyncStorage.setItem("accessToken", token)
 	console.log("[INFO] token saved to storage");
 }
 

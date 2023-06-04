@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as Linking from "expo-linking";
 import { StatusBar } from "react-native";
 import AppNavigator from "./src/navigation/AppNavigator";
@@ -27,13 +27,25 @@ async function loadFonts() {
 }
 
 export default function App() {
+	const [fontsLoaded, setFontsLoaded] = useState(false);
 	const prefix = Linking.createURL("/");
 	const linking = {
 		prefixes: [prefix],
 	};
 
-	loadFonts();
-	loginAsAdmin();
+	useEffect(() => {
+		loadFonts()
+			.then(() => setFontsLoaded(true))
+			.catch(error => {
+				console.log("Error loading fonts:", error);
+				setFontsLoaded(true); // Continue rendering even if fonts fail to load
+			});
+	}, []);
+
+	if (!fontsLoaded) {
+		// Return a loading screen or placeholder while fonts are being loaded
+		return null; // Replace with your loading component or placeholder
+	}
 
 	return (
 		<>

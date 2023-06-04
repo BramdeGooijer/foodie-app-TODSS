@@ -2,13 +2,32 @@ import { useState } from "react";
 import React, { SafeAreaView, StyleSheet, View, Text } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { RedirectButton } from "../../components/globalComponents/buttonComponents";
+import { loginWithEmailAndPassword } from "../../service/BearerService";
+import { useNavigation } from "@react-navigation/native";
 
 export default function LoginPageOverlay() {
-	const [emailInput, onChangeEmailInput] = useState("");
-	const [passwordInput, onChangePasswordInput] = useState("");
+	const [emailInput, setEmailInput] = useState("");
+	const [passwordInput, setPasswordInput] = useState("");
+	const navigation = useNavigation();
 
-	function handleLogin() {
+	async function handleLogin() {
 		console.log("login");
+		console.log(emailInput);
+		console.log(passwordInput);
+		if (
+			emailInput !== null &&
+			emailInput !== undefined &&
+			passwordInput !== null &&
+			passwordInput !== undefined &&
+			emailInput.length > 0 &&
+			passwordInput.length > 0
+		) {
+			await loginWithEmailAndPassword(emailInput, passwordInput).then(data => {
+				if (data === true) {
+					navigation.navigate("MainStack");
+				}
+			});
+		}
 	}
 
 	return (
@@ -23,7 +42,8 @@ export default function LoginPageOverlay() {
 						<Text style={styles.formLabel}>Gebruikersnaam of e-mailadres</Text>
 						<TextInput
 							style={styles.formInput}
-							onChange={onChangeEmailInput}
+							onChangeText={setEmailInput}
+							textContentType="emailAddress"
 							value={emailInput}
 						/>
 					</View>
@@ -31,20 +51,23 @@ export default function LoginPageOverlay() {
 						<Text style={styles.formLabel}>Wachtwoord</Text>
 						<TextInput
 							style={styles.formInput}
-							onChange={onChangePasswordInput}
+							onChangeText={setPasswordInput}
+							secureTextEntry={true}
 							value={passwordInput}
 						/>
 						<View style={styles.forgotPasswordWrapper}>
-							<Text styles={styles.greenUnderline}>Wachtwoord vergeten?</Text>
+							<Text style={[styles.greenUnderline, styles.forgotPasswordText]}>
+								Wachtwoord vergeten?
+							</Text>
 						</View>
 					</View>
 				</View>
 				<View style={styles.submitArea}>
-					<RedirectButton
-						text="Inloggen"
-						handleOnPress={handleLogin}></RedirectButton>
+					<RedirectButton text="Inloggen" handleOnPress={handleLogin} />
 					<Text style={styles.noAccountText}>Nog geen account?</Text>
-					<Text style={styles.greenUnderline}>Maak een account aan</Text>
+					<Text style={[styles.greenUnderline, styles.createUser]}>
+						Maak een account aan
+					</Text>
 				</View>
 			</View>
 		</SafeAreaView>
@@ -92,10 +115,7 @@ const styles = StyleSheet.create({
 	},
 
 	forgotPasswordText: {
-		fontFamily: "Plus-Jakarta-Sans-Regular",
 		fontSize: 16,
-		color: "#4C9E0B",
-		textDecorationLine: "underline",
 	},
 
 	formInput: {
@@ -119,10 +139,13 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 	},
 
+	createUser: {
+		fontSize: 18,
+	},
+
 	greenUnderline: {
 		marginTop: 8,
 		fontFamily: "Plus-Jakarta-Sans-Regular",
-		fontSize: 18,
 		color: "#4C9E0B",
 		textDecorationLine: "underline",
 	},
