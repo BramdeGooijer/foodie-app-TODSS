@@ -1,13 +1,15 @@
 import { useState } from "react";
 import React, { SafeAreaView, StyleSheet, View, Text } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import { TextInput, TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { RedirectButton } from "../../components/globalComponents/buttonComponents";
-import { loginWithEmailAndPassword } from "../../service/BearerService";
+import { createUserWithEmailAndPassword, loginWithEmailAndPassword } from "../../service/UserService";
 import { useNavigation } from "@react-navigation/native";
 
 export default function LoginPageOverlay() {
+	const [usernameInput, setUsernameInput] = useState("");
 	const [emailInput, setEmailInput] = useState("");
 	const [passwordInput, setPasswordInput] = useState("");
+	const [createUser, setCreateUser] = useState(false);
 	const navigation = useNavigation();
 
 	async function handleLogin() {
@@ -30,16 +32,55 @@ export default function LoginPageOverlay() {
 		}
 	}
 
+	async function handleCreateUser() {
+		console.log("create user");
+		console.log(usernameInput);
+		console.log(emailInput);
+		console.log(passwordInput);
+		if (
+			usernameInput !== null &&
+			usernameInput !== undefined &&
+			usernameInput.length > 0 &&
+			emailInput !== null &&
+			emailInput !== undefined &&
+			emailInput.length > 0 &&
+			passwordInput !== null &&
+			passwordInput !== undefined &&
+			passwordInput.length > 0
+		) {
+			await createUserWithEmailAndPassword(usernameInput, emailInput, passwordInput).then(data => {
+				if (data === true) {
+					navigation.navigate("MainStack");
+				}
+			});
+		}
+	}
+
+	function handletoggleForm() {
+		console.log("toggle form")
+		setCreateUser(!createUser);
+	}
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.contentWrapper}>
 				<View style={styles.titleArea}>
 					<Text style={styles.welcomeText}>Welkom</Text>
-					<Text style={styles.loginText}>Inloggen</Text>
+					<Text style={styles.loginText}>{createUser === true ? "Registreren" : "Inloggen"}</Text>
 				</View>
 				<View style={styles.formArea}>
+					{createUser === true && (
+						<View>
+							<Text style={styles.formLabel}>Gebruikersnaam</Text>
+							<TextInput
+								style={styles.formInput}
+								onChangeText={setUsernameInput}
+								value={usernameInput}
+							/>
+						</View>
+					)}
 					<View>
-						<Text style={styles.formLabel}>Gebruikersnaam of e-mailadres</Text>
+						<Text style={styles.formLabel}>{createUser === true ? "E-mailadres" : "Gebruikersnaam of e-mailadres"}</Text>
 						<TextInput
 							style={styles.formInput}
 							onChangeText={setEmailInput}
@@ -55,19 +96,23 @@ export default function LoginPageOverlay() {
 							secureTextEntry={true}
 							value={passwordInput}
 						/>
-						<View style={styles.forgotPasswordWrapper}>
-							<Text style={[styles.greenUnderline, styles.forgotPasswordText]}>
-								Wachtwoord vergeten?
-							</Text>
-						</View>
+						{createUser === false && (
+							<View style={styles.forgotPasswordWrapper}>
+								<Text style={[styles.greenUnderline, styles.forgotPasswordText]}>
+									Wachtwoord vergeten?
+								</Text>
+							</View>
+						)}
 					</View>
 				</View>
 				<View style={styles.submitArea}>
-					<RedirectButton text="Inloggen" handleOnPress={handleLogin} />
-					<Text style={styles.noAccountText}>Nog geen account?</Text>
-					<Text style={[styles.greenUnderline, styles.createUser]}>
-						Maak een account aan
-					</Text>
+					{createUser === true ? <RedirectButton text="Registreren" handleOnPress={handleCreateUser} /> : <RedirectButton text="Inloggen" handleOnPress={handleLogin} />}
+					<Text style={styles.noAccountText}>{createUser === true ? "Heb je al een account" : "Nog geen account"}</Text>
+					<TouchableWithoutFeedback onPress={handletoggleForm}>
+						<Text style={[styles.greenUnderline, styles.createUser]}>
+							{createUser === true ? "Log in met je account" : "Maak een account aan"}
+						</Text>
+					</TouchableWithoutFeedback>
 				</View>
 			</View>
 		</SafeAreaView>

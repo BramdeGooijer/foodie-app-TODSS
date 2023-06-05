@@ -21,6 +21,10 @@ export default function EditProfileOverlay({ navigation, route }) {
 		navigation.goBack();
 	}
 
+	function handleChangeName() {
+		console.log("change name");
+	}
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.topArea}>
@@ -55,9 +59,9 @@ export default function EditProfileOverlay({ navigation, route }) {
 								text="Annuleren"
 								maximumWidth={true}
 								invert={true}
-								handleOnPress={() => navigation.goBack()}
+								handleOnPress={handleReturn}
 							/>
-							<RedirectButton text="Opslaan" maximumWidth={true} />
+							<RedirectButton text="Opslaan" maximumWidth={true} handleOnPress={handleChangeName} />
 						</View>
 					</View>
 				)}
