@@ -55,6 +55,7 @@ export default function EditProfileOverlay({ navigation, route }) {
 								text="Annuleren"
 								maximumWidth={true}
 								invert={true}
+								handleOnPress={() => navigation.goBack()}
 							/>
 							<RedirectButton text="Opslaan" maximumWidth={true} />
 						</View>
