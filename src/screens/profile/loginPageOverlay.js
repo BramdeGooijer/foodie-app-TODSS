@@ -107,7 +107,7 @@ export default function LoginPageOverlay() {
 				</View>
 				<View style={styles.submitArea}>
 					{createUser === true ? <RedirectButton text="Registreren" handleOnPress={handleCreateUser} /> : <RedirectButton text="Inloggen" handleOnPress={handleLogin} />}
-					<Text style={styles.noAccountText}>{createUser === true ? "Heb je al een account" : "Nog geen account"}</Text>
+					<Text style={styles.noAccountText}>{createUser === true ? "Heb je al een account?" : "Nog geen account?"}</Text>
 					<TouchableWithoutFeedback onPress={handletoggleForm}>
 						<Text style={[styles.greenUnderline, styles.createUser]}>
 							{createUser === true ? "Log in met je account" : "Maak een account aan"}
