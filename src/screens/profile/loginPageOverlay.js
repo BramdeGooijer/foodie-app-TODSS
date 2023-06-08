@@ -1,5 +1,5 @@
 import { useState } from "react";
-import React, { SafeAreaView, StyleSheet, View, Text } from "react-native";
+import React, { SafeAreaView, StyleSheet, View, Text, Alert } from "react-native";
 import {
 	TextInput,
 	TouchableWithoutFeedback,
@@ -60,7 +60,8 @@ export default function LoginPageOverlay() {
 				passwordInput
 			).then(data => {
 				if (data === true) {
-					navigation.navigate("MainStack");
+					Alert.alert("Je account is aangemaakt");
+					setCreateUser(false);
 				}
 			});
 		}
