@@ -15,6 +15,9 @@ import { changeUsername } from "../../service/UserService";
 
 export default function EditProfileOverlay({ navigation, route }) {
 	const [profileInput, setProfileInput] = useState("");
+	const [oldPasswordInput, setOldPasswordInput] = useState("");
+	const [newPasswordInput, setNewPasswordInput] = useState("");
+	const [repeatNewPasswordInput, setRepeatNewPasswordInput] = useState("");
 	const { editType, currentUsername } = route.params;
 
 	function handleReturn() {
@@ -40,6 +43,10 @@ export default function EditProfileOverlay({ navigation, route }) {
 				}
 			});
 		}
+	}
+
+	function handleChangePassword() {
+		console.log("change password");
 	}
 
 	return (
@@ -86,7 +93,56 @@ export default function EditProfileOverlay({ navigation, route }) {
 						</View>
 					</View>
 				)}
-				{/* {editType === "password" && "Wachtwoord wijzigen"} */}
+				{editType === "password" && (
+					<View style={styles.editProfileContent}>
+						<View style={styles.formWrapper}>
+							<View>
+								<Text style={styles.formLabel}>Oud wachtwoord</Text>
+								<TextInput
+									style={styles.formInput}
+									onChangeText={oldPasswordInput}
+									secureTextEntry={true}
+									value={setOldPasswordInput}
+								/>
+							</View>
+							<View>
+								<Text style={styles.formLabel}>Nieuw wachtwoord</Text>
+								<TextInput
+									style={styles.formInput}
+									onChangeText={newPasswordInput}
+									secureTextEntry={true}
+									value={setNewPasswordInput}
+								/>
+							</View>
+							<View>
+								<Text style={styles.formLabel}>Herhaal nieuw wachtwoord</Text>
+								<TextInput
+									style={styles.formInput}
+									onChangeText={repeatNewPasswordInput}
+									secureTextEntry={true}
+									value={setRepeatNewPasswordInput}
+								/>
+							</View>
+						</View>
+						<View
+							style={[
+								styles.buttonWrapper,
+								{ width: Dimensions.get("window").width - 135 },
+							]}>
+							<RedirectButton
+								text="Annuleren"
+								maximumWidth={true}
+								invert={true}
+								handleOnPress={handleReturn}
+							/>
+							<RedirectButton
+								text="Opslaan"
+								maximumWidth={true}
+								handleOnPress={handleChangePassword}
+							/>
+						</View>
+					</View>
+				)}
 			</View>
 		</SafeAreaView>
 	);
@@ -123,6 +179,10 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		lineHeight: 34,
 		margin: 0,
+	},
+
+	formWrapper: {
+		gap: 20,
 	},
 
 	formLabel: {
