@@ -76,10 +76,35 @@ export async function createUserWithEmailAndPassword(
 		});
 }
 
+export async function changeUsername(newUsername) {
+	console.log("[INFO] change the username to newUsername");
+
+	return await fetch(`${ENDPOINT}/api/users/changename`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			newName: newUsername,
+		}),
+	})
+		.then(response => {
+			return response.json();
+		})
+		.then(data => {
+			console.log(data);
+			return true;
+		})
+		.catch(error => {
+			console.log(error);
+			return false;
+		});
+}
+
 async function saveTokenToAsyncStorage(token) {
 	console.log("[INFO] saveToken to storage");
 	// console.log(token);
-	AsyncStorage.setItem("accessToken", token)
+	AsyncStorage.setItem("accessToken", token);
 	console.log("[INFO] token saved to storage");
 }
 

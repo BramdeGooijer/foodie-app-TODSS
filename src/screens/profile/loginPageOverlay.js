@@ -1,8 +1,14 @@
 import { useState } from "react";
 import React, { SafeAreaView, StyleSheet, View, Text } from "react-native";
-import { TextInput, TouchableWithoutFeedback } from "react-native-gesture-handler";
+import {
+	TextInput,
+	TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
 import { RedirectButton } from "../../components/globalComponents/buttonComponents";
-import { createUserWithEmailAndPassword, loginWithEmailAndPassword } from "../../service/UserService";
+import {
+	createUserWithEmailAndPassword,
+	loginWithEmailAndPassword,
+} from "../../service/UserService";
 import { useNavigation } from "@react-navigation/native";
 
 export default function LoginPageOverlay() {
@@ -48,7 +54,11 @@ export default function LoginPageOverlay() {
 			passwordInput !== undefined &&
 			passwordInput.length > 0
 		) {
-			await createUserWithEmailAndPassword(usernameInput, emailInput, passwordInput).then(data => {
+			await createUserWithEmailAndPassword(
+				usernameInput,
+				emailInput,
+				passwordInput
+			).then(data => {
 				if (data === true) {
 					navigation.navigate("MainStack");
 				}
@@ -57,7 +67,7 @@ export default function LoginPageOverlay() {
 	}
 
 	function handletoggleForm() {
-		console.log("toggle form")
+		console.log("toggle form");
 		setCreateUser(!createUser);
 	}
 
@@ -66,7 +76,9 @@ export default function LoginPageOverlay() {
 			<View style={styles.contentWrapper}>
 				<View style={styles.titleArea}>
 					<Text style={styles.welcomeText}>Welkom</Text>
-					<Text style={styles.loginText}>{createUser === true ? "Registreren" : "Inloggen"}</Text>
+					<Text style={styles.loginText}>
+						{createUser === true ? "Registreren" : "Inloggen"}
+					</Text>
 				</View>
 				<View style={styles.formArea}>
 					{createUser === true && (
@@ -80,7 +92,11 @@ export default function LoginPageOverlay() {
 						</View>
 					)}
 					<View>
-						<Text style={styles.formLabel}>{createUser === true ? "E-mailadres" : "Gebruikersnaam of e-mailadres"}</Text>
+						<Text style={styles.formLabel}>
+							{createUser === true
+								? "E-mailadres"
+								: "Gebruikersnaam of e-mailadres"}
+						</Text>
 						<TextInput
 							style={styles.formInput}
 							onChangeText={setEmailInput}
@@ -98,7 +114,8 @@ export default function LoginPageOverlay() {
 						/>
 						{createUser === false && (
 							<View style={styles.forgotPasswordWrapper}>
-								<Text style={[styles.greenUnderline, styles.forgotPasswordText]}>
+								<Text
+									style={[styles.greenUnderline, styles.forgotPasswordText]}>
 									Wachtwoord vergeten?
 								</Text>
 							</View>
@@ -106,11 +123,24 @@ export default function LoginPageOverlay() {
 					</View>
 				</View>
 				<View style={styles.submitArea}>
-					{createUser === true ? <RedirectButton text="Registreren" handleOnPress={handleCreateUser} /> : <RedirectButton text="Inloggen" handleOnPress={handleLogin} />}
-					<Text style={styles.noAccountText}>{createUser === true ? "Heb je al een account?" : "Nog geen account?"}</Text>
+					{createUser === true ? (
+						<RedirectButton
+							text="Registreren"
+							handleOnPress={handleCreateUser}
+						/>
+					) : (
+						<RedirectButton text="Inloggen" handleOnPress={handleLogin} />
+					)}
+					<Text style={styles.noAccountText}>
+						{createUser === true
+							? "Heb je al een account?"
+							: "Nog geen account?"}
+					</Text>
 					<TouchableWithoutFeedback onPress={handletoggleForm}>
 						<Text style={[styles.greenUnderline, styles.createUser]}>
-							{createUser === true ? "Log in met je account" : "Maak een account aan"}
+							{createUser === true
+								? "Log in met je account"
+								: "Maak een account aan"}
 						</Text>
 					</TouchableWithoutFeedback>
 				</View>

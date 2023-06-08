@@ -11,6 +11,7 @@ import { TextInput } from "react-native-gesture-handler";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { RedirectButton } from "../../components/globalComponents/buttonComponents";
 import { Dimensions } from "react-native";
+import { changeUsername } from "../../service/UserService";
 
 export default function EditProfileOverlay({ navigation, route }) {
 	const [profileInput, setProfileInput] = useState("");
@@ -21,8 +22,24 @@ export default function EditProfileOverlay({ navigation, route }) {
 		navigation.goBack();
 	}
 
-	function handleChangeName() {
-		console.log("change name");
+	async function handleChangeName() {
+		console.log("change name to: " + profileInput);
+		if (
+			profileInput.length > 0 &&
+			profileInput !== undefined &&
+			profileInput !== null
+		) {
+			await changeUsername(profileInput).then(data => {
+				console.log(data);
+				if (data === true) {
+					navigation.goBack();
+				}
+				// temporary code for testing until request is live on backend
+				if (data === false) {
+					navigation.goBack();
+				}
+			});
+		}
 	}
 
 	return (
@@ -61,7 +78,11 @@ export default function EditProfileOverlay({ navigation, route }) {
 								invert={true}
 								handleOnPress={handleReturn}
 							/>
-							<RedirectButton text="Opslaan" maximumWidth={true} handleOnPress={handleChangeName} />
+							<RedirectButton
+								text="Opslaan"
+								maximumWidth={true}
+								handleOnPress={handleChangeName}
+							/>
 						</View>
 					</View>
 				)}
@@ -118,6 +139,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		paddingHorizontal: 20,
 		paddingVertical: 14,
+		marginTop: 6,
 	},
 
 	editProfileContent: {
@@ -127,6 +149,6 @@ const styles = StyleSheet.create({
 
 	buttonWrapper: {
 		flexDirection: "row",
-		gap: 12
+		gap: 12,
 	},
 });

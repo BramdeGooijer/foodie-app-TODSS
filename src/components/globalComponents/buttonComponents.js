@@ -66,7 +66,9 @@ export function RedirectButton(props) {
 					]}>
 					{props.text}
 				</Text>
-				{props.icon && <MaterialIcon size={24} color="white" name={props.icon} />}
+				{props.icon && (
+					<MaterialIcon size={24} color="white" name={props.icon} />
+				)}
 			</View>
 		</TouchableWithoutFeedback>
 	);

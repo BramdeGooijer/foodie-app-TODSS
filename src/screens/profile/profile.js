@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function ProfileScreen() {
 	const navigation = useNavigation();
-	const [username, setUsername] = useState("Gerard Joling")
+	const [username, setUsername] = useState("Gerard Joling");
 
 	function handleEditPassword() {
 		console.log("edit password");
@@ -14,7 +14,10 @@ export default function ProfileScreen() {
 
 	function handleEditUsername() {
 		console.log("edit username");
-		navigation.navigate("EditProfileOverlay", { editType: "username", currentUsername:  username});
+		navigation.navigate("EditProfileOverlay", {
+			editType: "username",
+			currentUsername: username,
+		});
 	}
 
 	function handleLogout() {
