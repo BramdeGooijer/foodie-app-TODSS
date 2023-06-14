@@ -14,6 +14,7 @@ export const COLORS = {
 };
 
 export const SIZES = {
+	large: 28,
 	h1: 22,
 	h2: 20,
 	h3: 18,
