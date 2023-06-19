@@ -1,12 +1,12 @@
 import { useState } from "react";
 import React, {
 	View,
-	Button,
 	Text,
 	SafeAreaView,
 	StyleSheet,
 	ScrollView,
 	Image,
+	Pressable,
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
@@ -18,12 +18,15 @@ import {
 	RedirectButton,
 } from "../../components/globalComponents/buttonComponents";
 import IngredientsComponent from "../../ingredients/ingredients";
+import { COLORS, SIZES } from "../../theme/theme";
+import SubscriptionText from "../../components/subscriptionTextComponent";
 
 export default function RecipeInfoOverlay({ navigation, route }) {
 	const { recipeInfo } = route.params;
 	const [description, setDescription] = useState(recipeInfo.description);
 	const [fullDescription, setFullDescription] = useState(false);
 	const [liked, setLiked] = useState(false);
+	const [showIngredients, setShowIngredients] = useState(true);
 
 	function handleReadMore() {
 		setFullDescription(!fullDescription);
@@ -36,6 +39,7 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 
 	function handleRedirect() {
 		console.log("redirect");
+		navigation.navigate("RecipeCookingState", { recipeInfo: recipeInfo });
 	}
 
 	const handleLike = () => {
@@ -51,16 +55,16 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 
 	return (
 		<SafeAreaView>
-			<View style={styles.returnButtonWrapper}>
+			<View style={[styles.returnButtonWrapper, styles.globalButtonStyle]}>
 				<IconButton icon="arrowleft" handleOnPress={handleReturn} />
 			</View>
-			<View style={styles.likeButtonWrapper}>
+			<View style={[styles.likeButtonWrapper, styles.globalButtonStyle]}>
 				<MaterialIconButton
 					icon={liked ? "favorite" : "favorite-outline"}
 					handleOnPress={handleLike}
 				/>
 			</View>
-			<View style={styles.redirectButtonWrapper}>
+			<View style={[styles.redirectButtonWrapper, styles.globalButtonStyle]}>
 				<RedirectButton
 					text="Start de kookstand"
 					handleOnPress={handleRedirect}
@@ -76,10 +80,13 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 						/>
 						<Text style={styles.recipeSlogan}>{recipeInfo.subName}</Text>
 						<Text style={styles.recipeTitle}>{recipeInfo.name}</Text>
-						<Text style={styles.recipePrepTime}>
-							{recipeInfo.prepTimeMinutes} minuten,{" "}
-							{recipeInfo.prepDifficulties[0]}
-						</Text>
+						<View style={styles.recipesubText}>
+							<Text style={styles.recipePrepTime}>
+								{recipeInfo.prepTimeMinutes} minuten,{" "}
+								{recipeInfo.prepDifficulties[0]}
+							</Text>
+							<SubscriptionText title="lenna +"></SubscriptionText>
+						</View>
 					</View>
 				</View>
 				<View style={styles.descriptionArea}>
@@ -104,75 +111,110 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 					</View>
 				</View>
 				<View style={styles.ingredientArea}>
-					<Text>Placeholder for recipe ingrediënts and preperation steps</Text>
-					<CookingStepsComponent cookingsteps={recipeInfo.cookingSteps} />
-					<IngredientsComponent></IngredientsComponent>
+					<View style={styles.tabButtonContainer}>
+						<Pressable
+							disabled={recipeInfo.plusRecipe}
+							style={styles.tabButton({ focused: showIngredients })}
+							onPress={() => setShowIngredients(true)}>
+							<Text style={styles.tabButtonText({ focused: showIngredients })}>
+								Ingrediënten
+							</Text>
+						</Pressable>
+						<Pressable
+							disabled={recipeInfo.plusRecipe}
+							style={styles.tabButton({ focused: !showIngredients })}
+							onPress={() => setShowIngredients(false)}>
+							<Text style={styles.tabButtonText({ focused: !showIngredients })}>
+								Bereiding
+							</Text>
+						</Pressable>
+					</View>
+					{recipeInfo.plusRecipe ? (
+						<View>
+							<Text>lenna plus</Text>
+						</View>
+					) : showIngredients ? (
+						<IngredientsComponent
+							ingredients={recipeInfo.ingredients}
+							requirements={recipeInfo.requirements}
+						/>
+					) : (
+						<CookingStepsComponent cookingsteps={recipeInfo.cookingSteps} />
+					)}
 				</View>
+
+				{console.log("blablabla", styles.tabButton(false))}
 			</ScrollView>
 		</SafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
+	tabButtonContainer: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+		paddingHorizontal: 18,
+		borderBottomColor: COLORS.primary,
+		borderBottomWidth: 1,
+	},
+	tabButton: ({ focused }) => ({
+		alignItems: "center",
+		paddingVertical: 16,
+		backgroundColor: "transparent",
+		flex: 1,
+		borderBottomWidth: focused ? 2 : 0,
+		borderBottomColor: COLORS.primary,
+	}),
+	tabButtonText: ({ focused }) => ({
+		color: focused ? COLORS.primary : COLORS.grey,
+		fontWeight: "bold",
+		fontSize: SIZES.h4,
+	}),
 	recipeInfoContainer: {
 		height: "100%",
 	},
 
-	returnButtonWrapper: {
+	globalButtonStyle: {
 		position: "absolute",
+		zIndex: 999,
+	},
 
+	returnButtonWrapper: {
 		top: 60,
 		left: 32,
-
-		zIndex: 999,
 	},
 
 	likeButtonWrapper: {
-		position: "absolute",
-
 		top: 60,
 		right: 32,
-
-		zIndex: 999,
 	},
 
 	redirectButtonWrapper: {
-		position: "absolute",
-
 		bottom: 40,
 		width: "100%",
-
 		alignItems: "center",
-
-		zIndex: 999,
 	},
 
 	topArea: {
-		// backgroundColor: "blue",
-		// flex: 2,
-		// height: 500,
 		paddingHorizontal: 20,
 		alignItems: "center",
+		backgroundColor: "#F7F7F7",
 	},
 
 	mainContentWrapper: {
 		width: "100%",
-		// backgroundColor: "blue",
 	},
 
 	recipeImage: {
-		// alignSelf: "center",
 		borderRadius: 5,
 		width: "100%",
 		height: 400,
-		// aspectRatio: 1,
 	},
 
 	recipeSlogan: {
 		fontSize: 20,
 		color: "#FBBA00",
 		fontFamily: "Nexa-Rust-Script-Cursive",
-
 		marginTop: 18,
 	},
 
@@ -181,18 +223,17 @@ const styles = StyleSheet.create({
 		fontFamily: "Plus-Jakarta-Sans-Bold",
 	},
 
+	recipesubText: {
+		flexDirection: "row",
+		alignItems: "center",
+		gap: 10,
+	},
+
 	recipePrepTime: {
 		fontSize: 16,
 		fontFamily: "Plus-Jakarta-Sans-Semi-Bold",
 		color: "#AAAAAA",
-
 		marginVertical: 16,
-	},
-
-	descriptionArea: {
-		backgroundColor: "#F7F7F7",
-		// flex: 1,
-		// height: 200,
 	},
 
 	descriptionWrapper: {
@@ -213,15 +254,12 @@ const styles = StyleSheet.create({
 	readMoreText: {
 		fontFamily: "Plus-Jakarta-Sans-Extra-Bold",
 		fontSize: 13,
-
 		marginRight: 3,
-
 		color: "#FBBA00",
 	},
 
 	ingredientArea: {
-		// backgroundColor: "red",
-		// flex: 1,
+		backgroundColor: "white",
 		height: 1000,
 	},
 });

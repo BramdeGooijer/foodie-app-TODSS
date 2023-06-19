@@ -1,3 +1,4 @@
+import { Alert } from "react-native";
 import { ENDPOINT } from "../../app.json";
 import { getTokenFromAsyncStorage } from "./UserService";
 
@@ -16,6 +17,10 @@ export async function getAllRecipes(pageSize, pageNumber, categoryName) {
 			},
 		}
 	).catch(error => {
+		Alert.alert(
+			"Er is iets mis gegaan!",
+			"Het vinden van alle recepten is niet gelukt"
+		);
 		console.log(error);
 	});
 }
@@ -34,6 +39,10 @@ export async function getFavoriteRecipes(pageSize, pageNumber) {
 			},
 		}
 	).catch(error => {
+		Alert.alert(
+			"Er is iets mis gegaan!",
+			"Het vinden van jouw favorieten recepten is niet gelukt"
+		);
 		console.log(error);
 	});
 }
@@ -49,6 +58,10 @@ export async function getRecipe(id) {
 			Authorization: bearerToken,
 		},
 	}).catch(error => {
+		Alert.alert(
+			"Er is iets mis gegaan!",
+			"Het vinden van het recept is niet gelukt"
+		);
 		console.log(error);
 	});
 }
@@ -67,6 +80,10 @@ export async function searchRecipe(name, pageNumber, categoryName) {
 			},
 		}
 	).catch(error => {
+		Alert.alert(
+			"Er is iets mis gegaan!",
+			"Het vinden van het recept is niet gelukt"
+		);
 		console.log(error);
 	});
 }

@@ -10,8 +10,6 @@ import {
 import React from "react";
 import RecipeItemComponent from "../../components/recipeComponents/recipeItemComponent";
 import { FONTS } from "../../theme/theme.js";
-import SearchButtonComponent from "../../components/recipeComponents/searchButtonComponent";
-import FilterButtonComponent from "../../components/recipeComponents/filterButtonComponent";
 import FilterItemsComponent from "../../components/recipeComponents/filterItemsComponent";
 import { useEffect, useState, useRef, useCallback } from "react";
 import debounce from "lodash/debounce";
@@ -172,6 +170,7 @@ export default function RecepiesScreen() {
 									key={item.id}
 									id={item.id}
 									liked={item.plusRecipe}
+									lennaplus={item.plusRecipe}
 									recipeImage="recipeTestImage"
 									category={item.categories[0]}
 									subtext={item.name}
@@ -260,7 +259,7 @@ const styles = StyleSheet.create({
 	input: {
 		fontSize: 16,
 		backgroundColor: "white",
-		minWidth: "100%",
+		width: 173,
 		borderRadius: 70,
 
 		height: 40,

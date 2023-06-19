@@ -11,9 +11,9 @@ export default function SubscriptionText({ title }) {
 
 const styles = StyleSheet.create({
 	subscriptionIcon: {
-		position: "absolute",
-		top: 15,
-		left: 15,
+		// position: "absolute",
+		// top: 15,
+		// left: 15,
 		justifyContent: "center",
 		alignItems: "center",
 		height: 20,
