@@ -187,7 +187,7 @@ function MainStackScreen() {
 
 export default function AppStack() {
 	return (
-		<RootStack.Navigator initialRouteName="LoginPage" presentation="modal">
+		<RootStack.Navigator initialRouteName="MainStack" presentation="modal">
 			<RootStack.Screen
 				name="LoginPage"
 				component={LoginPageOverlay}

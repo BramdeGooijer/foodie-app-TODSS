@@ -1,4 +1,5 @@
 import React, { Text, SafeAreaView } from "react-native";
+import { CategorieAdComponent } from "../../components/globalComponents/catergorieAdComponent";
 
 export default function DashboardScreen() {
 	return (
@@ -6,6 +7,8 @@ export default function DashboardScreen() {
 			<Text>Ontdek</Text>
 
 			<Text>Hier komt de "ontdek" pagina</Text>
+
+			<CategorieAdComponent />
 		</SafeAreaView>
 	);
 }
