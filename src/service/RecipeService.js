@@ -1,6 +1,6 @@
 import { Alert } from "react-native";
 import { ENDPOINT } from "../../app.json";
-import { getTokenFromAsyncStorage } from "./BearerService";
+import { getTokenFromAsyncStorage } from "./UserService";
 
 export async function getAllRecipes(pageSize, pageNumber, categoryName) {
 	console.log("[INFO] get all Recipes");
