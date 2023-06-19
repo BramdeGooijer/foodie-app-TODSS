@@ -17,6 +17,7 @@ import { getAllRecipes, getRecipe } from "../../service/RecipeService";
 import { ScrollView } from "react-native-gesture-handler";
 import { IconButton } from "../../components/globalComponents/buttonComponents";
 import { searchRecipe } from "../../service/RecipeService";
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function RecepiesScreen() {
 	const [openFilter, setOpenFilter] = useState(false);
@@ -28,8 +29,12 @@ export default function RecepiesScreen() {
 	const animatedValue = useRef(new Animated.Value(0)).current;
 	const [inputValue, setInputValue] = useState("");
 
+	const navigation = useNavigation();
+	const route = useRoute();
+	const { category } = route.params || {};
+
 	async function handleInputSubmit(text) {
-		await searchRecipe(text, 0, "")
+		await searchRecipe(text, 0, category)
 			.then(response => response.json())
 			.then(data => {
 				console.log(data.items);
@@ -81,29 +86,28 @@ export default function RecepiesScreen() {
 	const [showText, setShowText] = useState(true);
 
 	useEffect(() => {
-		loadData();
-	}, []);
+		loadData(category); 
+	  }, [category]);
 
-	const onRefresh = React.useCallback(() => {
-		setRefreshing(true);
-		loadData();
-		setTimeout(() => {
-			setRefreshing(false);
-		}, 1000);
-	}, []);
-
-	async function loadData() {
-		await getAllRecipes(100, 0, "")
+	async function loadData(category) {
+		await getAllRecipes(100, 0, category)
 			.then(response => response.json())
 			.then(data => {
 				console.log(data.items);
-
 				setRecipeItems(data.items);
 			})
 			.catch(error => {
 				console.log(error);
 			});
 	}
+
+	const onRefresh = React.useCallback(() => {
+		setRefreshing(true);
+		loadData(category);
+		setTimeout(() => {
+			setRefreshing(false);
+		}, 1000);
+	}, [category]);
 
 	const handleFilter = () => {
 		setOpenFilter(!openFilter);

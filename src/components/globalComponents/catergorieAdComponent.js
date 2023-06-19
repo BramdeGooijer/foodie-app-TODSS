@@ -2,12 +2,16 @@ import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { FONTS } from "../../theme/theme";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { IconButton, IconButtonCategorie } from "./buttonComponents";
+import { useNavigation } from '@react-navigation/native';
+import { IconButtonCategorie } from "./buttonComponents";
 import { MaterialIconButton } from "./buttonComponents";
 
 export function CategorieAdComponent() {
     const navigation = useNavigation();
+
+    const handleButtonClick = (category) => {
+        navigation.navigate("RecipesStack", { category });
+    };    
 
 	return (
         <View style={categorieAdComponentStyles.container}>
@@ -19,36 +23,42 @@ export function CategorieAdComponent() {
                     <IconButtonCategorie
                         icon="rest"
                         text="Ontbijt"
+                        handleOnPress={() => handleButtonClick("breakfast")}
                     />
                 </View>
                 <View style={categorieAdComponentStyles.buttonWrapper}>
                     <IconButtonCategorie
                         icon="rest"
                         text="Lunch"
+                        handleOnPress={() => handleButtonClick("lunch")}
                     />
                 </View>
                 <View style={categorieAdComponentStyles.buttonWrapper}>
                     <IconButtonCategorie
                         icon="rest"
                         text="Dinner"
+                        handleOnPress={() => handleButtonClick("dinner")}
                     />
                 </View>
                 <View style={categorieAdComponentStyles.buttonWrapper}>
                     <IconButtonCategorie
                         icon="rest"
                         text="Dessert"
+                        handleOnPress={() => handleButtonClick("dessert")}
                     />
                 </View>
                 <View style={categorieAdComponentStyles.buttonWrapper}>
                     <IconButtonCategorie
                         icon="rest"
                         text="Drankje"
+                        handleOnPress={() => handleButtonClick("drink")}
                     />
                 </View>
                 <View style={categorieAdComponentStyles.buttonWrapper}>
                     <IconButtonCategorie
                         icon="rest"
                         text="Borrelhap"
+                        handleOnPress={() => handleButtonClick("snack")}
                     />
                 </View>
             </View>
