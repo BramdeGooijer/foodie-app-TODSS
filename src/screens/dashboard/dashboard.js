@@ -1,4 +1,5 @@
 import React, { Text, SafeAreaView } from "react-native";
+import ButtonComponents from "../../../src/components/redirectComponent/redirectButtons.js";
 
 export default function DashboardScreen() {
 	return (
@@ -6,6 +7,7 @@ export default function DashboardScreen() {
 			<Text>Ontdek</Text>
 
 			<Text>Hier komt de "ontdek" pagina</Text>
+			<ButtonComponents />
 		</SafeAreaView>
 	);
 }
