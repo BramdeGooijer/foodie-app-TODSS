@@ -85,7 +85,7 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 								{recipeInfo.prepTimeMinutes} minuten,{" "}
 								{recipeInfo.prepDifficulties[0]}
 							</Text>
-							<SubscriptionText title="lenna +"></SubscriptionText>
+							{recipeInfo.plusRecipe && <SubscriptionText title="lenna +"></SubscriptionText>}
 						</View>
 					</View>
 				</View>
