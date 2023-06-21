@@ -18,12 +18,30 @@ const ButtonComponents = () => {
     <View style={styles.container}>
       <View style={styles.content}>
         <TouchableOpacity style={styles.greenButton} onPress={handleOrderButtonPress}>
-          <Text style={styles.buttonText}>Bestel nu!</Text>
-          <Text style={styles.subtitle}>Everyday Vegan Budget Friendly   kookboek</Text>
+          <View style={styles.buttonContent}>
+            <Text style={styles.buttonText}>Bestel nu!</Text>
+            <Text style={styles.subtitle}>Everyday Vegan Budget Friendly   kookboek</Text>
+          </View>
+          <View style={styles.arrowContainerGreen}>
+            <MaterialIcon
+              size={32}
+              name="arrow-forward"
+              color={"white"}
+            />
+          </View>
         </TouchableOpacity>
         <TouchableOpacity style={styles.yellowButton} onPress={handleInstagramButtonPress}>
-          <Text style={styles.buttonText}>Volg mij ook op:</Text>
-          <Text style={styles.subtitle}>Instagram</Text>
+          <View style={styles.buttonContent}>
+            <Text style={styles.buttonText}>Volg mij ook op:</Text>
+            <Text style={styles.subtitle}>Instagram</Text>
+          </View>
+          <View style={styles.arrowContainer}>
+            <MaterialIcon
+              size={32}
+              name="arrow-forward"
+              color={"white"}
+            />
+          </View>
         </TouchableOpacity>
       </View>
     </View>
@@ -43,11 +61,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
-    marginBottom: 10,
+    marginBottom: 2,
     height: 96,
-    width: 350, // Adjust the width value as desired
+    width: 350,
     justifyContent: 'center',
-
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   yellowButton: {
     backgroundColor:  COLORS.yellowCheck,
@@ -56,9 +75,14 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 10,
     height: 76,
-    width: 350, // Adjust the width value as desired
+    width: 350,
     justifyContent: 'center',
-
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  buttonContent: {
+    flex: 1,
+    marginRight: 10,
   },
   buttonText: {
     color: 'white',
@@ -69,10 +93,18 @@ const styles = StyleSheet.create({
   subtitle: {
     color: 'white',
     fontFamily: FONTS.Regular,
-    fontWeight: 700,
+    fontWeight: '700',
     fontSize: 16,
     textAlign: 'left',
     marginTop: 5,
+  },
+  arrowContainer: {
+    marginLeft: 10, // Adjust the marginLeft value as desired
+    marginTop: 20, // Adjust the marginTop value as desired
+  },
+  arrowContainerGreen: {
+    marginLeft: 10, // Adjust the marginLeft value as desired
+    marginTop: 35, // Adjust the marginTop value as desired
   },
 });
 
