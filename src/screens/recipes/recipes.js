@@ -17,9 +17,8 @@ import { getAllRecipes, getRecipe } from "../../service/RecipeService";
 import { ScrollView } from "react-native-gesture-handler";
 import { IconButton } from "../../components/globalComponents/buttonComponents";
 import { searchRecipe } from "../../service/RecipeService";
-import { useNavigation, useRoute } from '@react-navigation/native';
 
-export default function RecepiesScreen() {
+export default function RecepiesScreen({ route }) {
 	const [openFilter, setOpenFilter] = useState(false);
 	const [recipeItems, setRecipeItems] = useState();
 	const [refreshing, setRefreshing] = useState(false);
@@ -29,12 +28,11 @@ export default function RecepiesScreen() {
 	const animatedValue = useRef(new Animated.Value(0)).current;
 	const [inputValue, setInputValue] = useState("");
 
-	const navigation = useNavigation();
-	const route = useRoute();
 	const { category } = route.params || {};
 
-	async function handleInputSubmit(text) {
-		await searchRecipe(text, 0, category)
+	async function handleInputSubmit(text, searchCategory) {
+		console.log(searchCategory);
+		await searchRecipe(text, 0, searchCategory)
 			.then(response => response.json())
 			.then(data => {
 				console.log(data.items);
@@ -49,7 +47,7 @@ export default function RecepiesScreen() {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const debouncedHandleInputSubmit = useCallback(
 		debounce(text => {
-			handleInputSubmit(text);
+			handleInputSubmit(text, category);
 		}, 500),
 		[]
 	);
@@ -86,8 +84,8 @@ export default function RecepiesScreen() {
 	const [showText, setShowText] = useState(true);
 
 	useEffect(() => {
-		loadData(category); 
-	  }, [category]);
+		loadData(category);
+	}, [category]);
 
 	async function loadData(category) {
 		await getAllRecipes(100, 0, category)

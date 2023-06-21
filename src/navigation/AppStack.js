@@ -41,8 +41,8 @@ function MainTabs() {
 	const navigation = useNavigation();
 
 	const handleRecipesPress = () => {
-	  navigation.navigate("RecipesStack", { category: "" });
-	};  
+		navigation.navigate("RecipesStack", { category: "" });
+	};
 
 	return (
 		<Tab.Navigator
@@ -97,7 +97,7 @@ function MainTabs() {
 				}}
 				listeners={{
 					tabPress: handleRecipesPress,
-				  }}
+				}}
 			/>
 			<Tab.Screen
 				name="Favorites"
@@ -152,16 +152,16 @@ function DashboardStackScreen() {
 }
 function RecipesStackScreen({ route }) {
 	const { category = "" } = route.params || {};
-  
+
 	return (
-	  <RecipesStack.Navigator initialRouteName="Recipes">
-		<RecipesStack.Screen
-		  name="RecipesStack"
-		  component={RecipesScreen}
-		  options={{ ...defaultOptions, title: category || '' }}
-		  initialParams={{ category }} 
-		/>
-	  </RecipesStack.Navigator>
+		<RecipesStack.Navigator initialRouteName="Recipes">
+			<RecipesStack.Screen
+				name="RecipesStack"
+				component={RecipesScreen}
+				options={{ ...defaultOptions, title: category || "" }}
+				initialParams={{ category }}
+			/>
+		</RecipesStack.Navigator>
 	);
 }
 function FavoritesStackScreen() {
