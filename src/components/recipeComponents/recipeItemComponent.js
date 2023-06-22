@@ -47,8 +47,19 @@ export default function RecipeItemComponent(props) {
 	}
 
 	return (
-		<View style={styles.itemContainer}>
-			<Image style={styles.recipeImage} source={recipeImage} />
+		<View
+			style={[
+				props.textUnder === true
+					? styles.adItemContainer
+					: styles.itemContainer,
+				styles.globalItemContainer,
+			]}>
+			<Image
+				style={
+					props.textUnder === true ? styles.adRecipeImage : styles.recipeImage
+				}
+				source={recipeImage}
+			/>
 
 			{props.lennaplus ? (
 				<View style={styles.lennaPlusIcon}>
@@ -58,7 +69,11 @@ export default function RecipeItemComponent(props) {
 
 			<TouchableOpacity
 				onPress={handleLikeRecipe}
-				style={styles.likedIconTouchable}>
+				style={
+					props.textUnder === true
+						? styles.adLikedIconTouchable
+						: styles.likedIconTouchable
+				}>
 				{liked ? (
 					<MaterialIcon size={25} name="favorite" color={"#FBBA00"} />
 				) : (
@@ -66,14 +81,28 @@ export default function RecipeItemComponent(props) {
 				)}
 			</TouchableOpacity>
 
-			<View style={styles.recipeInfoWrapper}>
+			<View
+				style={[
+					styles.globalRecipeInfoWrapper,
+					props.textUnder === true
+						? styles.adRecipeInfoWrapper
+						: styles.recipeInfoWrapper,
+				]}>
 				<TouchableWithoutFeedback onPress={handleNavToRecipe}>
 					<View style={styles.recipeInfo}>
 						<Text style={styles.recipeCategoryText}>
 							{props.category.toUpperCase()}
 						</Text>
 
-						<Text style={styles.recipeSubText}>{props.subtext}</Text>
+						<Text
+							style={[
+								styles.globalRecipeSubText,
+								props.textUnder === true
+									? styles.adRecipeSubText
+									: styles.recipeSubText,
+							]}>
+							{props.subtext}
+						</Text>
 
 						<View style={styles.allergyIconWrapper}>
 							{props.allergies.map((item, index) => {
@@ -93,21 +122,35 @@ export default function RecipeItemComponent(props) {
 }
 
 const styles = StyleSheet.create({
+	globalItemContainer: {
+		borderRadius: 5,
+		backgroundColor: "#F3F4F1",
+	},
+
 	itemContainer: {
 		flexDirection: "row",
 		width: "100%",
 		height: 149,
-
 		marginBottom: 20,
+	},
 
-		borderTopRightRadius: 5,
-		borderBottomRightRadius: 5,
-		backgroundColor: "#F3F4F1",
+	adItemContainer: {
+		flexDirection: "column",
+		width: 227,
+		height: 300,
+		marginRight: 16,
 	},
 
 	recipeImage: {
 		width: 133,
 		height: 149,
+		backgroundColor: "#F3F4F1",
+	},
+
+	adRecipeImage: {
+		width: 227,
+		height: 150,
+		borderRadius: 5,
 		backgroundColor: "#F3F4F1",
 	},
 
@@ -124,19 +167,27 @@ const styles = StyleSheet.create({
 		zIndex: 101,
 	},
 
-	likedIcon: {
-		width: 23,
-		height: 20,
+	adLikedIconTouchable: {
+		position: "absolute",
+		right: 15,
+		bottom: 112,
 	},
 
-	recipeInfoWrapper: {
+	globalRecipeInfoWrapper: {
 		zIndex: 100,
-		width: "64%",
 		padding: 10,
 	},
 
+	recipeInfoWrapper: {
+		width: "64%",
+	},
+
+	adRecipeInfoWrapper: {
+		width: "100%",
+		height: "60%",
+	},
+
 	recipeInfo: {
-		// padding: 20,
 		justifyContent: "space-between",
 		height: "100%",
 	},
@@ -147,15 +198,25 @@ const styles = StyleSheet.create({
 		fontSize: 12,
 	},
 
-	recipeSubText: {
-		flex: 4,
+	globalRecipeSubText: {
 		fontFamily: "Plus-Jakarta-Sans-Bold",
 		fontSize: 16,
+	},
+
+	recipeSubText: {
+		flex: 4,
 		width: "85%",
+	},
+
+	adRecipeSubText: {
+		flex: 2,
+		width: "100%",
 	},
 
 	allergyIconWrapper: {
 		flex: 2,
 		flexDirection: "row",
+		width: 100,
+		height: 100,
 	},
 });
