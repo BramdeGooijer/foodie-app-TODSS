@@ -1,10 +1,11 @@
-import { SafeAreaView, View, StyleSheet, Text } from "react-native";
+import React, { SafeAreaView, View, StyleSheet, Text } from "react-native";
 import { FilterBasedAd } from "../../components/globalComponents/filterBasedAdComponent";
 import { MainAd } from "../../components/globalComponents/mainAdComponent";
 import RecipeSliderComponent from "../../components/dashboardComponents/recipeSliderComponent";
 import { useEffect, useState } from "react";
 import { getAllRecipes } from "../../service/RecipeService";
 import { ScrollView } from "react-native-gesture-handler";
+import ButtonComponents from "../../../src/components/redirectComponent/redirectButtons.js";
 
 export default function DashboardScreen() {
 	const [recipeItems, setRecipeItems] = useState();
@@ -55,6 +56,8 @@ export default function DashboardScreen() {
 					<Text style={styles.sliderText}>Favorieten in mei:</Text>
 					<RecipeSliderComponent recipeList={recipeItems} />
 				</View>
+
+				<ButtonComponents />
 			</ScrollView>
 		</SafeAreaView>
 	);
