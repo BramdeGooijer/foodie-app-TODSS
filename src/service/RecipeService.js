@@ -46,6 +46,37 @@ export async function getFavoriteRecipes(pageSize, pageNumber) {
 	});
 }
 
+export async function postFavoriteRecipe(recipeId, state) {
+	console.log("[INFO] post new favorite recipe state");
+
+	let bearerToken = "Bearer " + (await getTokenFromAsyncStorage());
+
+	return await fetch(`${ENDPOINT}/api/recipes/favorite`, {
+		method: "POST",
+		headers: {
+			Authorization: bearerToken,
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			RecipeId: recipeId,
+			State: state,
+		}),
+	})
+		.then(response => {
+			if (response.status === 204) {
+				return true;
+			} else if (response.status === 400) {
+				return false;
+			}
+		})
+		.catch(error => {
+			Alert.alert(
+				"Er is iets mis gegaan!",
+				"Het wijzigen van het favorieten recept is niet gelukt"
+			);
+		});
+}
+
 export async function getRecipe(id) {
 	console.log(`[INFO] get recipe: ${id}`);
 

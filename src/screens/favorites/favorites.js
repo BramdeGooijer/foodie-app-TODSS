@@ -167,7 +167,7 @@ export default function FavoritesScreen(props) {
 								<RecipeItemComponent
 									key={item.id}
 									id={item.id}
-									liked={item.plusRecipe}
+									liked={true}
 									recipeImage="recipeTestImage"
 									category={item.categories[0]}
 									subtext={item.name}
