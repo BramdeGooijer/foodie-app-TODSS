@@ -1,5 +1,11 @@
 import { useState } from "react";
-import React, { SafeAreaView, StyleSheet, View, Text, Alert } from "react-native";
+import React, {
+	SafeAreaView,
+	StyleSheet,
+	View,
+	Text,
+	Alert,
+} from "react-native";
 import {
 	TextInput,
 	TouchableWithoutFeedback,
