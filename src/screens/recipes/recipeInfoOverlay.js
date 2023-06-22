@@ -65,11 +65,13 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 				/>
 			</View>
 			<View style={[styles.redirectButtonWrapper, styles.globalButtonStyle]}>
-				{!recipeInfo.plusRecipe && <RedirectButton
-					text="Start de kookstand"
-					handleOnPress={handleRedirect}
-					icon="arrow-forward"
-				/>}
+				{!recipeInfo.plusRecipe && (
+					<RedirectButton
+						text="Start de kookstand"
+						handleOnPress={handleRedirect}
+						icon="arrow-forward"
+					/>
+				)}
 			</View>
 
 			<ScrollView style={styles.recipeInfoContainer}>
@@ -86,7 +88,9 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 								{recipeInfo.prepTimeMinutes} minuten,{" "}
 								{recipeInfo.prepDifficulties[0]}
 							</Text>
-							{recipeInfo.plusRecipe && <SubscriptionText title="lenna +"></SubscriptionText>}
+							{recipeInfo.plusRecipe && (
+								<SubscriptionText title="lenna +"></SubscriptionText>
+							)}
 						</View>
 					</View>
 				</View>
@@ -132,10 +136,16 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 					</View>
 					{recipeInfo.plusRecipe ? (
 						<View style={styles.lennaPlusScreen}>
-							<Text style={styles.lennaPlusScreenTitle}>Dit is een lenna + recept.</Text>
-							<Text style={styles.lennPlusScreenSubText}>Krijg onbeperkt toegang tot alle recepten met Lenna +.</Text>
+							<Text style={styles.lennaPlusScreenTitle}>
+								Dit is een lenna + recept.
+							</Text>
+							<Text style={styles.lennPlusScreenSubText}>
+								Krijg onbeperkt toegang tot alle recepten met Lenna +.
+							</Text>
 							<View style={styles.lennaPlusScreenRedirectButton}>
-								<RedirectButton text="Lenna+ afsluiten" icon="arrow-forward"></RedirectButton>
+								<RedirectButton
+									text="Lenna+ afsluiten"
+									icon="arrow-forward"></RedirectButton>
 							</View>
 						</View>
 					) : showIngredients ? (
@@ -278,7 +288,6 @@ const styles = StyleSheet.create({
 		marginTop: 80,
 		fontFamily: "Plus-Jakarta-Sans-Bold",
 		fontSize: 22,
-
 	},
 
 	lennPlusScreenSubText: {
@@ -291,5 +300,5 @@ const styles = StyleSheet.create({
 
 	lennaPlusScreenRedirectButton: {
 		marginTop: 38,
-	}
+	},
 });
