@@ -47,8 +47,19 @@ export default function RecipeItemComponent(props) {
 	}
 
 	return (
-		<View style={[props.textUnder === true ? styles.adItemContainer : styles.itemContainer, styles.globalItemContainer]}>
-			<Image style={props.textUnder === true ? styles.adRecipeImage : styles.recipeImage} source={recipeImage} />
+		<View
+			style={[
+				props.textUnder === true
+					? styles.adItemContainer
+					: styles.itemContainer,
+				styles.globalItemContainer,
+			]}>
+			<Image
+				style={
+					props.textUnder === true ? styles.adRecipeImage : styles.recipeImage
+				}
+				source={recipeImage}
+			/>
 
 			{props.lennaplus ? (
 				<View style={styles.lennaPlusIcon}>
@@ -58,7 +69,11 @@ export default function RecipeItemComponent(props) {
 
 			<TouchableOpacity
 				onPress={handleLikeRecipe}
-				style={props.textUnder === true ? styles.adLikedIconTouchable : styles.likedIconTouchable}>
+				style={
+					props.textUnder === true
+						? styles.adLikedIconTouchable
+						: styles.likedIconTouchable
+				}>
 				{liked ? (
 					<MaterialIcon size={25} name="favorite" color={"#FBBA00"} />
 				) : (
@@ -66,14 +81,28 @@ export default function RecipeItemComponent(props) {
 				)}
 			</TouchableOpacity>
 
-			<View style={[styles.globalRecipeInfoWrapper, props.textUnder === true ? styles.adRecipeInfoWrapper : styles.recipeInfoWrapper]}>
+			<View
+				style={[
+					styles.globalRecipeInfoWrapper,
+					props.textUnder === true
+						? styles.adRecipeInfoWrapper
+						: styles.recipeInfoWrapper,
+				]}>
 				<TouchableWithoutFeedback onPress={handleNavToRecipe}>
 					<View style={styles.recipeInfo}>
 						<Text style={styles.recipeCategoryText}>
 							{props.category.toUpperCase()}
 						</Text>
 
-						<Text style={[styles.globalRecipeSubText, props.textUnder === true ? styles.adRecipeSubText : styles.recipeSubText]}>{props.subtext}</Text>
+						<Text
+							style={[
+								styles.globalRecipeSubText,
+								props.textUnder === true
+									? styles.adRecipeSubText
+									: styles.recipeSubText,
+							]}>
+							{props.subtext}
+						</Text>
 
 						<View style={styles.allergyIconWrapper}>
 							{props.allergies.map((item, index) => {
@@ -117,7 +146,7 @@ const styles = StyleSheet.create({
 		height: 149,
 		backgroundColor: "#F3F4F1",
 	},
-	
+
 	adRecipeImage: {
 		width: 227,
 		height: 150,
@@ -141,7 +170,7 @@ const styles = StyleSheet.create({
 	adLikedIconTouchable: {
 		position: "absolute",
 		right: 15,
-		bottom: 112
+		bottom: 112,
 	},
 
 	globalRecipeInfoWrapper: {
@@ -150,7 +179,6 @@ const styles = StyleSheet.create({
 	},
 
 	recipeInfoWrapper: {
-
 		width: "64%",
 	},
 
@@ -174,7 +202,7 @@ const styles = StyleSheet.create({
 		fontFamily: "Plus-Jakarta-Sans-Bold",
 		fontSize: 16,
 	},
-	
+
 	recipeSubText: {
 		flex: 4,
 		width: "85%",

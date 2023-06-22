@@ -1,7 +1,10 @@
-import { SafeAreaView, Text, StyleSheet, View } from "react-native";
+import { SafeAreaView, View, StyleSheet, Text } from "react-native";
+import { FilterBasedAd } from "../../components/globalComponents/filterBasedAdComponent";
+import { MainAd } from "../../components/globalComponents/mainAdComponent";
 import RecipeSliderComponent from "../../components/dashboardComponents/recipeSliderComponent";
 import { useEffect, useState } from "react";
 import { getAllRecipes } from "../../service/RecipeService";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function DashboardScreen() {
 	const [recipeItems, setRecipeItems] = useState();
@@ -25,17 +28,36 @@ export default function DashboardScreen() {
 
 	return (
 		<SafeAreaView style={styles.dashboardContainer}>
-			<View>
-				<Text style={styles.sliderText}>Nieuwste recepten</Text>
-				<RecipeSliderComponent recipeList={recipeItems}></RecipeSliderComponent>
-			</View>
+			<ScrollView>
+				<View style={styles.mainAdContainer}>
+					<MainAd
+						title={"Ideaal voor valentijn!"}
+						description={"Makkelijke rijstwafel bonbons"}
+					/>
+				</View>
+				<View style={styles.filterBasedAdsContainer}>
+					<FilterBasedAd
+						description={"Seizoensgroenten in de spotlight: wintergroenten!"}
+						filters={["Gluten"]}
+						primary
+					/>
+					<FilterBasedAd
+						description={"Seizoensgroenten in de spotlight: wintergroenten!"}
+						filters={["Gluten"]}
+					/>
+				</View>
+				<View>
+					<Text style={styles.sliderText}>Nieuwste recepten</Text>
+					<RecipeSliderComponent recipeList={recipeItems} />
+				</View>
 
-			<View>
-				<Text style={styles.sliderText}>Favorieten in mei:</Text>
-				<RecipeSliderComponent recipeList={recipeItems}></RecipeSliderComponent>
-			</View>
+				<View>
+					<Text style={styles.sliderText}>Favorieten in mei:</Text>
+					<RecipeSliderComponent recipeList={recipeItems} />
+				</View>
+			</ScrollView>
 		</SafeAreaView>
-	)	
+	);
 }
 
 const styles = StyleSheet.create({
@@ -44,10 +66,25 @@ const styles = StyleSheet.create({
 		width: "100%",
 		height: "100%",
 	},
+
 	sliderText: {
 		fontFamily: "Plus-Jakarta-Sans-Bold",
 		color: "#294406",
 		fontSize: 18,
 		marginBottom: 16,
+	},
+
+	filterBasedAdsContainer: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "stretch",
+		gap: 8,
+		marginHorizontal: 20,
+	},
+
+	mainAdContainer: {
+		height: 320,
+		marginBottom: 8,
+		marginHorizontal: 20,
 	},
 });
