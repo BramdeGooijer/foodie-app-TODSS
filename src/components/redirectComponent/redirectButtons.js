@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: "flex-end",
+		paddingHorizontal: 20,
 	},
 	content: {
 		alignItems: "center",
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 		marginBottom: 2,
 		height: 96,
-		width: 350,
+		width: "100%",
 		justifyContent: "center",
 		flexDirection: "row",
 		alignItems: "center",
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 		marginTop: 10,
 		height: 76,
-		width: 350,
+		width: "100%",
 		justifyContent: "center",
 		flexDirection: "row",
 		alignItems: "center",
