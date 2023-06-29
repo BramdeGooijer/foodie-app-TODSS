@@ -14,6 +14,7 @@ export const COLORS = {
 };
 
 export const SIZES = {
+	large: 28,
 	h1: 22,
 	h2: 20,
 	h3: 18,
@@ -40,4 +41,5 @@ export const FONTS = {
 	MediumItalic: "Plus-Jakarta-Sans-Medium-Italic",
 	SemiBold: "Plus-Jakarta-Sans-Semi-Bold",
 	SemiBoldItalic: "Plus-Jakarta-Sans-Semi-Bold-Italic",
+	Nexa: "Nexa_rust_script_b",
 };

@@ -65,10 +65,13 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 				/>
 			</View>
 			<View style={[styles.redirectButtonWrapper, styles.globalButtonStyle]}>
-				<RedirectButton
-					text="Start de kookstand"
-					handleOnPress={handleRedirect}
-				/>
+				{!recipeInfo.plusRecipe && (
+					<RedirectButton
+						text="Start de kookstand"
+						handleOnPress={handleRedirect}
+						icon="arrow-forward"
+					/>
+				)}
 			</View>
 
 			<ScrollView style={styles.recipeInfoContainer}>
@@ -85,7 +88,9 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 								{recipeInfo.prepTimeMinutes} minuten,{" "}
 								{recipeInfo.prepDifficulties[0]}
 							</Text>
-							<SubscriptionText title="lenna +"></SubscriptionText>
+							{recipeInfo.plusRecipe && (
+								<SubscriptionText title="lenna +"></SubscriptionText>
+							)}
 						</View>
 					</View>
 				</View>
@@ -130,8 +135,18 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 						</Pressable>
 					</View>
 					{recipeInfo.plusRecipe ? (
-						<View>
-							<Text>lenna plus</Text>
+						<View style={styles.lennaPlusScreen}>
+							<Text style={styles.lennaPlusScreenTitle}>
+								Dit is een lenna + recept.
+							</Text>
+							<Text style={styles.lennPlusScreenSubText}>
+								Krijg onbeperkt toegang tot alle recepten met Lenna +.
+							</Text>
+							<View style={styles.lennaPlusScreenRedirectButton}>
+								<RedirectButton
+									text="Lenna+ afsluiten"
+									icon="arrow-forward"></RedirectButton>
+							</View>
 						</View>
 					) : showIngredients ? (
 						<IngredientsComponent
@@ -261,5 +276,29 @@ const styles = StyleSheet.create({
 	ingredientArea: {
 		backgroundColor: "white",
 		height: 1000,
+	},
+
+	lennaPlusScreen: {
+		width: "100%",
+		alignItems: "center",
+	},
+
+	lennaPlusScreenTitle: {
+		textAlign: "center",
+		marginTop: 80,
+		fontFamily: "Plus-Jakarta-Sans-Bold",
+		fontSize: 22,
+	},
+
+	lennPlusScreenSubText: {
+		marginTop: 13,
+		width: "50%",
+		fontSize: 16,
+		textAlign: "center",
+		lineHeight: 24,
+	},
+
+	lennaPlusScreenRedirectButton: {
+		marginTop: 38,
 	},
 });
