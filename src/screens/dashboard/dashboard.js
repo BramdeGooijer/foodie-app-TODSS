@@ -59,7 +59,7 @@ export default function DashboardScreen() {
 					<Text style={styles.sliderText}>Favorieten in mei:</Text>
 					<RecipeSliderComponent recipeList={recipeItems} />
 				</View>
-				
+
 				<ButtonComponents />
 			</ScrollView>
 		</SafeAreaView>
