@@ -18,7 +18,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { IconButton } from "../../components/globalComponents/buttonComponents";
 import { searchRecipe } from "../../service/RecipeService";
 
-export default function RecepiesScreen() {
+export default function RecepiesScreen({ route }) {
 	const [openFilter, setOpenFilter] = useState(false);
 	const [recipeItems, setRecipeItems] = useState();
 	const [refreshing, setRefreshing] = useState(false);
@@ -28,8 +28,11 @@ export default function RecepiesScreen() {
 	const animatedValue = useRef(new Animated.Value(0)).current;
 	const [inputValue, setInputValue] = useState("");
 
-	async function handleInputSubmit(text) {
-		await searchRecipe(text, 0, "")
+	const { category } = route.params || {};
+
+	async function handleInputSubmit(text, searchCategory) {
+		console.log(searchCategory);
+		await searchRecipe(text, 0, searchCategory)
 			.then(response => response.json())
 			.then(data => {
 				console.log(data.items);
@@ -44,7 +47,7 @@ export default function RecepiesScreen() {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const debouncedHandleInputSubmit = useCallback(
 		debounce(text => {
-			handleInputSubmit(text);
+			handleInputSubmit(text, category);
 		}, 500),
 		[]
 	);
@@ -81,29 +84,28 @@ export default function RecepiesScreen() {
 	const [showText, setShowText] = useState(true);
 
 	useEffect(() => {
-		loadData();
-	}, []);
+		loadData(category);
+	}, [category]);
 
-	const onRefresh = React.useCallback(() => {
-		setRefreshing(true);
-		loadData();
-		setTimeout(() => {
-			setRefreshing(false);
-		}, 1000);
-	}, []);
-
-	async function loadData() {
-		await getAllRecipes(100, 0, "")
+	async function loadData(category) {
+		await getAllRecipes(100, 0, category)
 			.then(response => response.json())
 			.then(data => {
 				console.log(data.items);
-
 				setRecipeItems(data.items);
 			})
 			.catch(error => {
 				console.log(error);
 			});
 	}
+
+	const onRefresh = React.useCallback(() => {
+		setRefreshing(true);
+		loadData(category);
+		setTimeout(() => {
+			setRefreshing(false);
+		}, 1000);
+	}, [category]);
 
 	const handleFilter = () => {
 		setOpenFilter(!openFilter);

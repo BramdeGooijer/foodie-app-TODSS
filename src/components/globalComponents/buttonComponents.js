@@ -28,6 +28,22 @@ export function IconButton(props) {
 	);
 }
 
+export function IconButtonCategorie(props) {
+	return (
+		<TouchableWithoutFeedback onPress={props.handleOnPress}>
+			<View
+				style={[
+					iconButtonStyles.container2,
+					props.text === undefined && iconButtonStyles.round,
+				]}>
+				<Icon size={24} name={props.icon} color="#FBBA00" />
+
+				{props.text && <Text style={iconButtonStyles.text2}>{props.text}</Text>}
+			</View>
+		</TouchableWithoutFeedback>
+	);
+}
+
 export function MaterialIconButton(props) {
 	const [textItem, setTextItem] = useState();
 
@@ -103,6 +119,29 @@ const iconButtonStyles = StyleSheet.create({
 		aspectRatio: 1,
 		width: 44,
 		height: 44,
+	},
+
+	container2: {
+		justifyContent: "center",
+		alignItems: "center",
+		gap: 5,
+
+		width: 165,
+		height: 70,
+
+		borderRadius: 9999999,
+		backgroundColor: "white",
+
+		shadowOffset: { width: 2, height: 2 },
+		shadowColor: "black",
+		shadowOpacity: 0.05,
+		shadowRadius: 6,
+	},
+
+	text2: {
+		color: "#3A3938",
+		fontSize: 16,
+		fontFamily: FONTS.Bold,
 	},
 });
 

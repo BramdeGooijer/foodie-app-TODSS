@@ -13,6 +13,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import RecipeCookingState from "../screens/recipes/recipeCookingState";
 import EditProfileOverlay from "../screens/profile/editProfileOverlay";
 import LoginPageOverlay from "../screens/profile/loginPageOverlay";
+import { useNavigation } from "@react-navigation/native";
 
 // tabs
 const Tab = createBottomTabNavigator();
@@ -37,6 +38,12 @@ const BackButton = ({ navigation }) => {
 };
 
 function MainTabs() {
+	const navigation = useNavigation();
+
+	const handleRecipesPress = () => {
+		navigation.navigate("RecipesStack", { category: "" });
+	};
+
 	return (
 		<Tab.Navigator
 			screenOptions={{
@@ -87,6 +94,9 @@ function MainTabs() {
 							/>
 						);
 					},
+				}}
+				listeners={{
+					tabPress: handleRecipesPress,
 				}}
 			/>
 			<Tab.Screen
@@ -140,13 +150,16 @@ function DashboardStackScreen() {
 		</DashboardStack.Navigator>
 	);
 }
-function RecipesStackScreen() {
+function RecipesStackScreen({ route }) {
+	const { category = "" } = route.params || {};
+
 	return (
 		<RecipesStack.Navigator initialRouteName="Recipes">
 			<RecipesStack.Screen
 				name="RecipesStack"
 				component={RecipesScreen}
-				options={{ ...defaultOptions }}
+				options={{ ...defaultOptions, title: category || "" }}
+				initialParams={{ category }}
 			/>
 		</RecipesStack.Navigator>
 	);

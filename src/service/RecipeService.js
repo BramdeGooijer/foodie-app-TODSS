@@ -70,8 +70,12 @@ export async function searchRecipe(name, pageNumber, categoryName) {
 
 	console.log(`[INFO] search recipe: ${name}`);
 
+	console.log(
+		`${ENDPOINT}/api/recipes?pageSize=100&Categoryname=${categoryName}&RecipeName=${name}&pageNumber=${pageNumber}`
+	);
+
 	return await fetch(
-		`${ENDPOINT}/api/recipes?pageSize=10&Categoryname=${categoryName}&RecipeName=${name}&pageNumber=${pageNumber}`,
+		`${ENDPOINT}/api/recipes?pageSize=100&Categoryname=${categoryName}&RecipeName=${name}&pageNumber=${pageNumber}`,
 		{
 			method: "GET",
 			headers: {

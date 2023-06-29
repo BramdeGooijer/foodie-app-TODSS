@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getAllRecipes } from "../../service/RecipeService";
 import { ScrollView } from "react-native-gesture-handler";
 import ButtonComponents from "../../../src/components/redirectComponent/redirectButtons.js";
+import { CategorieAdComponent } from "../../components/globalComponents/catergorieAdComponent";
 
 export default function DashboardScreen() {
 	const [recipeItems, setRecipeItems] = useState();
@@ -51,6 +52,8 @@ export default function DashboardScreen() {
 					<Text style={styles.sliderText}>Nieuwste recepten</Text>
 					<RecipeSliderComponent recipeList={recipeItems} />
 				</View>
+
+				<CategorieAdComponent />
 
 				<View>
 					<Text style={styles.sliderText}>Favorieten in mei:</Text>
