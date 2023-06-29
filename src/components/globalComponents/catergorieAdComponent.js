@@ -15,54 +15,32 @@ export function CategorieAdComponent() {
 		}, 0);
 	};
 
+	let categories = [
+		["Ontbijt", "breakfast"],
+		["Lunch", "lunch"],
+		["Dinner", "dinner"],
+		["Dessert", "dessert"],
+		["Drankje", "drink"],
+		["Borrelhap", "snack"],
+	];
+
 	return (
 		<View style={categorieAdComponentStyles.container}>
 			<Text style={categorieAdComponentStyles.ontdek}>Ontdek</Text>
 			<Text style={categorieAdComponentStyles.categorie}>Categorieën</Text>
 
 			<View style={categorieAdComponentStyles.buttonContainer}>
-				<View style={categorieAdComponentStyles.buttonWrapper}>
-					<IconButtonCategorie
-						icon="rest"
-						text="Ontbijt"
-						handleOnPress={() => handleButtonClick("breakfast")}
-					/>
-				</View>
-				<View style={categorieAdComponentStyles.buttonWrapper}>
-					<IconButtonCategorie
-						icon="rest"
-						text="Lunch"
-						handleOnPress={() => handleButtonClick("lunch")}
-					/>
-				</View>
-				<View style={categorieAdComponentStyles.buttonWrapper}>
-					<IconButtonCategorie
-						icon="rest"
-						text="Dinner"
-						handleOnPress={() => handleButtonClick("dinner")}
-					/>
-				</View>
-				<View style={categorieAdComponentStyles.buttonWrapper}>
-					<IconButtonCategorie
-						icon="rest"
-						text="Dessert"
-						handleOnPress={() => handleButtonClick("dessert")}
-					/>
-				</View>
-				<View style={categorieAdComponentStyles.buttonWrapper}>
-					<IconButtonCategorie
-						icon="rest"
-						text="Drankje"
-						handleOnPress={() => handleButtonClick("drink")}
-					/>
-				</View>
-				<View style={categorieAdComponentStyles.buttonWrapper}>
-					<IconButtonCategorie
-						icon="rest"
-						text="Borrelhap"
-						handleOnPress={() => handleButtonClick("snack")}
-					/>
-				</View>
+				{categories.map(category => {
+					return (
+						<View style={categorieAdComponentStyles.buttonWrapper}>
+							<IconButtonCategorie
+								icon="rest"
+								text={category[0]}
+								handleOnPress={() => handleButtonClick(category[1])}
+							/>
+						</View>
+					);
+				})}
 			</View>
 
 			<TouchableOpacity
