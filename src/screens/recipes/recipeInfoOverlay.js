@@ -20,6 +20,7 @@ import {
 import IngredientsComponent from "../../ingredients/ingredients";
 import { COLORS, SIZES } from "../../theme/theme";
 import SubscriptionText from "../../components/subscriptionTextComponent";
+import { postFavoriteRecipe } from "../../service/RecipeService";
 
 export default function RecipeInfoOverlay({ navigation, route }) {
 	const { recipeInfo } = route.params;
@@ -42,15 +43,16 @@ export default function RecipeInfoOverlay({ navigation, route }) {
 		navigation.navigate("RecipeCookingState", { recipeInfo: recipeInfo });
 	}
 
-	const handleLike = () => {
-		setLiked(!liked);
-		if (liked) {
-			console.log("unlike");
-			Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-		} else {
-			console.log("like");
-			Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-		}
+	const handleLike = async () => {
+		await postFavoriteRecipe(recipeInfo.id, !liked).then(data => {
+			if (data === true) {
+				setLiked(!liked);
+			} else if (data === false) {
+			}
+		});
+		liked
+			? Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
+			: Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 	};
 
 	return (

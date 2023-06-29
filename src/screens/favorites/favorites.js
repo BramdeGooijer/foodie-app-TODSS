@@ -17,6 +17,7 @@ import RecipeItemComponent from "../../components/recipeComponents/recipeItemCom
 import { getFavoriteRecipes } from "../../service/RecipeService";
 import debounce from "lodash/debounce";
 import { searchRecipe } from "../../service/RecipeService";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function FavoritesScreen(props) {
 	const [showSearchBar, setShowSearchBar] = useState(false);
@@ -26,10 +27,15 @@ export default function FavoritesScreen(props) {
 	const inputRef = useRef(null);
 	const animatedValue = useRef(new Animated.Value(0)).current;
 	const [inputValue, setInputValue] = useState("");
+	const isFocused = useIsFocused();
 
 	useEffect(() => {
 		loadData();
-	}, []);
+		if (isFocused) {
+			console.log("hi");
+			loadData();
+		}
+	}, [isFocused]);
 
 	const handleFilter = () => {
 		setOpenFilter(!openFilter);
@@ -167,7 +173,7 @@ export default function FavoritesScreen(props) {
 								<RecipeItemComponent
 									key={item.id}
 									id={item.id}
-									liked={item.plusRecipe}
+									liked={true}
 									recipeImage="recipeTestImage"
 									category={item.categories[0]}
 									subtext={item.name}

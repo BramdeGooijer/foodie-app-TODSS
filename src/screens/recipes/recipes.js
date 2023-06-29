@@ -171,7 +171,7 @@ export default function RecepiesScreen({ route }) {
 								<RecipeItemComponent
 									key={item.id}
 									id={item.id}
-									liked={item.plusRecipe}
+									liked={false}
 									lennaplus={item.plusRecipe}
 									recipeImage="recipeTestImage"
 									category={item.categories[0]}

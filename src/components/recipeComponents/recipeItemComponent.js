@@ -13,15 +13,20 @@ import AllergyIcon from "./iconComponent";
 
 import SubscriptionText from "../subscriptionTextComponent";
 import { useNavigation } from "@react-navigation/native";
-import { getRecipe } from "../../service/RecipeService";
+import { getRecipe, postFavoriteRecipe } from "../../service/RecipeService";
 
 export default function RecipeItemComponent(props) {
 	const [liked, setLiked] = useState(props.liked);
 	const navigation = useNavigation();
 	let recipeImage = require("../../../assets/recipe_load_image.png");
 
-	const handleLikeRecipe = () => {
-		setLiked(!liked);
+	const handleLikeRecipe = async () => {
+		await postFavoriteRecipe(props.id, !liked).then(data => {
+			if (data === true) {
+				setLiked(!liked);
+			} else if (data === false) {
+			}
+		});
 		liked
 			? Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
 			: Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
